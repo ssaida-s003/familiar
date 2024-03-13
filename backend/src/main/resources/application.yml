@@ -6,8 +6,8 @@ spring:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/cherish?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
-    username: ${USERNAME:root}
-    password: ${PASSWORD:root}
+    username: ${db.username:root}
+    password: ${db.password:root}
 
 server:
   servlet:
