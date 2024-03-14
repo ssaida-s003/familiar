@@ -5,6 +5,10 @@ RUN apt-get -y install libgl1-mesa-glx
 
 RUN pip install --upgrade pip
 
+
+COPY . /ai
+WORKDIR /ai
+
 RUN cat requirements.txt | xargs -n 1 pip install
 
 EXPOSE 3002
