@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Git Clone') {
             steps {
-                git branch: 'deploy', credentialsId: "gitlab-token", url: 'https://lab.ssafy.com/s10-s-project/S10P21S003.git'
+                git branch: 'ai/deploy', credentialsId: "gitlab-token", url: 'https://lab.ssafy.com/s10-s-project/S10P21S003.git'
             }
         }
         stage('Login'){
