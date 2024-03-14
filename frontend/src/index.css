@@ -1,0 +1,18 @@
+#root {
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url('public/img/img_main_background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
