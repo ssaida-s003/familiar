@@ -9,7 +9,7 @@ RUN pip install --upgrade pip
 COPY . /ai
 WORKDIR /ai
 
-RUN cat requirements.txt | xargs -n 1 pip install
+RUN pip install -r requirements.txt
 
 EXPOSE 3002
-CMD ["python ", "main.py"]
+CMD ["python", "main.py"]
