@@ -23,7 +23,7 @@ pipeline {
   
         stage('AI - Docker Image Build') {
             steps {
-                dir("./") {
+                dir("./ai") {
                     script{
                         dockerImage = docker.build ai_repository
                     }
