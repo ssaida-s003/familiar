@@ -1,0 +1,81 @@
+pipeline {
+    environment{
+        ai_repository = "fangdol888onssafy/ssaida-ai"
+        ai_img_name = "ssaida-ai"
+        docker_compose_ai_name = "ai"
+
+        DOCKERHUB_CREDENTIALS = credentials("dockerhub-token")
+        dockerImage = ''
+        SSH_CONNECTION = "ubuntu@j10s003.p.ssafy.io"
+    }
+    agent any
+    stages {
+        stage('Git Clone') {
+            steps {
+                git branch: 'deploy', credentialsId: "gitlab-token", url: 'https://lab.ssafy.com/s10-s-project/S10P21S003.git'
+            }
+        }
+        stage('Login'){
+          steps{
+              sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin' // docker hub 로그인
+          }
+        }
+  
+        stage('AI - Docker Image Build') {
+            steps {
+                dir("./") {
+                    script{
+                        dockerImage = docker.build ai_repository
+                    }
+                }
+            }
+        }
+
+        stage('AI - Docker Image Push') {
+            steps {
+                echo 'Push Docker'
+                script{
+                        dockerImage.push("latest")
+                }
+            }
+        }
+
+        stage('AI - Deploy') {
+            steps {
+                sshagent (credentials: ['aws_key']) {
+                    script{
+                        sh "ssh -o StrictHostKeyChecking=no  ${SSH_CONNECTION} uptime"
+                        //docker-compose
+                        sh "ssh -t ${SSH_CONNECTION} 'docker-compose pull ${docker_compose_ai_name}'"
+                        sh "ssh -t ${SSH_CONNECTION} 'docker-compose up -d ${docker_compose_ai_name}'"
+                    }
+                }
+            }     
+        }
+    }
+
+    post {
+        success {
+        	script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'good', 
+                message: "빌드 성공: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
+                endpoint: 'https://meeting.ssafy.com/hooks/nfsx17pzyjgkdgmk19xzp6q4ae', 
+                channel: 'Jenkins-S003'
+                )
+            }
+        }
+        failure {
+        	script {
+                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+                mattermostSend (color: 'danger', 
+                message: "빌드 실패: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})\n(<${env.BUILD_URL}|Details>)", 
+                endpoint: 'https://meeting.ssafy.com/hooks/nfsx17pzyjgkdgmk19xzp6q4ae', 
+                channel: 'Jenkins-S003'
+                )
+            }
+        }
+    }
+}
