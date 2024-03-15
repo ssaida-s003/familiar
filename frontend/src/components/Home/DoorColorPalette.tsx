@@ -1,4 +1,4 @@
-const DoorColorPallet = () => {
+const DoorColorPalette = () => {
   return (
     <>
       <div>해당 냉장고 문의 색상을 선택해주세요!</div>
@@ -6,4 +6,4 @@ const DoorColorPallet = () => {
   )
 }
 
-export default DoorColorPallet
+export default DoorColorPalette
