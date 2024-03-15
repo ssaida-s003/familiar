@@ -29,4 +29,12 @@ public class DailyRecord {
         this.content = content;
     }
 
+    public void updateContent(String content)
+    {
+        this.content=content;
+    }
+    public void updateUrl(String url)
+    {
+        this.url=url;
+    }
 }
