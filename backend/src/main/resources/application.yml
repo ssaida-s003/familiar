@@ -5,10 +5,17 @@ spring:
   datasource:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/cherish?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
+    url: jdbc:mysql://${MYSQL_HOST:localhost:3306}/s10p21s003_dev?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
     username: ${db.username:root}
     password: ${db.password:root}
 
 server:
+  port: 8081
   servlet:
     context-path: /api
+#쿼리문 로그
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
