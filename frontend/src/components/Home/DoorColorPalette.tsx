@@ -1,7 +1,8 @@
-import { ColorCardType } from '@types/Components/ColorPaletteType'
+import { ColorType } from '@/types/Components/ColorPaletteType'
+import ColorPaletteCard from '@components/Home/ColorPaletteCard.tsx'
 
 const DoorColorPalette = () => {
-  const colorSet: ColorCardType[] = [
+  const colorSet: ColorType[] = [
     { colorName: 'BEIGE', colorCode: '#D1C7BE' },
     { colorName: 'SKY BLUE', colorCode: '#9DC1D1' },
     { colorName: 'PINK', colorCode: '#EDD7DA' },
