@@ -1,7 +1,13 @@
+import React from 'react'
 import { ColorType } from '@/types/Components/ColorPaletteType'
-import ColorPaletteCard from '@components/Home/ColorPaletteCard.tsx'
+import ColorPaletteCard from '@components/Home/ColorPaletteCard'
+import * as d from '@components/Home/style/DoorColorPaletteStyle'
 
-const DoorColorPalette = () => {
+interface DoorColorPaletteProps {
+  quadrantNum: number
+}
+
+const DoorColorPalette: React.FC<DoorColorPaletteProps> = ({ quadrantNum }) => {
   const colorSet: ColorType[] = [
     { colorName: 'BEIGE', colorCode: '#D1C7BE' },
     { colorName: 'SKY BLUE', colorCode: '#9DC1D1' },
@@ -21,12 +27,14 @@ const DoorColorPalette = () => {
   ]
 
   return (
-    <>
-      <div>해당 냉장고 문의 색상을 선택해주세요!</div>
-      {colorSet.map(colorInfo => (
-        <ColorPaletteCard key={colorInfo.colorCode} colorInfo={colorInfo} />
-      ))}
-    </>
+    <d.Container quadrantnum={quadrantNum}>
+      <d.Title>해당 냉장고 문의 색상을 선택해주세요!</d.Title>
+      <d.CardSection>
+        {colorSet.map(colorInfo => (
+          <ColorPaletteCard key={colorInfo.colorCode} colorInfo={colorInfo} quadrantNum={quadrantNum} />
+        ))}
+      </d.CardSection>
+    </d.Container>
   )
 }
 
