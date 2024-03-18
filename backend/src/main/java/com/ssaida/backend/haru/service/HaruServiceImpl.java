@@ -1,5 +1,6 @@
 package com.ssaida.backend.haru.service;
 
+import com.ssaida.backend.family.entity.Member;
 import com.ssaida.backend.haru.dto.CreateRecordRequest;
 import com.ssaida.backend.haru.entity.DailyRecord;
 import com.ssaida.backend.haru.repository.RecordRepository;
@@ -16,10 +17,11 @@ public class HaruServiceImpl implements HaruService{
     @Override
     @Transactional
     public void createRecord(CreateRecordRequest createRecordRequest) throws Exception {
-        DailyRecord dailyRecord =new DailyRecord(createRecordRequest.getMemeberId(),createRecordRequest.getContent());
-        recordRepository.save(dailyRecord);
-        //TODO: FASTAPI 연결 필요
-        String url = "test_url";
-        dailyRecord.updateUrl(url);
+
+//        DailyRecord dailyRecord =new DailyRecord(createRecordRequest.getMemeberId(),createRecordRequest.getContent());
+//        recordRepository.save(dailyRecord);
+//        //TODO: FASTAPI 연결 필요
+//        String url = "test_url";
+//        dailyRecord.updateUrl(url);
     }
 }
