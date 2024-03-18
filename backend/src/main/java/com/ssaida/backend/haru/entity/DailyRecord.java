@@ -21,7 +21,7 @@ public class DailyRecord {
     private String content;
     private String url;
     @CreatedDate
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Builder
     public DailyRecord(int memberId, String content) {
@@ -30,7 +30,7 @@ public class DailyRecord {
     }
 
     public void updateContent(String content)
-    {   
+    {
         this.content=content;
     }
     public void updateUrl(String url)
