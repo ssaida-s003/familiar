@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class HaruServiceImpl implements HaruService{
 
-    final RecordRepository recordRepository;
+    private final RecordRepository recordRepository;
     @Override
     @Transactional
     public void createRecord(CreateRecordRequest createRecordRequest) throws Exception {

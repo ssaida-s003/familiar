@@ -1,5 +1,6 @@
 package com.ssaida.backend.haru.entity;
 
+import com.ssaida.backend.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,15 +14,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "record")
 @EntityListeners(AuditingEntityListener.class)
-public class DailyRecord {
+public class DailyRecord extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private int memberId;
     private String content;
     private String url;
-    @CreatedDate
-    private LocalDateTime created_at;
 
     @Builder
     public DailyRecord(int memberId, String content) {
@@ -37,4 +36,5 @@ public class DailyRecord {
     {
         this.url=url;
     }
+
 }
