@@ -30,7 +30,7 @@ public class DailyRecord {
     }
 
     public void updateContent(String content)
-    {
+    {   
         this.content=content;
     }
     public void updateUrl(String url)
