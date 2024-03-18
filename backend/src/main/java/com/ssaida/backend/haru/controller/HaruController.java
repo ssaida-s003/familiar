@@ -2,14 +2,11 @@ package com.ssaida.backend.haru.controller;
 
 import com.ssaida.backend.haru.dto.CreateRecordRequest;
 import com.ssaida.backend.haru.service.HaruService;
-import com.ssaida.backend.haru.service.HaruServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
