@@ -1,4 +1,4 @@
-export type ColorCardType = {
+export type ColorType = {
   colorName: string
   colorCode: string
 }
