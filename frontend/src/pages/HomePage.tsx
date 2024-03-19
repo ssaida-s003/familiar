@@ -17,7 +17,7 @@ const HomePage = () => {
 
   return (
     <h.Container>
-      <h.NextBtn src="/icon/icon_next.png" />
+      <h.NextBtn onClick={goToNextStep} src="/icon/icon_next.png" />
       <h.RefrigeratorContainer>
         <h.PanelContainer>
           <h.Panel onClick={handleClick(0)} />
