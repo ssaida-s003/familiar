@@ -12,6 +12,14 @@ export const Container = styled.div`
   align-items: center;
 `
 
+export const NextBtn = styled.img`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  cursor: pointer;
+`
+
 export const RefrigeratorContainer = styled.div`
   width: 329px;
   height: 674px;

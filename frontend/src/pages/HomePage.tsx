@@ -11,8 +11,13 @@ const HomePage = () => {
     setIsShowPallet(current => current.map((_, index) => index === doorNum))
   }
 
+  const goToNextStep = () => {
+    setIsShowPallet(current => current.map(() => false))
+  }
+
   return (
     <h.Container>
+      <h.NextBtn src="/icon/icon_next.png" />
       <h.RefrigeratorContainer>
         <h.PanelContainer>
           <h.Panel onClick={handleClick(0)} />
