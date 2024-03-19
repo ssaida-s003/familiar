@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface ContainerProps {
-  quadrantnum: number
+  $quadrantNum: number
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -11,7 +11,9 @@ export const Container = styled.div<ContainerProps>`
   justify-content: center;
   position: absolute;
   top: ${props => {
-    switch (props.quadrantnum) {
+    switch (props.$quadrantNum) {
+      case 0:
+        return '124px'
       case 1:
         return '35px'
       case 2:
@@ -23,7 +25,9 @@ export const Container = styled.div<ContainerProps>`
     }
   }};
   left: ${props => {
-    switch (props.quadrantnum) {
+    switch (props.$quadrantNum) {
+      case 0:
+        return '350px'
       case 1:
         return '-350px'
       case 2:
@@ -35,7 +39,14 @@ export const Container = styled.div<ContainerProps>`
     }
   }};
   width: 332px;
-  height: 290px;
+  height: ${props => {
+    switch (props.$quadrantNum) {
+      case 0:
+        return '120px'
+      default:
+        return '290px'
+    }
+  }};
   flex-shrink: 0;
   border-radius: 22px;
   border: 1.3px solid #fff;
