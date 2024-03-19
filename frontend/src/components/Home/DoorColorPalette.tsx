@@ -26,11 +26,28 @@ const DoorColorPalette: React.FC<DoorColorPaletteProps> = ({ quadrantNum }) => {
     { colorName: 'CHARCOAL', colorCode: '#212121' },
   ]
 
+  const panelColorSet: ColorType[] = [
+    { colorName: 'WHITE ', colorCode: '#F0EFED' },
+    { colorName: 'CHARCOAL', colorCode: '#212121' },
+  ]
+
+  if (quadrantNum >= 1) {
+    return (
+      <d.Container $quadrantNum={quadrantNum}>
+        <d.Title>해당 냉장고 문의 색상을 선택해주세요!</d.Title>
+        <d.CardSection>
+          {colorSet.map(colorInfo => (
+            <ColorPaletteCard key={colorInfo.colorCode} colorInfo={colorInfo} quadrantNum={quadrantNum} />
+          ))}
+        </d.CardSection>
+      </d.Container>
+    )
+  }
   return (
-    <d.Container quadrantnum={quadrantNum}>
+    <d.Container $quadrantNum={quadrantNum}>
       <d.Title>해당 냉장고 문의 색상을 선택해주세요!</d.Title>
       <d.CardSection>
-        {colorSet.map(colorInfo => (
+        {panelColorSet.map(colorInfo => (
           <ColorPaletteCard key={colorInfo.colorCode} colorInfo={colorInfo} quadrantNum={quadrantNum} />
         ))}
       </d.CardSection>
