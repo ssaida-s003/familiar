@@ -17,13 +17,15 @@ export const Container = styled.div<ContainerProps>`
 `
 
 export const ColorDiv = styled.div<ContainerProps>`
-  width: 46px;
-  height: 46px;
-  margin: 4px 2px;
+  width: 54px;
+  height: 54px;
   background: ${props => props.$cardColor || 'white'};
 `
 
 export const ColorText = styled.div`
+  height: 21px;
+  display: flex;
+  align-items: center;
   text-align: center;
   font-size: 8px;
 `
