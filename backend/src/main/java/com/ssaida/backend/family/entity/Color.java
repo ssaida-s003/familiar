@@ -17,8 +17,4 @@ public class Color extends BaseEntity {
     private String name;
     private boolean canApplyOnDisplay;
 
-//    @OneToMany
-//    @JoinColumn(name = "id")
-//    private List<Fridge> fridges;
-
 }

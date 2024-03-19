@@ -17,10 +17,7 @@ public class Member extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn
     private Family family;
     private String name;
-//    private List<DailyRecord> records;
-//    private List<Question> questions;
-//    private List<Answer> answers;
 }

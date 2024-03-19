@@ -19,11 +19,9 @@ public class Question extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn
     private Member member;
 
     private String content;
-
-//    private List<Answer> answers;
 
 }

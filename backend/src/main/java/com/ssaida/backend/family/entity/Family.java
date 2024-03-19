@@ -19,12 +19,13 @@ public class Family extends BaseEntity {
     private String pw;
     private String refreshToken;
 
-    @MapsId
+    @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "family")
     private Fridge fridge;
 
-//    private List<Member> members;
-//    private List<Drawing> drawings;
+    @OneToMany(mappedBy = "family")
+    private List<Member> members;
+
     @Builder
     public Family(int id, String email, String pw) {
         this.id = id;

@@ -17,10 +17,10 @@ public class Answer extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn
     private Member member;
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn
     private Question question;
     private String url;
 

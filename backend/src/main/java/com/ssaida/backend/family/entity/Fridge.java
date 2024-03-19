@@ -18,19 +18,24 @@ public class Fridge extends BaseEntity {
     private int Id;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @MapsId
+    @JoinColumn(name = "family_id")
     private Family family;
+
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "top_left")
     private Color topLeft;
+
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "top_right")
     private Color topRight;
+
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "bottom_left")
     private Color bottomLeft;
+
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "bottom_right")
     private Color bottomRight;
 
 }
