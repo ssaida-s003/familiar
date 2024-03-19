@@ -13,7 +13,7 @@ export const Container = styled.div<ContainerProps>`
   top: ${props => {
     switch (props.$quadrantNum) {
       case 0:
-        return '35px'
+        return '124px'
       case 1:
         return '35px'
       case 2:
@@ -38,18 +38,11 @@ export const Container = styled.div<ContainerProps>`
         return '-350px'
     }
   }};
-  width: ${props => {
-    switch (props.$quadrantNum) {
-      case 0:
-        return '30px'
-      default:
-        return '332px'
-    }
-  }};
+  width: 332px;
   height: ${props => {
     switch (props.$quadrantNum) {
       case 0:
-        return '30px'
+        return '120px'
       default:
         return '290px'
     }
