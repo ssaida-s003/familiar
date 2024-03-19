@@ -1,12 +1,13 @@
 package com.ssaida.backend.haru.service;
 
+import com.ssaida.backend.common.NotFoundException;
+import com.ssaida.backend.common.ErrorCode;
 import com.ssaida.backend.family.entity.Member;
 import com.ssaida.backend.family.repository.MemberRepository;
 import com.ssaida.backend.haru.dto.CreateRecordRequest;
 import com.ssaida.backend.haru.entity.DailyRecord;
 import com.ssaida.backend.haru.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +20,8 @@ public class HaruServiceImpl implements HaruService {
 
     @Override
     @Transactional
-    public void createRecord(CreateRecordRequest createRecordRequest) throws Exception {
-        Member member = memberRepository.findById(createRecordRequest.getMemberId()).orElseThrow();
+    public void createRecord(CreateRecordRequest createRecordRequest) {
+        Member member = memberRepository.findById(createRecordRequest.getMemberId()).orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotExistException));
 
         DailyRecord dailyRecord = DailyRecord.builder()
                 .member(member)

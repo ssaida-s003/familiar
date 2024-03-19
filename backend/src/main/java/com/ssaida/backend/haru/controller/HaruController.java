@@ -27,12 +27,8 @@ public class HaruController {
             @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody
             CreateRecordRequest createRecordRequest) {
         log.info("createRecord 입력 : {}", createRecordRequest);
-        try {
-            haruService.createRecord(createRecordRequest);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        haruService.createRecord(createRecordRequest);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
