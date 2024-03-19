@@ -8,12 +8,12 @@ import lombok.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateRecordRequest {
     @NotNull
-    private int memeberId;
+    private int memberId;
     private String content;
 
     @Builder
-    public CreateRecordRequest(int memeberId, String content) {
-        this.memeberId = memeberId;
+    public CreateRecordRequest(int memberId, String content) {
+        this.memberId = memberId;
         this.content = content;
     }
 }
