@@ -18,8 +18,8 @@ const ColorPaletteCard: React.FC<ColorPaletteCardProps> = ({ colorInfo, quadrant
   }
 
   return (
-    <c.Container onClick={handleClick} cardcolor={colorInfo.colorCode}>
-      <c.ColorDiv cardcolor={colorInfo.colorCode} />
+    <c.Container onClick={handleClick} $cardColor={colorInfo.colorCode}>
+      <c.ColorDiv $cardColor={colorInfo.colorCode} />
       <c.ColorText>{colorInfo.colorName}</c.ColorText>
     </c.Container>
   )

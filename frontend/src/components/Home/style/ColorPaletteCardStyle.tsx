@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 interface ContainerProps {
-  cardcolor?: string
+  $cardColor?: string
 }
 
 export const Container = styled.div<ContainerProps>`
   width: 54px;
   height: 75px;
-  border: 1px solid ${props => props.cardcolor || 'white'};
+  border: 1px solid ${props => props.$cardColor || 'white'};
   background: white;
   display: flex;
   flex-direction: column;
@@ -20,7 +20,7 @@ export const ColorDiv = styled.div<ContainerProps>`
   width: 46px;
   height: 46px;
   margin: 4px 2px;
-  background: ${props => props.cardcolor || 'white'};
+  background: ${props => props.$cardColor || 'white'};
 `
 
 export const ColorText = styled.div`
