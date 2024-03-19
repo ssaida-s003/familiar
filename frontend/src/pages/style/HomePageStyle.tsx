@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface QuadrantsProps {
-  selectedcolor: string
+  $selectedColor: string
 }
 
 export const Container = styled.div`
@@ -26,12 +26,13 @@ export const RefrigeratorContainer = styled.div`
     display: none;
   }
 `
+
 export const Quadrants1 = styled.div<QuadrantsProps>`
   width: 49.5%;
   height: 52.8%;
   position: absolute;
   left: -0.5px;
-  background-color: ${props => props.selectedcolor};
+  background-color: ${props => props.$selectedColor};
   margin: 0.5%;
 `
 
@@ -41,7 +42,7 @@ export const Quadrants2 = styled.div<QuadrantsProps>`
   position: absolute;
   bottom: 11.5px;
   left: -0.5px;
-  background-color: ${props => props.selectedcolor};
+  background-color: ${props => props.$selectedColor};
   margin: 0.5%;
 `
 
@@ -51,6 +52,6 @@ export const Quadrants3 = styled.div<QuadrantsProps>`
   position: absolute;
   bottom: 11.5px;
   right: -2px;
-  background-color: ${props => props.selectedcolor};
+  background-color: ${props => props.$selectedColor};
   margin: 0.5%;
 `
