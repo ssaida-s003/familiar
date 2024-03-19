@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorType } from '@/types/Components/ColorPaletteType'
+import { ColorType } from '@types/components/ColorPaletteType'
 import * as c from '@components/Home/style/ColorPaletteCardStyle'
 import { useColorStore } from '@stores/refrigerator'
 

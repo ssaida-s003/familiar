@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColorType } from '@/types/Components/ColorPaletteType'
+import { ColorType } from '@types/components/ColorPaletteType'
 import ColorPaletteCard from '@components/Home/ColorPaletteCard'
 import * as d from '@components/Home/style/DoorColorPaletteStyle'
 
