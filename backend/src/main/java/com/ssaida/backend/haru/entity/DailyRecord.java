@@ -16,9 +16,10 @@ import java.time.LocalDateTime;
 @Table(name = "record")
 public class DailyRecord extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @ManyToOne
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
     private Member member;
     private String content;
@@ -30,9 +31,8 @@ public class DailyRecord extends BaseEntity {
         this.content = content;
     }
 
-    public void updateUrl(String url)
-    {
-        this.url=url;
+    public void updateUrl(String url) {
+        this.url = url;
     }
 
 }

@@ -12,14 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class HaruServiceImpl implements HaruService{
+public class HaruServiceImpl implements HaruService {
 
     private final RecordRepository recordRepository;
     private final MemberRepository memberRepository;
+
     @Override
     @Transactional
     public void createRecord(CreateRecordRequest createRecordRequest) throws Exception {
-        Member member=memberRepository.findById(createRecordRequest.getMemberId()).orElseThrow();
+        Member member = memberRepository.findById(createRecordRequest.getMemberId()).orElseThrow();
 
         DailyRecord dailyRecord = DailyRecord.builder()
                 .member(member)

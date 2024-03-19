@@ -5,6 +5,7 @@ import com.ssaida.backend.drawing.entity.Drawing;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,18 +14,19 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Family extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String email;
     private String pw;
     private String refreshToken;
 
     @PrimaryKeyJoinColumn
-    @OneToOne(mappedBy = "family")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "family")
     private Fridge fridge;
 
     @OneToMany(mappedBy = "family")
-    private List<Member> members;
+    private List<Member> members=new ArrayList<>();
 
     @Builder
     public Family(int id, String email, String pw) {
@@ -34,6 +36,6 @@ public class Family extends BaseEntity {
     }
 
     public void updateRefreshToken(String refreshToken) {
-        this.refreshToken=refreshToken;
+        this.refreshToken = refreshToken;
     }
 }

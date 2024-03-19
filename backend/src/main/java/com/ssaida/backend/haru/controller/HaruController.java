@@ -20,21 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class HaruController {
 
     final HaruService haruService;
+
     @PostMapping("/record")
     @Operation(summary = "하루 일상 기록 생성")
     ResponseEntity<Void> createRecord(
             @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody
-            CreateRecordRequest createRecordRequest)
-    {
-        log.info("createRecord 입력 : {}",createRecordRequest);
-        try{
+            CreateRecordRequest createRecordRequest) {
+        log.info("createRecord 입력 : {}", createRecordRequest);
+        try {
             haruService.createRecord(createRecordRequest);
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
