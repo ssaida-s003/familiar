@@ -9,12 +9,10 @@ interface ColorPaletteCardProps {
 }
 
 const ColorPaletteCard: React.FC<ColorPaletteCardProps> = ({ colorInfo, quadrantNum }) => {
-  const selectedColorCode = useColorStore(state => state.selectedColorCode)
   const setSelectedColorCode = useColorStore(state => state.updateSelectedColorCode)
 
   const handleClick = () => {
     setSelectedColorCode(quadrantNum, colorInfo.colorCode)
-    console.log(selectedColorCode)
   }
 
   return (

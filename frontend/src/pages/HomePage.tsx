@@ -6,9 +6,6 @@ import { useEffect, useState } from 'react'
 const HomePage = () => {
   const setSelectedColorCode = useColorStore(state => state.selectedColorCode)
   const [isShowPalette, setIsShowPallet] = useState([false, false, false, false])
-  useEffect(() => {
-    console.log(setSelectedColorCode)
-  }, [setSelectedColorCode])
 
   const handleClick = (doorNum: number) => () => {
     setIsShowPallet(current => current.map((_, index) => index === doorNum))
