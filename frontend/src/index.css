@@ -1,3 +1,23 @@
+@font-face {
+    font-family: 'SamsungOne';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/SamsungOne-400.ttf');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SamsungOne';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/SamsungOne-700.ttf');
+    font-display: swap;
+}
+
+html, body {
+    font-family: 'SamsungOne', sans-serif;
+}
+
 #root {
     max-width: 1440px;
     min-height: 100vh;
@@ -7,7 +27,7 @@
 body {
     margin: 0;
     height: 100vh;
-    background-image: url('public/img/img_main_background.png');
+    background-image: url('img/img_main_background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
