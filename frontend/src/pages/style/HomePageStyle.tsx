@@ -29,8 +29,8 @@ export const RefrigeratorContainer = styled.div`
 `
 
 export const Quadrants0 = styled.div<QuadrantsProps>`
-  width: 163px;
-  height: 357px;
+  width: 163.5px;
+  height: 357.5px;
   position: absolute;
   top: -1px;
   right: -2px;
@@ -58,8 +58,8 @@ export const Panel = styled.div`
 `
 
 export const Quadrants1 = styled.div<QuadrantsProps>`
-  width: 163px;
-  height: 357px;
+  width: 163.5px;
+  height: 357.5px;
   position: absolute;
   top: -1px;
   left: -1.6px;
@@ -68,8 +68,8 @@ export const Quadrants1 = styled.div<QuadrantsProps>`
 `
 
 export const Quadrants2 = styled.div<QuadrantsProps>`
-  width: 163px;
-  height: 286px;
+  width: 163.5px;
+  height: 286.5px;
   position: absolute;
   bottom: 11.5px;
   left: -1.6px;
