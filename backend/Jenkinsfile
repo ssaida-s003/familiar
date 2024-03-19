@@ -86,6 +86,7 @@ pipeline {
     }
 
     stage('Post to Mattermost') {
+      steps {
         post {
           success {
             script {
@@ -112,6 +113,7 @@ pipeline {
           }
         }
       }
+    }
 
   }
 
