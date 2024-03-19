@@ -9,6 +9,9 @@ pipeline {
       DOCKERHUB_CREDENTIALS = credentials('dockerhub-token-s') // jenkins에 등록해 놓은 docker hub credentials 이름
       dockerImage = ''
       REPO = "s10-s-project/S10P21S003"
+      MYSQL_HOST = ${env.MYSQL_HOST}
+      MYSQL_USERNAME = ${env.MYSQL_USERNAME}
+      MYSQL_PASSWORD = ${env.MYSQL_PASSWORD}
     }
 
   stages {
@@ -80,8 +83,7 @@ pipeline {
           }
         }
         sh '$SSH_CMD $DOCKER pull $repository:latest'
-        sh 'echo MYSQL_HOST=${env.MYSQL_HOST} MYSQL_USERNAME=${env.MYSQL_USERNAME} MYSQL_PASSWORD=${env.MYSQL_PASSWORD}'
-        sh '$SSH_CMD $DOCKER run --name $repo_name -d -p 8081:8081 $repository -e TZ=Asia/Seoul -e MYSQL_HOST=${env.MYSQL_HOST} -e MYSQL_USERNAME=${env.MYSQL_USERNAME} -e MYSQL_PASSWORD=${env.MYSQL_PASSWORD}'
+        sh '$SSH_CMD $DOCKER run --name $repo_name -d -p 8081:8081 $repository -e TZ=Asia/Seoul -e MYSQL_HOST=$MYSQL_HOST -e MYSQL_USERNAME=$MYSQL_USERNAME -e MYSQL_PASSWORD=$MYSQL_PASSWORD'
 //         sh '$SSH_CMD $DOCKER compose up'
       }
     }
