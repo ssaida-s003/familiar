@@ -74,6 +74,7 @@ export const Panel = styled.iframe`
   height: 265px;
   background: white;
   z-index: 1;
+  border: none;
 `
 
 export const SmallRefrigerator = styled.div`
