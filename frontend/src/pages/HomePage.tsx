@@ -22,7 +22,7 @@ const HomePage = () => {
       <h.NextBtn onClick={goToNextStep} src="/icon/icon_next.png" />
       <h.RefrigeratorContainer $isCloseUp={isCloseUp}>
         <h.PanelContainer onClick={handleClick(0)}>
-          <h.Panel src="" />
+          <h.Panel src="/display" />
         </h.PanelContainer>
         <h.Quadrants onClick={handleClick(0)} $selectedColor={setSelectedColorCode[0]} $quadrantsNum={0} />
         {!isCloseUp && isShowPalette[0] && <DoorColorPalette quadrantNum={0} />}
