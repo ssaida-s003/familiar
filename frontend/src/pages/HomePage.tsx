@@ -21,8 +21,8 @@ const HomePage = () => {
     <h.Container>
       <h.NextBtn onClick={goToNextStep} src="/icon/icon_next.png" />
       <h.RefrigeratorContainer $isCloseUp={isCloseUp}>
-        <h.PanelContainer>
-          <h.Panel onClick={handleClick(0)} />
+        <h.PanelContainer onClick={handleClick(0)}>
+          <h.Panel src="" />
         </h.PanelContainer>
         <h.Quadrants onClick={handleClick(0)} $selectedColor={setSelectedColorCode[0]} $quadrantsNum={0} />
         {!isCloseUp && isShowPalette[0] && <DoorColorPalette quadrantNum={0} />}

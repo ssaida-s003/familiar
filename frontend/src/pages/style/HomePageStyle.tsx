@@ -69,7 +69,7 @@ export const PanelContainer = styled.div`
   margin: 0.5%;
 `
 
-export const Panel = styled.div`
+export const Panel = styled.iframe`
   width: 148px;
   height: 265px;
   background: white;
