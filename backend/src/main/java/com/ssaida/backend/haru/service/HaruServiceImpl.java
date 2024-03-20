@@ -5,11 +5,17 @@ import com.ssaida.backend.common.ErrorCode;
 import com.ssaida.backend.family.entity.Member;
 import com.ssaida.backend.family.repository.MemberRepository;
 import com.ssaida.backend.haru.dto.CreateRecordRequest;
+import com.ssaida.backend.haru.dto.GetRecordRequest;
+import com.ssaida.backend.haru.dto.GetRecordResponse;
 import com.ssaida.backend.haru.entity.DailyRecord;
 import com.ssaida.backend.haru.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +27,8 @@ public class HaruServiceImpl implements HaruService {
     @Override
     @Transactional
     public void createRecord(CreateRecordRequest createRecordRequest) {
-        Member member = memberRepository.findById(createRecordRequest.getMemberId()).orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotExistException));
+        Member member = memberRepository.findById(createRecordRequest.getMemberId())
+                .orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotExistException));
 
         DailyRecord dailyRecord = DailyRecord.builder()
                 .member(member)
@@ -30,5 +37,13 @@ public class HaruServiceImpl implements HaruService {
         //TODO: FASTAPI 연결 필요
         String url = "test_url";
         dailyRecord.updateUrl(url);
+    }
+
+    @Override
+    public Map<String, Object> getFamilyRecord(GetRecordRequest getRecordRequest) {
+        List<GetRecordResponse> recordList = recordRepository.findAllByFamilyAndDate(getRecordRequest.getFamilyId(), getRecordRequest.getDate());
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("records", recordList);
+        return resultMap;
     }
 }

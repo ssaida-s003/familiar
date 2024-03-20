@@ -3,7 +3,7 @@ spring:
     name:backend
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   datasource:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,3 +22,6 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+
+deepl:
+  apikey: ${키 작성}
