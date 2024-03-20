@@ -22,3 +22,7 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+
+db:
+  username: root
+  password: root
