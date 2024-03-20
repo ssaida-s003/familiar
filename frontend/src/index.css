@@ -2,7 +2,7 @@
     font-family: 'SamsungOne';
     font-style: normal;
     font-weight: 400;
-    src: url('/fonts/SamsungOne-400.ttf');
+    src: url('public/fonts/SamsungOne-400.ttf');
     font-display: swap;
 }
 
@@ -10,7 +10,7 @@
     font-family: 'SamsungOne';
     font-style: normal;
     font-weight: 700;
-    src: url('/fonts/SamsungOne-700.ttf');
+    src: url('public/fonts/SamsungOne-700.ttf');
     font-display: swap;
 }
 
