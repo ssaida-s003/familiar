@@ -1,7 +1,9 @@
 spring:
   application:
     name:backend
-
+  jpa:
+    hibernate:
+      ddl-auto: create
   datasource:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,6 +15,7 @@ server:
   port: 8081
   servlet:
     context-path: /api
+
 #쿼리문 로그
 logging:
   level:
