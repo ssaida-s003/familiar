@@ -40,7 +40,7 @@ export const RefrigeratorContainer = styled.div<RefrigeratorContainerProps>`
   }
 
   transition: transform 1.5s ease-in-out;
-  transform: ${props => props.$isCloseUp && 'scale(2.5) translate(-25%, 23%)'};
+  transform: ${props => props.$isCloseUp && 'scale(2.9) translate(-25%, 23.5%)'};
   position: relative;
 `
 
