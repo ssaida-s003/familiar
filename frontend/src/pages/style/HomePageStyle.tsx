@@ -5,6 +5,10 @@ interface QuadrantsProps {
   $quadrantsNum: number
 }
 
+interface RefrigeratorContainerProps {
+  $isCloseUp: boolean
+}
+
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -21,13 +25,12 @@ export const NextBtn = styled.img`
   cursor: pointer;
 `
 
-export const RefrigeratorContainer = styled.div`
+export const RefrigeratorContainer = styled.div<RefrigeratorContainerProps>`
   width: 329px;
   height: 674px;
   background-image: url('/icon/icon_refrigerator.png');
   background-size: contain;
   background-position: center;
-  position: relative;
   margin-top: 20px;
   border: 0.1px solid black;
   cursor: pointer;
@@ -35,6 +38,10 @@ export const RefrigeratorContainer = styled.div`
   @media (max-width: 340px), (max-height: 680px) {
     display: none;
   }
+
+  transition: transform 1.5s ease-in-out;
+  transform: ${props => props.$isCloseUp && 'scale(2.5) translate(-25%, 23%)'};
+  position: relative;
 `
 
 export const Quadrants = styled.div<QuadrantsProps>`
