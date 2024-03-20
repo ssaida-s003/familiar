@@ -8,8 +8,8 @@ spring:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${MYSQL_HOST:localhost:3306}/s10p21s003_dev?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
-    username: ${db.username:root}
-    password: ${db.password:root}
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
 
 server:
   port: 8081
@@ -22,7 +22,3 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
-
-db:
-  username: root
-  password: root
