@@ -1,4 +1,4 @@
 FROM openjdk:17
 ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","-DMYSQL_HOST=${MYSQL_HOST}","-DMYSQL_USERNAME=${MYSQL_USERNAME}","-DMYSQL_PASSWORD=${MYSQL_PASSWORD}","/app.jar"]
+ENTRYPOINT ["java","-jar","-Dmysql.host=${MYSQL_HOST}","-Dmysql.username=${MYSQL_USERNAME}","-Dmysql.password=${MYSQL_PASSWORD}","/app.jar"]
