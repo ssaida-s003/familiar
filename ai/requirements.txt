@@ -1,7 +1,4 @@
 fastapi
-torch
 uvicorn
 accelerate
-git+https://github.com/huggingface/diffusers
-peft
 xformers
