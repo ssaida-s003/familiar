@@ -11,6 +11,9 @@
       "@/*": [
         "src/*"
       ],
+      "@apis/*": [
+        "src/apis/*"
+      ],
       "@common/*": [
         "src/common/*"
       ],
