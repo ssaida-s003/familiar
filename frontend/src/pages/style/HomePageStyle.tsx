@@ -75,3 +75,14 @@ export const Panel = styled.div`
   background: white;
   z-index: 1;
 `
+
+export const SmallRefrigerator = styled.div`
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  background-image: url('/icon/icon_refrigerator.png');
+  background-size: contain;
+  background-position: center;
+  width: 180px;
+  height: 370px;
+`
