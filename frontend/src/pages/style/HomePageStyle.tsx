@@ -71,7 +71,7 @@ export const PanelContainer = styled.div`
 
 export const Panel = styled.div`
   width: 148px;
-  height: 264px;
+  height: 265px;
   background: white;
   z-index: 1;
 `
