@@ -21,7 +21,7 @@ public class HaruController {
 
     final HaruService haruService;
 
-    @PostMapping("/record")
+    @PostMapping("/records")
     @Operation(summary = "하루 일상 기록 생성")
     ResponseEntity<Void> createRecord(
             @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody
@@ -31,4 +31,6 @@ public class HaruController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
 }
