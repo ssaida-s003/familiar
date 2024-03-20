@@ -7,9 +7,9 @@ spring:
   datasource:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${mysql.host:localhost:3306}/s10p21s003_dev?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
-    username: ${mysql.username:root}
-    password: ${mysql.password:root}
+    url: jdbc:mysql://${mysql.host}/s10p21s003_dev?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
+    username: ${mysql.username}
+    password: ${mysql.password}
 
 server:
   port: 8081

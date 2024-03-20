@@ -12,18 +12,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @Slf4j
 public class BackendApplication {
 
-	@Value("${mysql.host}")
-	private static String mysqlHost;
-
-	@Value("${mysql.username}")
-	private static String userName;
-
-	@Value("${mysql.password}")
-	private static String password;
-
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
-		log.info("MYSQL : {}, {}, {}", mysqlHost, userName, password);
 	}
 
 }
