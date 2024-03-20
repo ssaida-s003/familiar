@@ -1,6 +1,6 @@
 import DisplayContainer from '@common/DisplayContainer'
 
-const ShareToday = () => {
+const FamilyShare = () => {
   return (
     <DisplayContainer>
       <></>
@@ -8,4 +8,4 @@ const ShareToday = () => {
   )
 }
 
-export default ShareToday
+export default FamilyShare
