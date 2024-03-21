@@ -6,6 +6,7 @@ interface ShareOrQuestionProps {
 
 export const Container = styled.div`
   width: 100%;
+  margin: 5% 0;
 `
 
 export const SelectedContainer = styled.div<ShareOrQuestionProps>`
@@ -24,16 +25,16 @@ export const ShareOrQuestionContainer = styled.div`
 `
 
 export const ShareContainerSmall = styled.div`
-  width: 66px;
-  height: 90px;
+  width: 66.4px;
+  height: 90.6px;
   background-image: url('/icon/icon_today_share_small.png');
   background-size: cover;
-  background-position: center;
+  background-position: bottom;
 `
 
 export const QuestionContainerSmall = styled.div`
-  width: 66px;
-  height: 90px;
+  width: 66.4px;
+  height: 90.9px;
   background-image: url('/icon/icon_question_small.png');
   background-size: cover;
   background-position: center;
