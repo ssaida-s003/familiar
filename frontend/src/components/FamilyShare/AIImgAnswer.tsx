@@ -1,3 +1,4 @@
+import NoAnswerAlarm from '@components/FamilyShare/NoAnswerAlarm.tsx'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -9,7 +10,11 @@ const Container = styled.div`
 `
 
 const AiImgAnswer = () => {
-  return <Container></Container>
+  return (
+    <Container>
+      <NoAnswerAlarm />
+    </Container>
+  )
 }
 
 export default AiImgAnswer
