@@ -19,7 +19,7 @@ const FamilyShare = () => {
   return (
     <DisplayContainer>
       <Container>
-        <Header />
+        <Header title={'가족 공유'} />
         <ShareOrQuestion />
         <AIImgAnswer />
         <Calender />
