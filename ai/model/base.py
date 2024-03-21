@@ -8,20 +8,22 @@ class BaseModel():
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-        # LCM-LoRA
-        # set scheduler
-        if self.config.LCM_LoRA :
-            self.pipe.scheduler = LCMScheduler.from_config(self.pipe.scheduler.config)
-            # load LCM-LoRA
-            self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdxl")
 
         #파이프라인 생성
         self.pipe = StableDiffusionPipeline.from_pretrained(
             config.model_path, dtype=torch.float16,
         ).to(self.device)
 
-        #스케쥴러 등록
-        self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
+
+        # LCM-LoRA
+        if self.config.LCM_LoRA:
+            # set scheduler
+            self.pipe.scheduler = LCMScheduler.from_config(self.pipe.scheduler.config)
+            # load LCM-LoRA
+            self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdv1-5")
+        else:
+            #스케쥴러 등록
+            self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
 
         #최적화 여부
         if self.config.xformer:
