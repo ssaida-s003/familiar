@@ -6,23 +6,13 @@ interface ShareOrQuestionProps {
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
 `
 
 export const SelectedContainer = styled.div<ShareOrQuestionProps>`
   width: 90%;
-  height: 55.5px;
+  height: 55.3px;
   margin: 0 5%;
   background-image: url(${props => (props.$shareOrQuestion === 1 ? '/icon/icon_today_share_big.png' : '/icon/icon_question_big.png')});
-  background-size: cover;
-  background-position: center;
-`
-
-export const QuestionContainer = styled.div`
-  width: 90%;
-  height: 55.5px;
-  margin: 0 5%;
-  background-image: url('/icon/icon_question_big.png');
   background-size: cover;
   background-position: center;
 `
