@@ -25,17 +25,17 @@ export const ShareOrQuestionContainer = styled.div`
 `
 
 export const ShareContainerSmall = styled.div`
-  width: 66.2px;
-  height: 90.4px;
+  width: 66.4px;
+  height: 90.6px;
   background-image: url('/icon/icon_today_share_small.png');
   background-size: cover;
-  background-position: top;
+  background-position: bottom;
 `
 
 export const QuestionContainerSmall = styled.div`
-  width: 66.2px;
-  height: 90.4px;
+  width: 66.4px;
+  height: 90.9px;
   background-image: url('/icon/icon_question_small.png');
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
 `
