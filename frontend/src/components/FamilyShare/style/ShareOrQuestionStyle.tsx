@@ -1,15 +1,19 @@
 import styled from 'styled-components'
 
+interface ShareOrQuestionProps {
+  $shareOrQuestion: number
+}
+
 export const Container = styled.div`
   width: 100%;
   height: 100%;
 `
 
-export const ShareContainer = styled.div`
+export const SelectedContainer = styled.div<ShareOrQuestionProps>`
   width: 90%;
   height: 55.5px;
   margin: 0 5%;
-  background-image: url('/icon/icon_today_share_big.png');
+  background-image: url(${props => (props.$shareOrQuestion === 1 ? '/icon/icon_today_share_big.png' : '/icon/icon_question_big.png')});
   background-size: cover;
   background-position: center;
 `
@@ -25,7 +29,6 @@ export const QuestionContainer = styled.div`
 
 export const ShareOrQuestionContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: space-evenly;
 `

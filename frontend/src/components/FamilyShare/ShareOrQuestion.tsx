@@ -2,10 +2,10 @@ import { useState } from 'react'
 import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
 
 const ShareOrQuestion = () => {
-  const [shareOrQuestion, setShareOrQuestion] = useState(1)
+  const [shareOrQuestion, setShareOrQuestion] = useState(0)
 
   //   api 통신 결과
-
+  // 0 두개 1 하루공유 2 질문과답변
   return (
     <s.Container>
       {shareOrQuestion === 0 && (
@@ -14,8 +14,7 @@ const ShareOrQuestion = () => {
           <s.QuestionContainerSmall></s.QuestionContainerSmall>
         </s.ShareOrQuestionContainer>
       )}
-      {shareOrQuestion === 1 && <s.QuestionContainer />}
-      {shareOrQuestion === 2 && <s.ShareContainer />}
+      {shareOrQuestion !== 0 && <s.SelectedContainer $shareOrQuestion={shareOrQuestion} />}
     </s.Container>
   )
 }
