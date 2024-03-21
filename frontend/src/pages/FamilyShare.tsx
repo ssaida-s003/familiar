@@ -4,6 +4,7 @@ import ShareOrQuestion from '@components/FamilyShare/ShareOrQuestion'
 import Calender from '@components/FamilyShare/Calender'
 import Navbar from '@common/Navbar'
 import styled from 'styled-components'
+import AIImgAnswer from '@components/FamilyShare/AIImgAnswer'
 
 const Container = styled.div`
   width: 100%;
@@ -20,6 +21,7 @@ const FamilyShare = () => {
       <Container>
         <Header />
         <ShareOrQuestion />
+        <AIImgAnswer />
         <Calender />
         <Navbar />
       </Container>
