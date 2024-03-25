@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/haru/questions/")
+@RequestMapping("/haru/questions")
 @RequiredArgsConstructor
 @Slf4j
 public class QuestionController {
@@ -24,9 +24,8 @@ public class QuestionController {
     @PostMapping
     @Operation(summary = "질문 생성")
     public ResponseEntity<Void> createQuestion(
-            @Parameter(description = "멤버Id,질문 내용") @RequestBody CreateQuestionRequest createQuestionRequest)
-    {
-        log.info("createQuestion 입력 : {}",createQuestionRequest);
+            @Parameter(description = "멤버Id,질문 내용") @RequestBody CreateQuestionRequest createQuestionRequest) {
+        log.info("createQuestion 입력 : {}", createQuestionRequest);
 
         questionService.createQuestion(createQuestionRequest);
         return new ResponseEntity<>(HttpStatus.OK);

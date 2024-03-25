@@ -20,5 +20,5 @@ public interface RecordRepository extends JpaRepository<DailyRecord, Long> {
             "WHERE YEAR(r.createdAt) = :year " +
             "AND MONTH(r.createdAt) = :month " +
             "AND r.member.family.id = :familyId")
-    List<DailyRecord> findAllByMonthAndFamilyId(@Param("familyId") int familyId, @Param("year") int year, @Param("month") int month);
+    List<DailyRecord> findAllByFamilyIdAndMonth(@Param("familyId") int familyId, @Param("year") int year, @Param("month") int month);
 }

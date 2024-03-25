@@ -25,7 +25,7 @@ public class RecordServiceImpl implements RecordService {
     @Transactional
     public void createRecord(CreateRecordRequest createRecordRequest) {
         Member member = memberRepository.findById(createRecordRequest.getMemberId())
-                .orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotExistException));
+                .orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotFoundException));
 
         DailyRecord dailyRecord = createRecordRequest.toEntity(member);
         recordRepository.save(dailyRecord);
