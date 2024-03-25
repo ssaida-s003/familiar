@@ -9,12 +9,16 @@ import com.oracle.bmc.auth.SimplePrivateKeySupplier;
 import com.oracle.bmc.objectstorage.ObjectStorage;
 import com.oracle.bmc.objectstorage.ObjectStorageClient;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.Objects;
 import java.util.function.Supplier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 @Configuration
 public class ObjectStorageConfig {
@@ -23,18 +27,43 @@ public class ObjectStorageConfig {
 	@Bean
 	public AuthenticationDetailsProvider authenticationDetailsProvider() throws IOException {
 		ClassLoader classLoader = ObjectStorageConfig.class.getClassLoader();
-		File tempConfigFile = new File(
-			Objects.requireNonNull(classLoader.getResource("config/config")).getFile());
-		File tempOCIAPIKey = new File(
-			Objects.requireNonNull(classLoader.getResource("config/SSAIDA.pem")).getFile());
 
-		ConfigFile config = ConfigFileReader.parse(tempConfigFile.getPath(), "DEFAULT");
+		try (InputStream configStream = classLoader.getResourceAsStream("config/config"); InputStream privateKeyStream = classLoader.getResourceAsStream("config/SSAIDA.pem");){
 
-		Supplier<InputStream> privateKeySupplier = new SimplePrivateKeySupplier(tempOCIAPIKey.getPath());
+			ConfigFile config = ConfigFileReader.parse(configStream, "DEFAULT");
 
-		return SimpleAuthenticationDetailsProvider.builder()
-			.tenantId(config.get("tenancy")).userId(config.get("user")).fingerprint(config.get("fingerprint"))
-			.privateKeySupplier(privateKeySupplier).region(Region.AP_CHUNCHEON_1).build();
+			File privateKey = File.createTempFile("SSAIDA", ".pem");
+			privateKey.deleteOnExit();
+
+			try (FileOutputStream outputStream = new FileOutputStream(privateKey)) {
+				int read;
+				byte[] bytes = new byte[1024];
+
+				while ((read = privateKeyStream.read(bytes)) != -1) {
+					outputStream.write(bytes, 0, read);
+				}
+			}
+
+			Supplier<InputStream> privateKeySupplier = new SimplePrivateKeySupplier(privateKey.getPath());
+
+			return SimpleAuthenticationDetailsProvider.builder()
+					.tenantId(config.get("tenancy")).userId(config.get("user")).fingerprint(config.get("fingerprint"))
+					.privateKeySupplier(privateKeySupplier).region(Region.AP_CHUNCHEON_1).build();
+		}
+
+//		File tempConfigFile = new File(
+//			Objects.requireNonNull(classLoader.getResource("config/config")).getFile());
+//		File tempOCIAPIKey = new File(
+//			Objects.requireNonNull(classLoader.getResource("config/SSAIDA.pem")).getFile());
+//
+//		ConfigFile config = ConfigFileReader.parse(tempConfigFile.getPath(), "DEFAULT");
+//
+//		Supplier<InputStream> privateKeySupplier = new SimplePrivateKeySupplier(tempOCIAPIKey.getPath());
+//
+//		return SimpleAuthenticationDetailsProvider.builder()
+//			.tenantId(config.get("tenancy")).userId(config.get("user")).fingerprint(config.get("fingerprint"))
+//			.privateKeySupplier(privateKeySupplier).region(Region.AP_CHUNCHEON_1).build();
+
 	}
 
 	@Bean
