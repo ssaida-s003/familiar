@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface CategoryProps {
+  $isSelected: boolean
+}
+
 export const PaintContainer = styled.div`
   width: 100%;
   height: 60%;
@@ -32,7 +36,7 @@ export const TitleInfo = styled.div`
 export const TitleInput = styled.input`
   width: 96%;
   border-radius: 2px;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   padding: 2%;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: transparent;
@@ -52,7 +56,7 @@ export const CategoryInfo = styled.div`
   font-size: 18px;
 `
 
-export const Category = styled.div`
+export const Category = styled.div<CategoryProps>`
   margin: 5px;
   display: flex;
   align-items: center;
@@ -62,6 +66,7 @@ export const Category = styled.div`
   border-radius: 100%;
   background: #fff;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border: 3px solid ${({ $isSelected }) => ($isSelected ? '#80add9' : 'transparent')};
 `
 
 export const ButtonContainer = styled.div`

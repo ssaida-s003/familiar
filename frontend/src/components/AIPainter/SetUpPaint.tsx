@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import DisplayContainer from '@common/DisplayContainer'
 import * as s from '@components/AIPainter/style/SetUpPaintStyle'
@@ -22,6 +23,11 @@ const SetUpPaint = () => {
   ]
   const location = useLocation()
   const image = location.state?.image
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  const selectCategory = (categoryNameByEnglish: string) => {
+    setSelectedCategory(categoryNameByEnglish)
+  }
 
   return (
     <DisplayContainer>
@@ -34,7 +40,9 @@ const SetUpPaint = () => {
           <s.CategoryContainer>
             {categorySet.map(category => (
               // eslint-disable-next-line react/jsx-key
-              <s.Category>{category.categoryName}</s.Category>
+              <s.Category key={category.categoryNameByEnglish} onClick={() => selectCategory(category.categoryNameByEnglish)} $isSelected={selectedCategory === category.categoryNameByEnglish}>
+                {category.categoryName}
+              </s.Category>
             ))}
           </s.CategoryContainer>
           <s.ButtonContainer>
