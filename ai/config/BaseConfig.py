@@ -5,7 +5,8 @@ base_config = dict(
     inference_step = 20,
     xformer = True,
     offload = True,
-    LCM_LoRA = True,
+    model_version="SD1.5",
+    fast_inference = True,
 )
 
 class BaseConfig():
@@ -19,4 +20,5 @@ class BaseConfig():
         self.inference_step = config["inference_step"]
         self.xformer = config["xformer"]
         self.offload = config["offload"]
-        self.LCMLoRA = config["LCM_LoRA"]
+        self.model_version = config["model_version"]
+        self.fast_inference = config["fast_inference"]
