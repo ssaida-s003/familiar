@@ -67,4 +67,25 @@ public class DrawingServiceImpl implements DrawingService {
 			.stream().map(DrawingInfo::from)
 			.toList();
 	}
+
+	@Override
+	public Integer registerWallpaper(Integer familyId, Integer drawingId, boolean isWallpaper) {
+		Drawing drawing = drawingRepository.findById(drawingId)
+			.orElseThrow(() -> new DrawingException(NOT_EXISTS));
+
+		if (!drawing.getFamily().getId().equals(familyId)) {
+			throw new DrawingException(NOT_EXISTS);
+		}
+
+		drawing.switchWallpaper(isWallpaper);
+
+		return drawing.getId();
+	}
+
+	@Override
+	public List<DrawingInfo> findFamilyWallpapers(Integer familyId) {
+		return drawingRepository.findAllByFamilyIdAndIsWallpaper(familyId, true)
+			.stream().map(DrawingInfo::from)
+			.toList();
+	}
 }
