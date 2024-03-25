@@ -51,7 +51,6 @@ const Canvas = () => {
     contextRef.current!.closePath()
     setIsDrawing(false)
     addHistory()
-    console.log('현재 스텝', step)
   }
 
   const draw = ({ nativeEvent }: React.MouseEvent<HTMLCanvasElement>) => {
@@ -78,9 +77,7 @@ const Canvas = () => {
 
   const undo = () => {
     if (step > 0) {
-      console.log('현재 스텝', step)
       setStep(step - 1)
-      console.log('현재 스텝', step)
       restoreHistory(step - 1)
     }
   }
