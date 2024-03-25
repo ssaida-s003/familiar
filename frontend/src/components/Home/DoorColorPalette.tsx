@@ -1,10 +1,14 @@
 import React from 'react'
-import { ColorType } from '@/types/components/ColorPaletteType'
 import ColorPaletteCard from '@components/Home/ColorPaletteCard'
 import * as d from '@components/Home/style/DoorColorPaletteStyle'
 
 interface DoorColorPaletteProps {
   quadrantNum: number
+}
+
+interface ColorType {
+  colorName: string
+  colorCode: string
 }
 
 const DoorColorPalette: React.FC<DoorColorPaletteProps> = ({ quadrantNum }) => {

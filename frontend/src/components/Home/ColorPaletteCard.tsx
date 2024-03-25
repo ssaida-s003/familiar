@@ -1,7 +1,11 @@
 import React from 'react'
-import { ColorType } from '@/types/components/ColorPaletteType'
 import * as c from '@components/Home/style/ColorPaletteCardStyle'
 import { useColorStore } from '@stores/refrigerator'
+
+interface ColorType {
+  colorName: string
+  colorCode: string
+}
 
 interface ColorPaletteCardProps {
   colorInfo: ColorType
