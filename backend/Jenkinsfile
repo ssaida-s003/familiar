@@ -16,8 +16,8 @@ pipeline {
     stage('Add Env Files') {
       steps {
         dir('./backend') {
-          sh 'chmod -R 700 src/main/resources'
-          sh 'mkdir src/main/resources/config'
+//           sh 'chmod -R 700 src/main/resources'
+//           sh 'mkdir src/main/resources/config'
 
           withCredentials([file(credentialsId: 'backend-keys', variable: 'keys')]) {
             sh 'cp ${keys} src/main/resources/config/keys.yml'
