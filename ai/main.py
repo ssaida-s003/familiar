@@ -1,9 +1,36 @@
-from fastapi import FastAPI, UploadFile, File, Form
 import uvicorn
+from fastapi import FastAPI, UploadFile, File, Form
+from starlette.middleware.cors import CORSMiddleware
+
+from database import database
 
 app = FastAPI()
 
+origins = [
+    "https://ssaida-back.duckdns.org",
+    "http://localhost:8081",
+    "http://127.0.0.1:8081"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# DB 세팅
+db = database.Database()
+
 #모델 로딩
+models = {}
+
+## 가족 일기 모델
+models['diary']  = None
+
+## 스케치 그림 생성 모델
+models['drawing'] = None
 
 @app.get("/")
 async def read_root():
