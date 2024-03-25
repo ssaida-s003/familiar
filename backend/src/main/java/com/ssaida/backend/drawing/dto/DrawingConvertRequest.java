@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DrawingConvertRequest(
 	@NotNull
-	String title,
+	String name,
 	@NotNull
 	String artStyle
 ) {

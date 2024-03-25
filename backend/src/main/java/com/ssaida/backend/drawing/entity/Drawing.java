@@ -19,11 +19,26 @@ public class Drawing extends BaseEntity {
     @JoinColumn
     private Family family;
 
+    private String name;
+
     private String originalUrl;
 
     private String generatedUrl;
 
     private boolean isWallpaper;
 
+    @Builder
+    public Drawing(Family family, String name, String originalUrl, String generatedUrl,
+        boolean isWallpaper) {
+        this.family = family;
+        this.name = name;
+        this.originalUrl = originalUrl;
+        this.generatedUrl = generatedUrl;
+        this.isWallpaper = isWallpaper;
+    }
+
+    public void switchWallpaper(boolean isWallpaper) {
+        this.isWallpaper = isWallpaper;
+    }
 
 }
