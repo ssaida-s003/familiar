@@ -1,17 +1,3 @@
-db:
-  host: ${MYSQL_HOST}
-  username: ${MYSQL_USERNAME}
-  password: ${MYSQL_PASSWORD}
-
-deepl:
-  apikey: ${DEEPL_APIKEY}
-
-oci:
-  object-storage:
-    bucket-name: ${OCI_BUCKET_NAME}
-    bucket-name-space: ${OCI_BUCKET_NAME_SPACE}
-    region-url: ${OCI_REGION_URL}
-
 spring:
   application:
     name: backend
