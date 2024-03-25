@@ -6,7 +6,6 @@ interface ShareOrQuestionProps {
 
 export const Container = styled.div`
   width: 100%;
-  margin: 5% 0;
 `
 
 export const SelectedContainer = styled.div<ShareOrQuestionProps>`
