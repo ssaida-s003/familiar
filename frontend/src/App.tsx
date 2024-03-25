@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from '@pages/HomePage'
 import WallPapersPage from '@pages/WallPapersPage'
-import FamilyShare from '@pages/FamilyShare.tsx'
+import FamilyShare from '@pages/FamilyShare'
 import AIPainterPage from '@pages/AIPainterPage'
 
 const AuthRoutes = () => (
