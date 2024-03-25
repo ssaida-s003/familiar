@@ -30,28 +30,26 @@ const SetUpPaint = () => {
   }
 
   return (
-    <DisplayContainer>
-      <>
-        <s.PaintContainer>{image && <s.Paint src={image} alt="Canvas Painting" />}</s.PaintContainer>
-        <s.SetUpContainer>
-          <s.TitleInfo>그림의 제목을 지어주세요!</s.TitleInfo>
-          <s.TitleInput />
-          <s.CategoryInfo> 생성할 그림의 스타일을 골라주세요!</s.CategoryInfo>
-          <s.CategoryContainer>
-            {categorySet.map(category => (
-              // eslint-disable-next-line react/jsx-key
-              <s.Category key={category.categoryNameByEnglish} onClick={() => selectCategory(category.categoryNameByEnglish)} $isSelected={selectedCategory === category.categoryNameByEnglish}>
-                {category.categoryName}
-              </s.Category>
-            ))}
-          </s.CategoryContainer>
-          <s.ButtonContainer>
-            <s.ReturnButton>다시 그릴게요!</s.ReturnButton>
-            <s.MakeButton>이렇게 만들어 주세요!</s.MakeButton>
-          </s.ButtonContainer>
-        </s.SetUpContainer>
-      </>
-    </DisplayContainer>
+    <>
+      <s.PaintContainer>{image && <s.Paint src={image} alt="Canvas Painting" />}</s.PaintContainer>
+      <s.SetUpContainer>
+        <s.TitleInfo>그림의 제목을 지어주세요!</s.TitleInfo>
+        <s.TitleInput onChange={handleTitleChange} />
+        <s.CategoryInfo> 생성할 그림의 스타일을 골라주세요!</s.CategoryInfo>
+        <s.CategoryContainer>
+          {categorySet.map(category => (
+            // eslint-disable-next-line react/jsx-key
+            <s.Category key={category.categoryNameByEnglish} onClick={() => selectCategory(category.categoryNameByEnglish)} $isSelected={selectedCategory === category.categoryNameByEnglish}>
+              {category.categoryName}
+            </s.Category>
+          ))}
+        </s.CategoryContainer>
+        <s.ButtonContainer>
+          <s.ReturnButton onClick={handleRePaint}>다시 그릴게요!</s.ReturnButton>
+          <s.MakeButton onClick={handleConvert}>이렇게 만들어 주세요!</s.MakeButton>
+        </s.ButtonContainer>
+      </s.SetUpContainer>
+    </>
   )
 }
 
