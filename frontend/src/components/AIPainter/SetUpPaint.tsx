@@ -12,14 +12,14 @@ const SetUpPaint = () => {
   const categorySet: CategorySetType[] = [
     {
       categoryName: '실사화',
-      categoryNameByEnglish: 'realistic ',
+      categoryNameByEnglish: 'realistic',
     },
-    { categoryName: '만화', categoryNameByEnglish: 'cartoon ' },
+    { categoryName: '만화', categoryNameByEnglish: 'cartoon' },
     {
-      categoryName: '실사화',
-      categoryNameByEnglish: 'realistic ',
+      categoryName: '실사화2',
+      categoryNameByEnglish: 'realistic2',
     },
-    { categoryName: '만화', categoryNameByEnglish: 'cartoon ' },
+    { categoryName: '만화2', categoryNameByEnglish: 'cartoon2' },
   ]
   const location = useLocation()
   const image = location.state?.image
