@@ -16,4 +16,8 @@ public interface DrawingService {
 
 	List<DrawingInfo> findFamilyDrawings(Integer familyId);
 
+	Integer registerWallpaper(Integer familyId, Integer drawingId, boolean isWallpaper);
+
+	List<DrawingInfo> findFamilyWallpapers(Integer familyId);
+
 }

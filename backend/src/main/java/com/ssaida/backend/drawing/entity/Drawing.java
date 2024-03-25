@@ -36,4 +36,9 @@ public class Drawing extends BaseEntity {
         this.generatedUrl = generatedUrl;
         this.isWallpaper = isWallpaper;
     }
+
+    public void switchWallpaper(boolean isWallpaper) {
+        this.isWallpaper = isWallpaper;
+    }
+
 }
