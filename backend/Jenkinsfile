@@ -14,24 +14,29 @@ pipeline {
   stages {
 
     stage('Add Env Files') {
-      sh 'chmod -R rwx src/main/resources'
-      sh 'mkdir src/main/resources/config'
+      steps {
+        dir('./backend') {
+          sh 'chmod -R rwx src/main/resources'
+          sh 'mkdir src/main/resources/config'
 
-      withCredentials([file(credentialsId: 'backend-keys', variable: 'keys')]) {
-        sh 'cp ${keys} src/main/resources/config/keys.yml'
+          withCredentials([file(credentialsId: 'backend-keys', variable: 'keys')]) {
+            sh 'cp ${keys} src/main/resources/config/keys.yml'
+          }
+
+          withCredentials([file(credentialsId: 'backend-config', variable: 'config')]) {
+            sh 'cp ${config} src/main/resources/config/config'
+          }
+
+          withCredentials([file(credentialsId: 'backend-pem', variable: 'pem')]) {
+            sh 'cp ${pem} src/main/resources/config/SSAIDA.pem'
+          }
+
+          withCredentials([file(credentialsId: 'backend-pem-public', variable: 'pem-public')]) {
+            sh 'cp ${pem-public} src/main/resources/config/SSAIDA_public.pem'
+          }
+        }
       }
 
-      withCredentials([file(credentialsId: 'backend-config', variable: 'config')]) {
-        sh 'cp ${config} src/main/resources/config/config'
-      }
-
-      withCredentials([file(credentialsId: 'backend-pem', variable: 'pem')]) {
-        sh 'cp ${pem} src/main/resources/config/SSAIDA.pem'
-      }
-
-      withCredentials([file(credentialsId: 'backend-pem-public', variable: 'pem-public')]) {
-        sh 'cp ${pem-public} src/main/resources/config/SSAIDA_public.pem'
-      }
     }
 
     stage('Build') {
