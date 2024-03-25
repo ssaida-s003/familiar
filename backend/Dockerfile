@@ -4,5 +4,5 @@ ENV MYSQL_HOST=$MYSQL_HOST
 ENV MYSQL_USERNAME=$MYSQL_USERNAME
 ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
 COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
-CMD ["-Dmysql.host=${MYSQL_HOST}","-Dmysql.username=${MYSQL_USERNAME}","-Dmysql.password=${MYSQL_PASSWORD}"]
+CMD ["java","-jar","/app.jar","-Dmysql.host=${MYSQL_HOST}","-Dmysql.username=${MYSQL_USERNAME}","-Dmysql.password=${MYSQL_PASSWORD}"]
+#ENTRYPOINT ["java","-jar","/app.jar","-Dmysql.host=${MYSQL_HOST}","-Dmysql.username=${MYSQL_USERNAME}","-Dmysql.password=${MYSQL_PASSWORD}"]
