@@ -10,10 +10,11 @@ import org.springframework.web.service.annotation.PostExchange;
 @HttpExchange(url = "http://localhost:8000")
 public interface StableDiffusionApiClient {
 
-	@PostExchange(url = "/files/multipart", contentType = MULTIPART_FORM_DATA_VALUE)
+	@PostExchange(url = "/drawing/style-transfer", contentType = MULTIPART_FORM_DATA_VALUE)
 	byte[] convertImage(
 		@RequestPart(name = "image") MultipartFile image,
-		@RequestPart(name = "request") Img2ImgRequest request);
+		@RequestPart(name = "prompt") String prompt,
+		@RequestPart(name = "artStyle") String artStyle);
 
 }
 
