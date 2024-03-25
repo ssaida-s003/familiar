@@ -1,11 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import ToolBar from '@components/AIPainter/ToolBar.tsx'
-import styled from 'styled-components'
-
-const Container = styled.div`
-  background-color: white;
-  border: black solid 1px;
-`
+import { useNavigate } from 'react-router-dom'
+import ToolBar from '@components/AIPainter/ToolBar'
+import * as c from '@components/AIPainter/style/CanvasStyle'
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -17,13 +13,15 @@ const Canvas = () => {
   const [step, setStep] = useState(0)
   const [brushColor, setBrushColor] = useState('#000000')
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     const canvas = canvasRef.current
     if (canvas) {
       canvas.width = 444
-      canvas.height = 770
+      canvas.height = 730
       canvas.style.width = `444px`
-      canvas.style.height = `770px`
+      canvas.style.height = `730px`
 
       const context = canvas.getContext('2d')
       if (context) {
@@ -121,11 +119,20 @@ const Canvas = () => {
     }
   }
 
+  const goNextStep = () => {
+    const canvas = canvasRef.current
+    if (canvas) {
+      const dataUrl = canvas.toDataURL()
+      navigate('/display/AI-painter/setup', { state: { image: dataUrl } })
+    }
+  }
+
   return (
-    <Container>
+    <c.Container>
       <canvas onMouseDown={startDrawing} onMouseUp={endDrawing} onMouseMove={draw} onMouseLeave={() => isDrawing && endDrawing()} ref={canvasRef} />
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
-    </Container>
+      <c.NextStepBtn src="/icon/icon_AIChangeBtn.png" onClick={goNextStep} />
+    </c.Container>
   )
 }
 
