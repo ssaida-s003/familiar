@@ -1,11 +1,12 @@
 package com.ssaida.backend.drawing.service.impl;
 
-import static com.ssaida.backend.drawing.exception.ErrorCode.NOT_EXISTS_FAMILY;
+import static com.ssaida.backend.drawing.exception.ErrorCode.NOT_EXISTS;
 
 import com.ssaida.backend.common.ai.StableDiffusionApiClient;
 import com.ssaida.backend.common.prompt.PromptGenerator;
 import com.ssaida.backend.drawing.dto.DrawingConvertRequest;
 import com.ssaida.backend.drawing.dto.DrawingSaveRequest;
+import com.ssaida.backend.drawing.entity.Drawing;
 import com.ssaida.backend.drawing.exception.DrawingException;
 import com.ssaida.backend.drawing.repository.DrawingRepository;
 import com.ssaida.backend.drawing.service.DrawingService;
@@ -41,8 +42,20 @@ public class DrawingServiceImpl implements DrawingService {
 	public Integer saveDrawing(Integer familyId, DrawingSaveRequest request) {
 		// 요청자와 Family간의 검증이 필요하지만 생략
 		Family family = familyRepository.findById(familyId)
-			.orElseThrow(() -> new DrawingException(NOT_EXISTS_FAMILY));
+			.orElseThrow(() -> new DrawingException(NOT_EXISTS));
 
 		return drawingRepository.save(request.toEntity(family)).getId();
+	}
+
+	@Override
+	public void deleteDrawing(Integer familyId, Integer drawingId) {
+		Drawing drawing = drawingRepository.findById(drawingId)
+			.orElseThrow(() -> new DrawingException(NOT_EXISTS));
+
+		if (!drawing.getFamily().getId().equals(familyId)) {
+			throw new DrawingException(NOT_EXISTS);
+		}
+
+		drawingRepository.delete(drawing);
 	}
 }

@@ -10,4 +10,5 @@ public interface DrawingService {
 
 	Integer saveDrawing(Integer familyId, DrawingSaveRequest request);
 
+	void deleteDrawing(Integer familyId, Integer drawingId);
 }
