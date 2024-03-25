@@ -9,7 +9,6 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const navigate = useNavigate()
   const goBack = () => {
-    console.log('뒤로가기')
     navigate('/display')
   }
 
