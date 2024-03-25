@@ -16,7 +16,7 @@ pipeline {
     stage('Add Env Files') {
       steps {
         dir('./backend') {
-          sh 'chmod -R rwx src/main/resources'
+          sh 'chmod -R 700 src/main/resources'
           sh 'mkdir src/main/resources/config'
 
           withCredentials([file(credentialsId: 'backend-keys', variable: 'keys')]) {
