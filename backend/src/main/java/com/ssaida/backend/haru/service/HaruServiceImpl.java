@@ -38,12 +38,4 @@ public class HaruServiceImpl implements HaruService {
         String url = "test_url";
         dailyRecord.updateUrl(url);
     }
-
-    @Override
-    public Map<String, Object> getFamilyRecord(GetRecordRequest getRecordRequest) {
-        List<GetRecordResponse> recordList = recordRepository.findAllByFamilyAndDate(getRecordRequest.getFamilyId(), getRecordRequest.getDate());
-        Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("records", recordList);
-        return resultMap;
-    }
 }
