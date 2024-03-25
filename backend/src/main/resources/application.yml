@@ -1,13 +1,27 @@
+db:
+  host: ${MYSQL_HOST}
+  username: ${MYSQL_USERNAME}
+  password: ${MYSQL_PASSWORD}
+
+deepl:
+  apikey: ${DEEPL_APIKEY}
+
+oci:
+  object-storage:
+    bucket-name: ${OCI_BUCKET_NAME}
+    bucket-name-space: ${OCI_BUCKET_NAME_SPACE}
+    region-url: ${OCI_REGION_URL}
+
 spring:
   application:
-    name:backend
+    name: backend
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
   datasource:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${MYSQL_HOST:localhost:3306}/s10p21s003_dev?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
+    url: jdbc:mysql://${db.host:localhost:3306}/s10p21s003_dev?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8
     username: ${db.username:root}
     password: ${db.password:root}
 
@@ -22,6 +36,3 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
-
-deepl:
-  apikey: ${키 작성}
