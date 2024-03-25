@@ -80,16 +80,17 @@ export const ReturnButton = styled.button`
   width: 48%;
   padding: 2%;
   border-radius: 50px;
-  border: 4px solid #d9d9d9;
+  border: 2px solid #d9d9d9;
   background: linear-gradient(92deg, #d9d9d9 0.01%, rgba(255, 255, 255, 0.4) 109.3%);
   font-weight: 700;
+  color: gray;
 `
 
 export const MakeButton = styled.button`
   width: 48%;
   padding: 2%;
   border-radius: 50px;
-  border: 4px solid rgba(128, 173, 217, 0.7);
+  border: 2px solid rgba(128, 173, 217, 0.7);
   background: linear-gradient(92deg, rgba(128, 173, 217, 0.7) 0.01%, rgba(255, 255, 255, 0.4) 109.3%);
   font-weight: 700;
 `
