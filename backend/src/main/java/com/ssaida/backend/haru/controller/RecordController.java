@@ -11,14 +11,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/haru")
+@RequestMapping("/haru/records")
 @RequiredArgsConstructor
 @Slf4j
 public class RecordController {
 
     final HaruService haruService;
 
-    @PostMapping("/records")
+    @PostMapping
     @Operation(summary = "하루 기록 생성")
     ResponseEntity<Void> createRecord(
             @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody
