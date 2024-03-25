@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@ToString
+@ToString(of = {"id", "content"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Question extends BaseEntity {
 
@@ -23,6 +23,8 @@ public class Question extends BaseEntity {
     @JoinColumn
     private Member member;
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Answer> answers;
     private String content;
 
 }

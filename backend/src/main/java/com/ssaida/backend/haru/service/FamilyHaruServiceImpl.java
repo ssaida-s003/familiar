@@ -4,13 +4,15 @@ import com.ssaida.backend.common.BadRequestException;
 import com.ssaida.backend.common.ErrorCode;
 import com.ssaida.backend.haru.dto.*;
 import com.ssaida.backend.haru.entity.DailyRecord;
+import com.ssaida.backend.haru.entity.Question;
+import com.ssaida.backend.haru.repository.AnswerRepository;
+import com.ssaida.backend.haru.repository.QuestionRepository;
 import com.ssaida.backend.haru.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -25,6 +27,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class FamilyHaruServiceImpl implements FamilyHaruService {
     private final RecordRepository recordRepository;
+    private final QuestionRepository questionRepository;
+    private final AnswerRepository answerRepository;
 
 
     @Override
@@ -44,11 +48,11 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
         //기록,질문,답변을 따로 조회하여 날짜를 기준으로 갯수 모으기
         //기록 조회
 
-        List<DailyRecord> recordCountList = recordRepository.findAllByMonthAndFamilyId(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
+        List<DailyRecord> recordCount = recordRepository.findAllByMonthAndFamilyId(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
+        Map<LocalDate, List<DailyRecord>> recordMap = recordCount.stream().collect(Collectors.groupingBy(dailyRecord -> dailyRecord.getCreatedAt().toLocalDate()));
+        log.info("월간 record 조회 : {}", recordMap);
 
-        Map<LocalDate, List<DailyRecord>> recordMap = recordCountList.stream().collect(Collectors.groupingBy(dailyRecord -> dailyRecord.getCreatedAt().toLocalDate()));
-        log.info("recordMap 까지만 확인 : {}", recordMap);
-
+        //조회 결과를 MonthlyContentDto에 넣기
         for (Map.Entry<LocalDate, List<DailyRecord>> entry : recordMap.entrySet()) {
             MonthlyContentDto monthlyContentDto = new MonthlyContentDto();
             monthlyContentDto.setRecordCount(entry.getValue().size());
@@ -57,8 +61,23 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
             contentMap.put(entry.getKey(), monthlyContentDto);
         }
 
-        //기록 없음
-        //TODO: 질문,답변 결과 받기
+        //질문 조회
+        // TODO: 질문,답변 결과 받기
+        List<Question> questionCount = questionRepository.findAllByMonthAndFamilyId(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
+
+        log.info("월간 question 조회 : {}", questionCount);
+
+        //질문, 질문에 대한 답변 조회 결과를 MonthlyContentDto에 넣기
+        for (Question question : questionCount) {
+            MonthlyContentDto monthlyContentDto = new MonthlyContentDto();
+            monthlyContentDto.setQuestionCount(1);
+            monthlyContentDto.setAnswerCount(question.getAnswers().size());
+            if (question.getAnswers().size() > 0) {
+                monthlyContentDto.setUrl(question.getAnswers().get(0).getUrl());
+            }
+            contentMap.put(question.getCreatedAt().toLocalDate(), monthlyContentDto);
+        }
+
 
         List<GetMonthlyHaruResponse> resultList = contentToMonthlyResult(contentMap);
 

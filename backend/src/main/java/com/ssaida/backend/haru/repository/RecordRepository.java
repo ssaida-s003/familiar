@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.YearMonth;
 import java.util.List;
 
 public interface RecordRepository extends JpaRepository<DailyRecord, Long> {
@@ -22,5 +20,5 @@ public interface RecordRepository extends JpaRepository<DailyRecord, Long> {
             "WHERE YEAR(r.createdAt) = :year " +
             "AND MONTH(r.createdAt) = :month " +
             "AND r.member.family.id = :familyId")
-    List<DailyRecord> findAllByMonthAndFamilyId(@Param("familyId") int familyId, @Param("year") int Year, @Param("month") int month);
+    List<DailyRecord> findAllByMonthAndFamilyId(@Param("familyId") int familyId, @Param("year") int year, @Param("month") int month);
 }
