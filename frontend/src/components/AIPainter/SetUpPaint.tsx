@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import DisplayContainer from '@common/DisplayContainer'
+import React, { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import * as s from '@components/AIPainter/style/SetUpPaintStyle'
+import { aiPaintConvert } from '@apis/aiPainter'
+import { useFamilyStore } from '@stores/family.ts'
 
 interface CategorySetType {
   categoryName: string
@@ -24,9 +25,49 @@ const SetUpPaint = () => {
   const location = useLocation()
   const image = location.state?.image
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [title, setTitle] = useState('')
+  const navigate = useNavigate()
+  const familyId = useFamilyStore(state => state.familyId)
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value)
+  }
 
   const selectCategory = (categoryNameByEnglish: string) => {
     setSelectedCategory(categoryNameByEnglish)
+  }
+
+  const handleRePaint = () => {
+    navigate('/display/AI-painter')
+  }
+
+  const dataURItoBlob = (dataURI: string): Blob => {
+    const splitDataURI = dataURI.split(',')
+    const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURIComponent(splitDataURI[1])
+    const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
+    const ia = new Uint8Array(byteString.length)
+
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i)
+    }
+
+    return new Blob([ia], { type: mimeString })
+  }
+
+  const handleConvert = async () => {
+    try {
+      if (selectedCategory && title && image) {
+        const imageBlob = dataURItoBlob(image)
+        const formData = new FormData()
+        formData.append('image', imageBlob)
+        formData.append('name', title)
+        formData.append('artStyle', selectedCategory)
+        const response = await aiPaintConvert(familyId, formData)
+        console.log(response)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
