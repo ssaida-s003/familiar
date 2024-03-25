@@ -4,4 +4,4 @@ class MyModel(SQLModel, table=True):
     __tablename__ = "models"
 
     id: int  = Field(default=None, primary_key=True)
-    model_path: str | None = Column(String, default="")
+    model_path: str | None = Column(String, default="SG161222/Realistic_Vision_V2.0")

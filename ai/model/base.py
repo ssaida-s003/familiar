@@ -1,28 +1,28 @@
 from diffusers import StableDiffusionPipeline, LCMScheduler
 from model import InferenceParameter
 from sampler.schedulers import scheduler
+from model import base_model, available_model
 import torch
 
 class BaseModel():
     def __init__(self, config):
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+        self.model = base_model
 
         #파이프라인 생성
         self.pipe = StableDiffusionPipeline.from_pretrained(
             config.model_path, dtype=torch.float16,
         ).to(self.device)
 
-
-        # LCM-LoRA
-        if self.config.LCM_LoRA:
-            # set scheduler
+        # 추론 속도 상승 - RoLA 적용
+        if self.config.fast_inference:
+           # set scheduler
             self.pipe.scheduler = LCMScheduler.from_config(self.pipe.scheduler.config)
             # load LCM-LoRA
             self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdv1-5")
         else:
-            #스케쥴러 등록
+            # 일반 스케쥴러 등록
             self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
 
         #최적화 여부
