@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class DrawingExceptionHandler {
 
-	@ExceptionHandler(DrawingConvertException.class)
-	public ResponseEntity<ErrorResponse> drawingConvertExceptionHandler(DrawingConvertException e) {
+	@ExceptionHandler(DrawingException.class)
+	public ResponseEntity<ErrorResponse> drawingExceptionHandler(DrawingException e) {
 		return ResponseEntity.status(e.getErrorCode().getStatus())
 			.body(new ErrorResponse(e.getErrorCode().name(), e.getErrorCode().getMessage()));
 	}

@@ -3,11 +3,11 @@ package com.ssaida.backend.drawing.exception;
 import lombok.Getter;
 
 @Getter
-public class DrawingConvertException extends RuntimeException {
+public class DrawingException extends RuntimeException {
 
 	private final ErrorCode errorCode;
 
-	public DrawingConvertException(ErrorCode code) {
+	public DrawingException(ErrorCode code) {
 		this.errorCode = code;
 	}
 
