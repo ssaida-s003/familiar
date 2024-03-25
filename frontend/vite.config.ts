@@ -19,6 +19,7 @@ export default defineConfig(() => {
         { find: '@stores', replacement: path.resolve(__dirname, 'src/stores') },
         { find: '@style', replacement: path.resolve(__dirname, 'src/style') },
         { find: '@types', replacement: path.resolve(__dirname, 'src/types') },
+        { find: '@hooks', replacement: path.resolve(__dirname, 'src/hooks') },
       ],
     },
     plugins: [react(), tsconfigPaths()],
