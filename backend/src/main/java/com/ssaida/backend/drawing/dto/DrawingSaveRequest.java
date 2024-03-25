@@ -9,12 +9,13 @@ public record DrawingSaveRequest(
 	String originalImage,
 	String convertedImage,
 	@NotNull
-	String title
+	String name
 ) {
 
 	public Drawing toEntity(Family family) {
 		return Drawing.builder()
 			.family(family)
+			.name(name)
 			.generatedUrl(convertedImage)
 			.originalUrl(originalImage)
 			.isWallpaper(false)

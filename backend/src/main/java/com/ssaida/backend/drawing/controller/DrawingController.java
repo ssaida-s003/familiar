@@ -2,15 +2,18 @@ package com.ssaida.backend.drawing.controller;
 
 import com.ssaida.backend.drawing.component.ValidImage;
 import com.ssaida.backend.drawing.dto.DrawingConvertRequest;
+import com.ssaida.backend.drawing.dto.DrawingInfo;
 import com.ssaida.backend.drawing.dto.DrawingSaveRequest;
 import com.ssaida.backend.drawing.service.DrawingService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Path;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,5 +56,13 @@ public class DrawingController {
 	) {
 		drawingService.deleteDrawing(familyId, drawingId);
 		return ResponseEntity.ok().build();
+	}
+
+	@Operation(summary = "그림 전체 조회 API")
+	@GetMapping
+	public ResponseEntity<List<DrawingInfo>> queryDrawings(
+		@PathVariable("familyId") Integer familyId
+	) {
+		return ResponseEntity.ok(drawingService.findFamilyDrawings(familyId));
 	}
 }

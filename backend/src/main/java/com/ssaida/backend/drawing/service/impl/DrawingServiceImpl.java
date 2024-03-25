@@ -5,6 +5,7 @@ import static com.ssaida.backend.drawing.exception.ErrorCode.NOT_EXISTS;
 import com.ssaida.backend.common.ai.StableDiffusionApiClient;
 import com.ssaida.backend.common.prompt.PromptGenerator;
 import com.ssaida.backend.drawing.dto.DrawingConvertRequest;
+import com.ssaida.backend.drawing.dto.DrawingInfo;
 import com.ssaida.backend.drawing.dto.DrawingSaveRequest;
 import com.ssaida.backend.drawing.entity.Drawing;
 import com.ssaida.backend.drawing.exception.DrawingException;
@@ -12,6 +13,7 @@ import com.ssaida.backend.drawing.repository.DrawingRepository;
 import com.ssaida.backend.drawing.service.DrawingService;
 import com.ssaida.backend.family.entity.Family;
 import com.ssaida.backend.family.repository.FamilyRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +34,7 @@ public class DrawingServiceImpl implements DrawingService {
 	public byte[] convert(MultipartFile image, DrawingConvertRequest request) {
 		// 프롬프트 작성
 		String prompt = promptGenerator
-			.generateConvertDrawingPrompt(request.title(), request.artStyle());
+			.generateConvertDrawingPrompt(request.name(), request.artStyle());
 
 		// AI API 호출
 		return stableDiffusionApiClient.convertImage(image, prompt, request.artStyle());
@@ -57,5 +59,12 @@ public class DrawingServiceImpl implements DrawingService {
 		}
 
 		drawingRepository.delete(drawing);
+	}
+
+	@Override
+	public List<DrawingInfo> findFamilyDrawings(Integer familyId) {
+		return drawingRepository.findAllByFamilyId(familyId)
+			.stream().map(DrawingInfo::from)
+			.toList();
 	}
 }
