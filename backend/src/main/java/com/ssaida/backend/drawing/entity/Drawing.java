@@ -25,5 +25,11 @@ public class Drawing extends BaseEntity {
 
     private boolean isWallpaper;
 
-
+    @Builder
+    public Drawing(Family family, String originalUrl, String generatedUrl, boolean isWallpaper) {
+        this.family = family;
+        this.originalUrl = originalUrl;
+        this.generatedUrl = generatedUrl;
+        this.isWallpaper = isWallpaper;
+    }
 }
