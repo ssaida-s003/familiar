@@ -1,6 +1,9 @@
 spring:
   application:
     name: backend
+  config:
+    import:
+      - classpath:/config/keys.yml
   jpa:
     hibernate:
       ddl-auto: create-drop
