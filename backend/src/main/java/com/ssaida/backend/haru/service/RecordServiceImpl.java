@@ -27,4 +27,9 @@ public class RecordServiceImpl implements RecordService {
         DailyRecord dailyRecord = createRecordRequest.toEntity(member);
         recordRepository.save(dailyRecord);
     }
+
+    @Override
+    public void deleteRecord(long recordId) {
+        recordRepository.deleteById(recordId);
+    }
 }

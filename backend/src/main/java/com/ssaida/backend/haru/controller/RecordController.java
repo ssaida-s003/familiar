@@ -29,5 +29,14 @@ public class RecordController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{recordId}")
+    @Operation(summary = "하루 기록 삭제")
+    ResponseEntity<Void> deleteRecord(
+            @Parameter(description = "삭제할 기록 Id") @PathVariable("recordId") long recordId
+    ) {
+        log.info("deleteRecord 입력 : {}", recordId);
+        recordService.deleteRecord(recordId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
