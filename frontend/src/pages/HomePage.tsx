@@ -5,15 +5,15 @@ import { useState } from 'react'
 
 const HomePage = () => {
   const setSelectedColorCode = useColorStore(state => state.selectedColorCode)
-  const [isShowPalette, setIsShowPallet] = useState([false, false, false, false])
+  const [isShowPalette, setIsShowPalette] = useState([false, false, false, false])
   const [isCloseUp, setIsCloseUp] = useState(false)
 
   const handleClick = (doorNum: number) => () => {
-    setIsShowPallet(current => current.map((_, index) => index === doorNum))
+    setIsShowPalette(current => current.map((_, index) => index === doorNum))
   }
 
   const goToNextStep = () => {
-    setIsShowPallet(current => current.map(() => false))
+    setIsShowPalette(current => current.map(() => false))
     setIsCloseUp(true)
   }
 
