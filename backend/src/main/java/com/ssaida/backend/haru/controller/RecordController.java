@@ -8,21 +8,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/haru")
+@RequestMapping("/haru/records")
 @RequiredArgsConstructor
 @Slf4j
-public class HaruController {
+public class RecordController {
 
     final HaruService haruService;
 
-    @PostMapping("/record")
-    @Operation(summary = "하루 일상 기록 생성")
+    @PostMapping
+    @Operation(summary = "하루 기록 생성")
     ResponseEntity<Void> createRecord(
             @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody
             CreateRecordRequest createRecordRequest) {
@@ -31,4 +28,5 @@ public class HaruController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }

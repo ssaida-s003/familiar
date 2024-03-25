@@ -10,12 +10,12 @@ import lombok.ToString;
 
 @Entity
 @Getter
-@ToString
+@ToString(of = {"id","topLeft","topRight","bottomLeft","bottomRight"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Fridge extends BaseEntity {
 
     @Id
-    private Integer Id;
+    private Integer id;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId

@@ -16,6 +16,7 @@ public class Color extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+    private String colorCode;
     private boolean canApplyOnDisplay;
 
 }

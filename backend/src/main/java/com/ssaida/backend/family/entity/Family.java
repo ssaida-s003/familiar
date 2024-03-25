@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@ToString
+@ToString(of = {"id","email","pw","refreshToken"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Family extends BaseEntity {
 
