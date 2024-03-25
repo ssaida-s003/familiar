@@ -1,7 +1,7 @@
 package com.ssaida.backend.haru.controller;
 
 import com.ssaida.backend.haru.dto.CreateRecordRequest;
-import com.ssaida.backend.haru.service.HaruService;
+import com.ssaida.backend.haru.service.RecordService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class RecordController {
 
-    final HaruService haruService;
+    final RecordService recordService;
 
     @PostMapping
     @Operation(summary = "하루 기록 생성")
@@ -24,11 +24,10 @@ public class RecordController {
             @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody
             CreateRecordRequest createRecordRequest) {
         log.info("createRecord 입력 : {}", createRecordRequest);
-        haruService.createRecord(createRecordRequest);
+        recordService.createRecord(createRecordRequest);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
 
 }

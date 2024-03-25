@@ -5,21 +5,15 @@ import com.ssaida.backend.common.ErrorCode;
 import com.ssaida.backend.family.entity.Member;
 import com.ssaida.backend.family.repository.MemberRepository;
 import com.ssaida.backend.haru.dto.CreateRecordRequest;
-import com.ssaida.backend.haru.dto.GetRecordRequest;
-import com.ssaida.backend.haru.dto.GetRecordResponse;
 import com.ssaida.backend.haru.entity.DailyRecord;
 import com.ssaida.backend.haru.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Service
 @RequiredArgsConstructor
-public class HaruServiceImpl implements HaruService {
+public class RecordServiceImpl implements RecordService {
 
     private final RecordRepository recordRepository;
     private final MemberRepository memberRepository;
