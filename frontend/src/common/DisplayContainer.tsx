@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 148px;
+  width: 444px;
   margin: 0;
   background-color: gray;
 `
