@@ -30,12 +30,7 @@ public class HaruServiceImpl implements HaruService {
         Member member = memberRepository.findById(createRecordRequest.getMemberId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotExistException));
 
-        DailyRecord dailyRecord = DailyRecord.builder()
-                .member(member)
-                .content(createRecordRequest.getContent()).build();
+        DailyRecord dailyRecord = createRecordRequest.toEntity(member);
         recordRepository.save(dailyRecord);
-        //TODO: FASTAPI 연결 필요
-        String url = "test_url";
-        dailyRecord.updateUrl(url);
     }
 }

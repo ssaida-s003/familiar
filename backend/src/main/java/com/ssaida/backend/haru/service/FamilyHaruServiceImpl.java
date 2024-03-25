@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 public class FamilyHaruServiceImpl implements FamilyHaruService {
     private final RecordRepository recordRepository;
     private final QuestionRepository questionRepository;
-    private final AnswerRepository answerRepository;
 
 
     @Override

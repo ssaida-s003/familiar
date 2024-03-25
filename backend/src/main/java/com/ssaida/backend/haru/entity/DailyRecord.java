@@ -26,9 +26,10 @@ public class DailyRecord extends BaseEntity {
     private String url;
 
     @Builder
-    public DailyRecord(Member member, String content) {
+    public DailyRecord(Member member, String content, String url) {
         this.member = member;
         this.content = content;
+        this.url = url;
     }
 
     public void updateUrl(String url) {
