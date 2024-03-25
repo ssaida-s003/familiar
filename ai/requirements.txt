@@ -2,3 +2,7 @@ fastapi
 uvicorn
 accelerate
 xformers
+sqlmodel
+sql
+mysql
+python-multipart
