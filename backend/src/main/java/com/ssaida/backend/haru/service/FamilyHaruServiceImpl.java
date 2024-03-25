@@ -1,5 +1,7 @@
 package com.ssaida.backend.haru.service;
 
+import com.ssaida.backend.common.BadRequestException;
+import com.ssaida.backend.common.ErrorCode;
 import com.ssaida.backend.haru.dto.*;
 import com.ssaida.backend.haru.entity.DailyRecord;
 import com.ssaida.backend.haru.repository.RecordRepository;
@@ -31,11 +33,10 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM");
         YearMonth yearMonth = null;
         try {
-            // 파싱을 시도하여 예외가 발생하지 않으면 유효한 형식으로 간주
             yearMonth = YearMonth.parse(month);
         } catch (DateTimeParseException e) {
             // 예외가 발생하면 잘못된 형식으로 간주
-
+            throw new BadRequestException(ErrorCode.InvalidMonthFormatException);
         }
 
         Map<LocalDate, MonthlyContentDto> contentMap = new HashMap<>();
@@ -75,7 +76,6 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
     @Override
     public List<GetRecordResponse> getFamilyRecord(GetRecordRequest getRecordRequest) {
         return recordRepository.findAllByDateAndFamilyId(getRecordRequest.getFamilyId(), getRecordRequest.getDate());
-
     }
 
 
