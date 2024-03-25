@@ -31,8 +31,8 @@ pipeline {
             sh 'cp ${pem} src/main/resources/config/SSAIDA.pem'
           }
 
-          withCredentials([file(credentialsId: 'backend-pem-public', variable: 'pem-public')]) {
-            sh 'cp ${pem-public} src/main/resources/config/SSAIDA_public.pem'
+          withCredentials([file(credentialsId: 'backend-pem-public', variable: 'pem')]) {
+            sh 'cp ${pem} src/main/resources/config/SSAIDA_public.pem'
           }
         }
       }
