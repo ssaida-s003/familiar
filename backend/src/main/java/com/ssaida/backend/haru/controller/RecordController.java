@@ -1,5 +1,6 @@
 package com.ssaida.backend.haru.controller;
 
+import com.ssaida.backend.haru.dto.ConvertRecordRequest;
 import com.ssaida.backend.haru.dto.CreateRecordRequest;
 import com.ssaida.backend.haru.service.RecordService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,8 +22,7 @@ public class RecordController {
     @PostMapping
     @Operation(summary = "하루 기록 생성")
     ResponseEntity<Void> createRecord(
-            @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody
-            CreateRecordRequest createRecordRequest) {
+            @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody CreateRecordRequest createRecordRequest) {
         log.info("createRecord 입력 : {}", createRecordRequest);
         recordService.createRecord(createRecordRequest);
 
@@ -38,5 +38,4 @@ public class RecordController {
         recordService.deleteRecord(recordId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

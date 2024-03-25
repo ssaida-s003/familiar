@@ -9,13 +9,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class PromptGeneratorImpl implements PromptGenerator {
 
-	private final LanguageTranslator languageTranslator;
+    private final LanguageTranslator languageTranslator;
 
-	@Override
-	public String generateConvertDrawingPrompt(String title, String artStyle) {
+    @Override
+    public String generateConvertDrawingPrompt(String title, String artStyle) {
 
-		String translatedTitle = languageTranslator.translateToEnglish(title);
+        String translatedTitle = languageTranslator.translateToEnglish(title);
 
-		return "((" + translatedTitle + "))" + ", ((" + artStyle + "))";
-	}
+        return "((" + translatedTitle + "))" + ", ((" + artStyle + "))";
+    }
+
+    @Override
+    public String generateConvertHaruPrompt(String content) {
+        String translatedContent = languageTranslator.translateToEnglish(content);
+        return "a photo of sks, person, " + translatedContent + ", best quality, 4k, uhd";
+    }
 }
