@@ -4,13 +4,18 @@ import * as a from '@components/AIPainter/style/AIPaintCardStyle'
 
 interface AiPaintCardProps {
   paint: getPaintResType
+  onDeleted: (drawingId: number) => void
 }
 
-const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint }) => {
+const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
   const [showButtons, setShowButtons] = useState(false)
 
   const handleSnowManIconClick = () => {
     setShowButtons(!showButtons)
+  }
+
+  const handleDelete = () => {
+    onDeleted(paint.drawingId)
   }
 
   return (
@@ -22,7 +27,7 @@ const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint }) => {
         {showButtons && (
           <a.ButtonContainer>
             <a.Button>배경화면 선택하기</a.Button>
-            <a.Button>그림 삭제하기</a.Button>
+            <a.Button onClick={handleDelete}>그림 삭제하기</a.Button>
           </a.ButtonContainer>
         )}
       </a.CardHeader>

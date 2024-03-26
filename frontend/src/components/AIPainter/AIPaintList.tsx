@@ -1,8 +1,9 @@
 import AiPaintCard from '@components/AIPainter/AIPaintCard'
 import styled from 'styled-components'
 import { useFamilyStore } from '@stores/family'
-import { getAllPaint } from '@apis/aiPainter'
-import { useQuery } from 'react-query'
+import { deletePaint, getAllPaint } from '@apis/aiPainter'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
+import AxiosError from '@common/AxiosError'
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -15,19 +16,25 @@ const Container = styled.div`
   align-items: center;
 `
 
-const AiPaintList = () => {
-  const { familyId } = useFamilyStore()
-
-  const usePaintList = (familyId: number) => {
-    return useQuery(['paintList', familyId], () => getAllPaint(familyId))
-  }
-
-  const { data, isLoading, error } = usePaintList(familyId)
-
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error occurred</div> // 에러 처리를 좀 더 명확하게
-
-  return <Container>{data && data.map(paint => <AiPaintCard paint={paint} key={paint.drawingId} />)}</Container>
+const usePaintList = (familyId: number) => {
+  return useQuery(['paintList', familyId], () => getAllPaint(familyId))
 }
 
-export default AiPaintList
+const AIPaintList = () => {
+  const { familyId } = useFamilyStore()
+  const queryClient = useQueryClient()
+  const { data, isLoading, error } = usePaintList(familyId)
+
+  const deleteMutation = useMutation((drawingId: number) => deletePaint(familyId, drawingId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['paintList', familyId])
+    },
+  })
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <AxiosError />
+
+  return <Container>{data && data.map(paint => <AiPaintCard paint={paint} key={paint.drawingId} onDeleted={() => deleteMutation.mutate(paint.drawingId)} />)}</Container>
+}
+
+export default AIPaintList
