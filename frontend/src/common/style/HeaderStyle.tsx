@@ -1,14 +1,15 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 94%;
-  height: 24px;
+  box-sizing: border-box;
+  width: 444px;
+  height: 50px;
   display: flex;
   align-items: center;
   position: absolute;
   top: 0;
   left: 0;
-  margin: 3%;
+  padding: 10px;
 `
 
 export const GoBack = styled.img`
