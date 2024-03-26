@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
 
 const ShareOrQuestion = () => {
