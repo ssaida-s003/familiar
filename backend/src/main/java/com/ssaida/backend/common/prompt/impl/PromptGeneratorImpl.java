@@ -3,11 +3,15 @@ package com.ssaida.backend.common.prompt.impl;
 import com.ssaida.backend.common.prompt.PromptGenerator;
 import com.ssaida.backend.common.traslator.LanguageTranslator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
 public class PromptGeneratorImpl implements PromptGenerator {
+
+    @Value("${gemini.api-key}")
+    private String apiKey;
 
     private final LanguageTranslator languageTranslator;
 
