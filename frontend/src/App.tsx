@@ -6,6 +6,7 @@ import FamilyShare from '@pages/FamilyShare'
 import AIPainterPage from '@pages/AIPainterPage'
 import SetUpPaintPage from '@pages/SetUpPaintPage'
 import AIPaintAlbumPage from '@pages/AIPaintAlbumPage'
+import ScrollToTop from '@hooks/ScrollToTop'
 
 const AuthRoutes = () => (
   <Routes>
@@ -21,7 +22,12 @@ const AuthRoutes = () => (
 
 function App() {
   const user = true
-  return <BrowserRouter>{user && <AuthRoutes />}</BrowserRouter>
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      {user && <AuthRoutes />}
+    </BrowserRouter>
+  )
 }
 
 export default App

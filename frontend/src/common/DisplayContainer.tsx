@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
+  box-sizing: border-box;
   width: 444px;
   min-height: 795px;
-  margin: 0;
+  padding-top: 50px;
   background: linear-gradient(
     163deg,
     rgba(147, 178, 212, 0.6) 0%,
@@ -21,7 +22,7 @@ interface DisplayContainerProps {
 }
 
 const DisplayContainer: React.FC<DisplayContainerProps> = ({ children }) => {
-  return <Container>{children}</Container>
+  return <Container>{children} </Container>
 }
 
 export default DisplayContainer

@@ -6,10 +6,7 @@ interface CategoryProps {
 
 export const LottieContainer = styled.div`
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 745px;
 `
 
 export const PaintContainer = styled.div`
@@ -19,6 +16,7 @@ export const PaintContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-bottom: 5%;
 `
 
 export const Paint = styled.img`
@@ -30,7 +28,7 @@ export const Paint = styled.img`
 export const SetUpContainer = styled.div`
   box-sizing: border-box;
   width: 100%;
-  height: 40%;
+  height: 35%;
   background: linear-gradient(113deg, rgba(255, 255, 255, 0.56) 1.61%, rgba(255, 255, 255, 0.32) 100%);
   padding: 5%;
 `
@@ -81,7 +79,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  margin: 5% 0;
+  margin: 5% 0 0 0;
 `
 
 export const ReturnButton = styled.button`
@@ -104,7 +102,7 @@ export const MakeButton = styled.button`
 `
 
 export const ErrorContainer = styled.div`
-  height: 100%;
+  height: 745px;
   margin: auto;
   display: flex;
   align-items: center;
