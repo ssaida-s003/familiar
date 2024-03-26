@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import * as s from '@components/AIPainter/style/SetUpPaintStyle'
 import { aiPaintConvert } from '@apis/aiPainter'
 import { useFamilyStore } from '@stores/family.ts'
+import { useMutation } from 'react-query'
 
 interface CategorySetType {
   categoryName: string
@@ -54,20 +55,31 @@ const SetUpPaint = () => {
     return new Blob([ia], { type: mimeString })
   }
 
+  const mutation = useMutation(async (formData: FormData) => {
+    return aiPaintConvert(familyId, formData)
+  })
+
   const handleConvert = async () => {
-    try {
-      if (selectedCategory && title && image) {
-        const imageBlob = dataURItoBlob(image)
-        const formData = new FormData()
-        formData.append('image', imageBlob)
-        formData.append('name', title)
-        formData.append('artStyle', selectedCategory)
-        const response = await aiPaintConvert(familyId, formData)
-        console.log(response)
-      }
-    } catch (error) {
-      console.error(error)
+    if (selectedCategory && title && image) {
+      const imageBlob = dataURItoBlob(image)
+      const formData = new FormData()
+      formData.append('image', imageBlob)
+      formData.append('name', title)
+      formData.append('artStyle', selectedCategory)
+      mutation.mutate(formData)
     }
+  }
+
+  if (mutation.isLoading) {
+    return <div>로딩중...</div>
+  }
+
+  if (mutation.isError) {
+    return alert('예기치 못한 에러가 발생하였어요')
+  }
+
+  if (mutation.isSuccess) {
+    console.log(mutation.data)
   }
 
   return (
