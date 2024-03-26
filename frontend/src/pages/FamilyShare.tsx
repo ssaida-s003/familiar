@@ -8,10 +8,7 @@ import AIImgAnswer from '@components/FamilyShare/AIImgAnswer'
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 100vh;
   justify-content: center;
 `
 
