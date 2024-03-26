@@ -44,28 +44,18 @@ const SetUpPaint = () => {
     navigate('/display/AI-painter')
   }
 
-  const dataURItoBlob = (dataURI: string): Blob => {
-    const splitDataURI = dataURI.split(',')
-    const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURIComponent(splitDataURI[1])
-    const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
-    const ia = new Uint8Array(byteString.length)
-
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i)
-    }
-
-    return new Blob([ia], { type: mimeString })
-  }
-
   const mutation = useMutation(async (formData: FormData) => {
     return aiPaintConvert(familyId, formData)
   })
 
   const handleConvert = async () => {
     if (selectedCategory && title && image) {
-      const imageBlob = dataURItoBlob(image)
+      const paintStore = usePaintStore()
+      paintStore.setTitle(title)
+      paintStore.setOriginalImage(image)
+
       const formData = new FormData()
-      formData.append('image', imageBlob)
+      formData.append('image', image)
       formData.append('name', title)
       formData.append('artStyle', selectedCategory)
       mutation.mutate(formData)
