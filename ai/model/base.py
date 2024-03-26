@@ -1,14 +1,30 @@
+import os
+
 from diffusers import StableDiffusionPipeline, LCMScheduler
 from model import InferenceParameter
 from sampler.schedulers import scheduler
 from model import base_model, available_model
 import torch
+from huggingface_hub import login, hf_hub_download, snapshot_download
 
 class BaseModel():
     def __init__(self, config):
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = base_model
+
+        # 사용할 모델이 존재하는지 확인하기
+        if not os.path.exists(config.model_path): # 만약 모델이 없다면 다운로드를 수행한다.
+            access_token = os.environ.get('HUGGINGFACE_TOKEN')
+            login(token=access_token) # API 토큰 삽입
+
+            # 모델을 다운로드한다.
+            snapshot_download(
+                repo_id=config.repo_id,
+                repo_type="dataset",
+                local_dir_use_symlinks=False,
+                local_dir=config.model_path
+            )
 
         #파이프라인 생성
         self.pipe = StableDiffusionPipeline.from_pretrained(
@@ -31,7 +47,6 @@ class BaseModel():
 
         if self.config.offload:
             self.pipe.enable_sequential_cpu_offload()
-
 
     #추론 실행
     def inference(self, input: InferenceParameter):
