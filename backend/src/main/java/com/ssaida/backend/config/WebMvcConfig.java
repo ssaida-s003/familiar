@@ -21,9 +21,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //        configuration.addAllowedOriginPattern("*");
 //        configuration.addAllowedOrigin("*");
         configuration.setAllowedOrigins(
-                List.of("http://localhost:3000", "http://localhost:5173", "https://ssaida-front.duckdns.org"));
+                List.of("*", "http://localhost:3000", "http://localhost:5173", "https://ssaida-front.duckdns.org"));
         configuration.setAllowedOriginPatterns(
-                List.of("http://localhost:3000/**", "http://localhost:5173/**", "https://ssaida-front.duckdns.org/**"));
+                List.of("*", "http://localhost:3000/**", "http://localhost:5173/**", "https://ssaida-front.duckdns.org/**"));
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.setAllowCredentials(true);
