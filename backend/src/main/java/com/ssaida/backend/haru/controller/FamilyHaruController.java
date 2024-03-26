@@ -2,6 +2,8 @@ package com.ssaida.backend.haru.controller;
 
 
 import com.ssaida.backend.haru.dto.GetRecordRequest;
+import com.ssaida.backend.haru.dto.QuestionDto;
+import com.ssaida.backend.haru.entity.Question;
 import com.ssaida.backend.haru.service.FamilyHaruService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -39,6 +41,15 @@ public class FamilyHaruController {
                 .familyId(familyId)
                 .date(date).build();
         return new ResponseEntity<>(familyHaruService.getFamilyRecord(getRecordRequest), HttpStatus.OK);
+    }
+
+    @GetMapping("/questions")
+    @Operation(summary = "하루 질문 조회")
+    public ResponseEntity<QuestionDto.Response> getQuestion(
+            @Parameter(description = "가족Id") @PathVariable("familyId") int familyId,
+            @Parameter(description = "조회일자 yyyy-MM-dd") @RequestParam("date") LocalDate date) {
+        log.info("getQuestion 입력: {} {}", familyId, date);
+        return new ResponseEntity<>(familyHaruService.getQuestion(familyId, date), HttpStatus.OK);
     }
 
 

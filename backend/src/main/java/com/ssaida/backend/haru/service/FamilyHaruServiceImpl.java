@@ -2,6 +2,7 @@ package com.ssaida.backend.haru.service;
 
 import com.ssaida.backend.common.BadRequestException;
 import com.ssaida.backend.common.ErrorCode;
+import com.ssaida.backend.common.NotFoundException;
 import com.ssaida.backend.haru.dto.*;
 import com.ssaida.backend.haru.entity.DailyRecord;
 import com.ssaida.backend.haru.entity.Question;
@@ -47,7 +48,7 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
         //기록,질문,답변을 따로 조회하여 날짜를 기준으로 갯수 모으기
         //기록 조회
 
-        List<DailyRecord> recordCount = recordRepository.findAllByMonthAndFamilyId(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
+        List<DailyRecord> recordCount = recordRepository.findAllByFamilyIdAndMonth(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
         Map<LocalDate, List<DailyRecord>> recordMap = recordCount.stream().collect(Collectors.groupingBy(dailyRecord -> dailyRecord.getCreatedAt().toLocalDate()));
         log.info("월간 record 조회 : {}", recordMap);
 
@@ -62,7 +63,7 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
 
         //질문 조회
         // TODO: 질문,답변 결과 받기
-        List<Question> questionCount = questionRepository.findAllByMonthAndFamilyId(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
+        List<Question> questionCount = questionRepository.findAllByFamilyIdAndMonth(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
 
         log.info("월간 question 조회 : {}", questionCount);
 
@@ -94,6 +95,12 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
     @Override
     public List<GetRecordResponse> getFamilyRecord(GetRecordRequest getRecordRequest) {
         return recordRepository.findAllByDateAndFamilyId(getRecordRequest.getFamilyId(), getRecordRequest.getDate());
+    }
+
+    @Override
+    public QuestionDto.Response getQuestion(int familyId, LocalDate date) {
+        return new QuestionDto.Response(questionRepository.findByFamilyIdAndDate(familyId, date)
+                .orElseThrow(() -> new NotFoundException(ErrorCode.QuestionNotFoundException)));
     }
 
 

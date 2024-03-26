@@ -10,15 +10,21 @@ import java.time.format.DateTimeParseException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ResponseStatus(value = HttpStatus.CONFLICT)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = NotFoundException.class)
-    public ErrorResponse handleConflictException(NotFoundException e) {
+    public ErrorResponse handleNotFoundException(NotFoundException e) {
         return new ErrorResponse(e.getErrorCode().getCode(), e.getErrorCode().getMessage());
     }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST )
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = BadRequestException.class)
-    public ErrorResponse handleBadRequestException(BadRequestException e){
+    public ErrorResponse handleBadRequestException(BadRequestException e) {
+        return new ErrorResponse(e.getErrorCode().getCode(), e.getErrorCode().getMessage());
+    }
+
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    @ExceptionHandler(value = ConflictException.class)
+    public ErrorResponse handleConflictException(ConflictException e) {
         return new ErrorResponse(e.getErrorCode().getCode(), e.getErrorCode().getMessage());
     }
 
