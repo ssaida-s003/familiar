@@ -11,7 +11,7 @@ const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint }) => {
     <a.Container $isWallpaper={paint.isWallpaper}>
       <a.CardHeader>
         <a.Title>{paint.name}</a.Title>
-        <a.PinIcon src="/icon/icon_pin.png" />
+        {paint.isWallpaper && <a.PinIcon src="/icon/icon_pin.png" />}
         <a.SnowManIcon src="/icon/icon_snowman.png" />
       </a.CardHeader>
       <a.CreatedDate>{paint.createdAt}</a.CreatedDate>
