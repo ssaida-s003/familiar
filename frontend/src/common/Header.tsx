@@ -9,7 +9,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const navigate = useNavigate()
   const goBack = () => {
-    navigate('/display')
+    navigate(-1)
   }
 
   return (
