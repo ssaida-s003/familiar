@@ -6,7 +6,7 @@ export const Container = styled.div`
   position: relative;
 `
 
-export const GalleryBtn = styled.img`
+export const AlbumBtn = styled.img`
   width: 10%;
   position: absolute;
   top: 15px;
