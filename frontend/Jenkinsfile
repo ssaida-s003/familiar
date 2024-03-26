@@ -23,6 +23,7 @@ pipeline {
         dir('./frontend') {
           script {
             sh 'npm install'
+            sh 'npm run build'
           }
         }
       }
