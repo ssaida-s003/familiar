@@ -9,6 +9,14 @@ export const aiPaintSave = async (familyId: number, data: AiPainterSaveReqType):
   return publicRequest.post(`/families/${familyId}/drawings`, data).then(res => res.data)
 }
 
-export const getAllPaintSave = async (familyId: number): Promise<getPaintResType[]> => {
+export const getAllPaint = async (familyId: number): Promise<getPaintResType[]> => {
   return publicRequest.get(`/families/${familyId}/drawings`).then(res => res.data)
+}
+
+export const selectWallPaper = async (familyId: number, drawingId: number, isWallpaper: boolean): Promise<number> => {
+  return publicRequest.get(`/families/${familyId}/drawings/${drawingId}/wallpaper?isWallpaper=${isWallpaper}`).then(res => res.data)
+}
+
+export const deletePaint = async (familyId: number, drawingId: number): Promise<null> => {
+  return publicRequest.delete(`/families/${familyId}/drawings${drawingId}`).then(res => res.data)
 }

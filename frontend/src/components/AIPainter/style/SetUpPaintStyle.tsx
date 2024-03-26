@@ -7,6 +7,9 @@ interface CategoryProps {
 export const LottieContainer = styled.div`
   width: 100%;
   height: 745px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export const PaintContainer = styled.div`

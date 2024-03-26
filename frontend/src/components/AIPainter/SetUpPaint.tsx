@@ -8,6 +8,7 @@ import Lottie from 'react-lottie'
 import loading from '@/assets/lotties/loading.json'
 import { usePaintStore } from '@stores/aiPaint'
 import { AiPainterConvertReqType } from '@/types/aiPainter'
+import AxiosError from '@common/AxiosError'
 
 interface CategorySetType {
   categoryName: string
@@ -34,7 +35,7 @@ const SetUpPaint = () => {
   const navigate = useNavigate()
   const familyId = useFamilyStore(state => state.familyId)
   const paintStore = usePaintStore()
-  
+
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
@@ -86,12 +87,7 @@ const SetUpPaint = () => {
   }
 
   if (mutation.isError) {
-    return (
-      <s.ErrorContainer>
-        예기치 못한 에러가 발생하였습니다.
-        <s.ReturnButton onClick={() => window.location.reload()}>뒤로가기</s.ReturnButton>
-      </s.ErrorContainer>
-    )
+    return <AxiosError />
   }
 
   if (mutation.isSuccess) {
