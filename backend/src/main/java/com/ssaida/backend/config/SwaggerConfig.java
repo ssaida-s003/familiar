@@ -2,6 +2,7 @@ package com.ssaida.backend.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.RequiredArgsConstructor;
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,12 @@ import org.springframework.context.annotation.Configuration;
 @OpenAPIDefinition(
         info = @Info(title = "S10P21S003",
                 description = "SSDC Generative AI Image Project for Samsung FamilyHub",
-                version = "v1"))
+                version = "v1"),
+        servers = {
+                @Server(url = "https://ssaida-back.duckdns.org", description = "배포 서버"),
+                @Server(url = "http://localhost:8081", description = "Localhost")
+        }
+)
 @RequiredArgsConstructor
 @Configuration
 public class SwaggerConfig {
