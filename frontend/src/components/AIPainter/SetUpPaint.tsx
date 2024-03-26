@@ -6,6 +6,8 @@ import { useFamilyStore } from '@stores/family'
 import { useMutation } from 'react-query'
 import Lottie from 'react-lottie'
 import loading from '@/assets/lotties/loading.json'
+import { usePaintStore } from '@stores/aiPaint'
+import { AiPainterConvertReqType } from '@/types/aiPainter'
 
 interface CategorySetType {
   categoryName: string
@@ -44,8 +46,8 @@ const SetUpPaint = () => {
     navigate('/display/AI-painter')
   }
 
-  const mutation = useMutation(async (formData: FormData) => {
-    return aiPaintConvert(familyId, formData)
+  const mutation = useMutation(async (data: AiPainterConvertReqType) => {
+    return aiPaintConvert(familyId, data)
   })
 
   const handleConvert = async () => {
@@ -54,11 +56,15 @@ const SetUpPaint = () => {
       paintStore.setTitle(title)
       paintStore.setOriginalImage(image)
 
-      const formData = new FormData()
-      formData.append('image', image)
-      formData.append('name', title)
-      formData.append('artStyle', selectedCategory)
-      mutation.mutate(formData)
+      const aiPainterConvertReq = {
+        drawing: image,
+        request: {
+          name: title,
+          artStyle: selectedCategory,
+        },
+      }
+
+      mutation.mutate(aiPainterConvertReq)
     }
   }
 
