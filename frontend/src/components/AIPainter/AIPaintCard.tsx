@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { getPaintResType } from '@/types/aiPainter'
 import * as a from '@components/AIPainter/style/AIPaintCardStyle'
+import { selectWallPaper } from '@apis/aiPainter.ts'
+import { useMutation } from 'react-query'
 
 interface AiPaintCardProps {
   paint: getPaintResType
@@ -9,9 +11,19 @@ interface AiPaintCardProps {
 
 const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
   const [showButtons, setShowButtons] = useState(false)
+  const [isSelected, setIsSelected] = useState(paint.isWallpaper)
 
   const handleSnowManIconClick = () => {
     setShowButtons(!showButtons)
+  }
+
+  const selectMutation = useMutation(() => selectWallPaper(paint.familyId, paint.drawingId, !paint.isWallpaper), {
+    onSuccess: () => {
+      setIsSelected(!isSelected)
+    },
+  })
+  const handleSelect = () => {
+    selectMutation.mutate()
   }
 
   const handleDelete = () => {
@@ -26,7 +38,7 @@ const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
         <a.SnowManIcon src="/icon/icon_snowman.png" onClick={handleSnowManIconClick} />
         {showButtons && (
           <a.ButtonContainer>
-            <a.Button>배경화면 선택하기</a.Button>
+            <a.Button onClick={handleSelect}>{paint.isWallpaper ? '배경화면 해제하기' : '배경화면 선택하기'}</a.Button>
             <a.Button onClick={handleDelete}>그림 삭제하기</a.Button>
           </a.ButtonContainer>
         )}
