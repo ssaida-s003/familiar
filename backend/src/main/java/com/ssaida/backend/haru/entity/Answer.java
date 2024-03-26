@@ -3,10 +3,7 @@ package com.ssaida.backend.haru.entity;
 import com.ssaida.backend.common.BaseEntity;
 import com.ssaida.backend.family.entity.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 
 @Entity
@@ -25,5 +22,10 @@ public class Answer extends BaseEntity {
     private Question question;
     private String url;
 
-
+    @Builder
+    public Answer(Member member, Question question, String url) {
+        this.member = member;
+        this.question = question;
+        this.url = url;
+    }
 }

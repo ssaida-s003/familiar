@@ -24,9 +24,11 @@ public class QuestionServiceImpl implements QuestionService {
 
         Member member = memberRepository.findById(createQuestionRequest.getMemberId())
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotFoundException));
+
         if (questionRepository.findByFamilyIdAndDate(member.getFamily().getId(), LocalDate.now()).isPresent()) {
             throw new ConflictException(ErrorCode.QuestionAlreadyExistsException);
         }
+
         Question question = Question.builder()
                 .member(member)
                 .content(createQuestionRequest.getContent())
