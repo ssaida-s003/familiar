@@ -11,3 +11,13 @@ export interface AiPainterSaveReqType {
   convertedImage: string
   name: string
 }
+
+export interface getPaintResType {
+  drawingId: number
+  familyId: number
+  name: string
+  originalImage: string
+  convertedImage: string
+  createdAt: string
+  isWallpaper: boolean
+}

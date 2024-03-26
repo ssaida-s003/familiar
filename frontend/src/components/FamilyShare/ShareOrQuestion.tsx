@@ -2,10 +2,7 @@ import { useEffect, useState } from 'react'
 import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
 
 const ShareOrQuestion = () => {
-  const [shareOrQuestion, setShareOrQuestion] = useState(0)
-  useEffect(() => {
-    setShareOrQuestion(0);
-  }, []);
+  const [shareOrQuestion] = useState(0)
 
   //   api 통신 결과
   // 0 두개 1 하루공유 2 질문과답변
