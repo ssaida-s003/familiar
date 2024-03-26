@@ -102,3 +102,14 @@ export const MakeButton = styled.button`
   background: linear-gradient(92deg, rgba(128, 173, 217, 0.7) 0.01%, rgba(255, 255, 255, 0.4) 109.3%);
   font-weight: 700;
 `
+
+export const ErrorContainer = styled.div`
+  height: 100%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: 700;
+  line-height: 100px;
+`

@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import * as s from '@components/AIPainter/style/SetUpPaintStyle'
 import { aiPaintConvert } from '@apis/aiPainter'
-import { useFamilyStore } from '@stores/family.ts'
+import { useFamilyStore } from '@stores/family'
 import { useMutation } from 'react-query'
 import Lottie from 'react-lottie'
 import loading from '@/assets/lotties/loading.json'
+import { usePaintStore } from '@stores/aiPaint'
+import { AiPainterConvertReqType } from '@/types/aiPainter'
 
 interface CategorySetType {
   categoryName: string
@@ -44,31 +46,25 @@ const SetUpPaint = () => {
     navigate('/display/AI-painter')
   }
 
-  const dataURItoBlob = (dataURI: string): Blob => {
-    const splitDataURI = dataURI.split(',')
-    const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURIComponent(splitDataURI[1])
-    const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
-    const ia = new Uint8Array(byteString.length)
-
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i)
-    }
-
-    return new Blob([ia], { type: mimeString })
-  }
-
-  const mutation = useMutation(async (formData: FormData) => {
-    return aiPaintConvert(familyId, formData)
+  const mutation = useMutation(async (data: AiPainterConvertReqType) => {
+    return aiPaintConvert(familyId, data)
   })
 
   const handleConvert = async () => {
     if (selectedCategory && title && image) {
-      const imageBlob = dataURItoBlob(image)
-      const formData = new FormData()
-      formData.append('image', imageBlob)
-      formData.append('name', title)
-      formData.append('artStyle', selectedCategory)
-      mutation.mutate(formData)
+      const paintStore = usePaintStore()
+      paintStore.setTitle(title)
+      paintStore.setOriginalImage(image)
+
+      const aiPainterConvertReq = {
+        drawing: image,
+        request: {
+          name: title,
+          artStyle: selectedCategory,
+        },
+      }
+
+      mutation.mutate(aiPainterConvertReq)
     }
   }
 
@@ -90,11 +86,17 @@ const SetUpPaint = () => {
   }
 
   if (mutation.isError) {
-    return alert('예기치 못한 에러가 발생하였어요')
+    return (
+      <s.ErrorContainer>
+        예기치 못한 에러가 발생하였습니다.
+        <s.ReturnButton onClick={() => window.location.reload()}>뒤로가기</s.ReturnButton>
+      </s.ErrorContainer>
+    )
   }
 
   if (mutation.isSuccess) {
     console.log(mutation.data)
+    navigate('/display/AI-painter', { state: { backgroundImage: mutation.data } })
   }
 
   return (
