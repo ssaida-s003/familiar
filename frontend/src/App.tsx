@@ -5,6 +5,7 @@ import WallPapersPage from '@pages/WallPapersPage'
 import FamilyShare from '@pages/FamilyShare'
 import AIPainterPage from '@pages/AIPainterPage'
 import SetUpPaintPage from '@pages/SetUpPaintPage'
+import AIPaintAlbumPage from '@pages/AIPaintAlbumPage'
 
 const AuthRoutes = () => (
   <Routes>
@@ -14,6 +15,7 @@ const AuthRoutes = () => (
     <Route path="/display/share-family" element={<FamilyShare />} />
     <Route path="/display/AI-painter" element={<AIPainterPage />} />
     <Route path="/display/AI-painter/setup" element={<SetUpPaintPage />} />
+    <Route path="/display/AI-painter/album" element={<AIPaintAlbumPage />} />
   </Routes>
 )
 

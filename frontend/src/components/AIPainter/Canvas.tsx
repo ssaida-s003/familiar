@@ -31,6 +31,11 @@ const Canvas = () => {
         context.lineWidth = lineWidth
         contextRef.current = context
       }
+      
+      if (canvas) {
+        const initialCanvasState = canvas.toDataURL()
+        setHistory([initialCanvasState])
+      }
     }
   }, [])
 
