@@ -1,8 +1,8 @@
 import AiPaintCard from '@components/AIPainter/AIPaintCard'
 import styled from 'styled-components'
 import { useFamilyStore } from '@stores/family'
+import { getAllPaint } from '@apis/aiPainter'
 import { useQuery } from 'react-query'
-import { getAllPaintSave } from '@apis/aiPainter'
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -14,12 +14,18 @@ const Container = styled.div`
   justify-items: center;
   align-items: center;
 `
+
 const AiPaintList = () => {
   const { familyId } = useFamilyStore()
-  const { data, isLoading, error } = useQuery(['paintList', familyId], () => getAllPaintSave(familyId))
+
+  const usePaintList = (familyId: number) => {
+    return useQuery(['paintList', familyId], () => getAllPaint(familyId))
+  }
+
+  const { data, isLoading, error } = usePaintList(familyId)
 
   if (isLoading) return <div>Loading...</div>
-  if (error) return <div></div>
+  if (error) return <div>Error occurred</div> // 에러 처리를 좀 더 명확하게
 
   return <Container>{data && data.map(paint => <AiPaintCard paint={paint} key={paint.drawingId} />)}</Container>
 }

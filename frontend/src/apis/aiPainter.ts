@@ -9,6 +9,6 @@ export const aiPaintSave = async (familyId: number, data: AiPainterSaveReqType):
   return publicRequest.post(`/families/${familyId}/drawings`, data).then(res => res.data)
 }
 
-export const getAllPaintSave = async (familyId: number): Promise<getPaintResType[]> => {
+export const getAllPaint = async (familyId: number): Promise<getPaintResType[]> => {
   return publicRequest.get(`/families/${familyId}/drawings`).then(res => res.data)
 }
