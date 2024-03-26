@@ -33,7 +33,8 @@ const SetUpPaint = () => {
   const [title, setTitle] = useState('')
   const navigate = useNavigate()
   const familyId = useFamilyStore(state => state.familyId)
-
+  const paintStore = usePaintStore()
+  
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
@@ -52,7 +53,6 @@ const SetUpPaint = () => {
 
   const handleConvert = async () => {
     if (selectedCategory && title && image) {
-      const paintStore = usePaintStore()
       paintStore.setTitle(title)
       paintStore.setOriginalImage(image)
 

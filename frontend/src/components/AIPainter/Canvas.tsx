@@ -169,9 +169,13 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
     }
   }
 
+  const goAlbum = () => {
+    navigate('/display/AI-painter/album')
+  }
+
   return (
     <c.Container>
-      <c.GalleryBtn src="/icon/icon_galleryBtn.png" />
+      <c.AlbumBtn src="/icon/icon_albumBtn.png" onClick={goAlbum} />
       <canvas onMouseDown={startDrawing} onMouseUp={endDrawing} onMouseMove={draw} onMouseLeave={() => isDrawing && endDrawing()} ref={canvasRef} />
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
       {backgroundImage && <c.InfoText>그림을 추가로 꾸밀 수 있어요!</c.InfoText>}
