@@ -20,7 +20,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedMethods("*")
-                .allowedOriginPatterns("http://localhost:3000", "http://localhost:5173",
+                .allowedOriginPatterns("http://localhost:3000", "http://localhost:5173", "http://localhost:8081",
                         "http://localhost:8090", "https://ssaida-front.duckdns.org");
     }
 
@@ -30,7 +30,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //        configuration.addAllowedOriginPattern("*");
 //        configuration.addAllowedOrigin("*");
         configuration.setAllowedOriginPatterns(
-                List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:8090", "https://ssaida-front.duckdns.org"));
+                List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:8081", "http://localhost:8090", "https://ssaida-front.duckdns.org"));
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.setAllowCredentials(true);
