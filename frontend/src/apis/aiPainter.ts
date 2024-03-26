@@ -9,3 +9,13 @@ export const aiPaintConvert = async (familyId: number, formData: FormData): Prom
     })
     .then(res => res.data)
 }
+
+export const aiPaintSave = async (familyId: number, formData: FormData): Promise<number> => {
+  return publicRequest
+    .post(`/families/${familyId}/drawings`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .then(res => res.data)
+}
