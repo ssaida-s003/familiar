@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+interface ContainerProps {
+  $isWallpaper: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
   width: 90%;
   aspect-ratio: 1 / 0.6;
   border-radius: 1rem;
-  border: 3px solid #80add9;
+  border: 3px solid ${props => (props.$isWallpaper ? '#80add9' : 'transparent')};
   background: linear-gradient(101deg, rgba(255, 255, 255, 0.7) 1%, rgba(255, 255, 255, 0.4) 100%);
   padding: 3%;
 `

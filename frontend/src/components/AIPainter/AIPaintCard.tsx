@@ -8,7 +8,7 @@ interface AiPaintCardProps {
 
 const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint }) => {
   return (
-    <a.Container>
+    <a.Container $isWallpaper={paint.isWallpaper}>
       <a.CardHeader>
         <a.Title>{paint.name}</a.Title>
         <a.PinIcon src="/icon/icon_pin.png" />
