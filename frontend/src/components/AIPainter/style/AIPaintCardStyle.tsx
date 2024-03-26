@@ -12,6 +12,7 @@ export const Container = styled.div<ContainerProps>`
   background: linear-gradient(101deg, rgba(255, 255, 255, 0.7) 1%, rgba(255, 255, 255, 0.4) 100%);
   padding: 3%;
   margin-bottom: 4%;
+  position: relative;
 `
 
 export const CardHeader = styled.div`
@@ -69,4 +70,31 @@ export const ArrowIcon = styled.img`
   width: 10%;
   height: auto;
   margin: auto 0;
+`
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: 30%;
+  flex-direction: column;
+  align-content: space-between;
+  position: absolute;
+  top: 13%;
+  right: 4%;
+  border-radius: 0.3rem;
+  border: 0.1rem solid rgba(255, 255, 255, 0.3);
+  background: rgba(128, 173, 217, 0.9);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
+  padding: 1%;
+`
+
+export const Button = styled.button`
+  box-sizing: border-box;
+  width: 98%;
+  margin: 1.5% auto;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  border: 0.1rem solid rgba(255, 255, 255, 0.7);
+  background: linear-gradient(95deg, #fff 0%, rgba(255, 255, 255, 0.4) 100%);
+  font-size: 0.6rem;
+  padding: 2% 0;
 `
