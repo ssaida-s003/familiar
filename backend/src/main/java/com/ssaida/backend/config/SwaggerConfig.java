@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
                 description = "SSDC Generative AI Image Project for Samsung FamilyHub",
                 version = "v1"),
         servers = {
-                @Server(url = "https://ssaida-back.duckdns.org", description = "배포 서버"),
-                @Server(url = "http://localhost:8081", description = "Localhost")
+                @Server(url = "https://ssaida-back.duckdns.org/api", description = "배포 서버"),
+                @Server(url = "http://localhost:8081/api", description = "Localhost")
         }
 )
 @RequiredArgsConstructor

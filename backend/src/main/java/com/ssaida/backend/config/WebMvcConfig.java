@@ -19,9 +19,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("*")
+                .allowedOrigins("*")
                 .allowedOriginPatterns("http://localhost:3000", "http://localhost:5173", "http://localhost:8081",
-                        "http://localhost:8090", "https://ssaida-front.duckdns.org");
+                        "http://localhost:8090", "https://ssaida-front.duckdns.org")
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
+                .allowedHeaders("Authorization", "Content-Type")
+                .exposedHeaders("Custom-Header")
+                .allowCredentials(true)
+                .maxAge(3600L);
     }
 
     @Bean
@@ -29,8 +34,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         CorsConfiguration configuration = new CorsConfiguration();
 //        configuration.addAllowedOriginPattern("*");
 //        configuration.addAllowedOrigin("*");
+        configuration.setAllowedOrigins(
+            List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:8081",
+                "http://localhost:8090", "https://ssaida-front.duckdns.org"));
         configuration.setAllowedOriginPatterns(
-                List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:8081", "http://localhost:8090", "https://ssaida-front.duckdns.org"));
+            List.of("http://localhost:3000/**", "http://localhost:5173/**", "http://localhost:8081/**",
+                "http://localhost:8090/**", "https://ssaida-front.duckdns.org/**"));
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.setAllowCredentials(true);
