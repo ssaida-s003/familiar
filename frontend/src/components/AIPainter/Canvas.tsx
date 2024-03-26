@@ -1,9 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation } from 'react-query'
 import ToolBar from '@components/AIPainter/ToolBar'
 import * as c from '@components/AIPainter/style/CanvasStyle'
+import { usePaintStore } from '@stores/aiPaint'
+import { useFamilyStore } from '@stores/family'
+import { AiPainterSaveReqType } from '@/types/aiPainter'
+import { aiPaintSave } from '@apis/aiPainter'
 
-const Canvas = () => {
+interface CanvasProps {
+  backgroundImage?: string // 배경 이미지 URL 또는 Base64 데이터
+}
+
+const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const contextRef = useRef<CanvasRenderingContext2D | null>(null)
   const [isDrawing, setIsDrawing] = useState(false)
@@ -12,8 +21,22 @@ const Canvas = () => {
   const [history, setHistory] = useState<string[]>([])
   const [step, setStep] = useState(0)
   const [brushColor, setBrushColor] = useState('#000000')
-
+  const paintStore = usePaintStore()
+  const { familyId } = useFamilyStore()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (backgroundImage && canvasRef.current && contextRef.current) {
+      const context = contextRef.current
+      const img = new Image()
+      img.onload = () => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        context.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height)
+      }
+      img.src = backgroundImage
+    }
+  }, [backgroundImage])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -31,7 +54,7 @@ const Canvas = () => {
         context.lineWidth = lineWidth
         contextRef.current = context
       }
-      
+
       if (canvas) {
         const initialCanvasState = canvas.toDataURL()
         setHistory([initialCanvasState])
@@ -121,19 +144,37 @@ const Canvas = () => {
     }
   }
 
+  const saveMutation = useMutation(async (data: AiPainterSaveReqType) => {
+    return aiPaintSave(familyId, data)
+  })
+
   const goNextStep = () => {
     const canvas = canvasRef.current
     if (canvas) {
       const dataUrl = canvas.toDataURL()
-      navigate('/display/AI-painter/setup', { state: { image: dataUrl } })
+
+      if (backgroundImage) {
+        const { title, originalImage } = paintStore
+
+        const aiPainterSaveReq = {
+          originalImage: originalImage,
+          convertedImage: dataUrl,
+          name: title,
+        }
+
+        saveMutation.mutate(aiPainterSaveReq)
+      } else {
+        navigate('/display/AI-painter/setup', { state: { image: dataUrl } })
+      }
     }
   }
 
   return (
     <c.Container>
+      <c.GalleryBtn src="/icon/icon_galleryBtn.png" />
       <canvas onMouseDown={startDrawing} onMouseUp={endDrawing} onMouseMove={draw} onMouseLeave={() => isDrawing && endDrawing()} ref={canvasRef} />
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
-      <c.NextStepBtn src="/icon/icon_AIChangeBtn.png" onClick={goNextStep} />
+      <c.NextStepBtn src={backgroundImage ? '/icon/icon_AIStoreBtn.png' : '/icon/icon_AIChangeBtn.png'} onClick={goNextStep} />
     </c.Container>
   )
 }
