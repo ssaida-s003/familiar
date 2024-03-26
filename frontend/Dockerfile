@@ -1,9 +1,8 @@
 FROM nginx:stable-alpine
 RUN rm -rf /etc/nginx/sites-enabled/default
-COPY nginx/default.conf /etc/nginx/conf.d
-WORKDIR /code
-COPY ./dist/ dist/
-#COPY ./dist /usr/share/nginx/html
+COPY nginx/nginx.conf /etc/nginx/conf.d
+RUN rm /etc/nginx/conf.d/default.conf
+COPY ./dist /usr/share/nginx/html
 
 EXPOSE 3000
 STOPSIGNAL SIGTERM
