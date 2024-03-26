@@ -174,6 +174,7 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
       <c.GalleryBtn src="/icon/icon_galleryBtn.png" />
       <canvas onMouseDown={startDrawing} onMouseUp={endDrawing} onMouseMove={draw} onMouseLeave={() => isDrawing && endDrawing()} ref={canvasRef} />
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
+      {backgroundImage && <c.InfoText>그림을 추가로 꾸밀 수 있어요!</c.InfoText>}
       <c.NextStepBtn src={backgroundImage ? '/icon/icon_AIStoreBtn.png' : '/icon/icon_AIChangeBtn.png'} onClick={goNextStep} />
     </c.Container>
   )
