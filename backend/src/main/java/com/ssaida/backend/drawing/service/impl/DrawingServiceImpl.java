@@ -2,7 +2,9 @@ package com.ssaida.backend.drawing.service.impl;
 
 import static com.ssaida.backend.drawing.exception.ErrorCode.NOT_EXISTS;
 
+import com.ssaida.backend.common.ai.Img2ImgRequest;
 import com.ssaida.backend.common.ai.StableDiffusionApiClient;
+import com.ssaida.backend.common.bucket.BucketClient;
 import com.ssaida.backend.common.prompt.PromptGenerator;
 import com.ssaida.backend.drawing.dto.DrawingConvertRequest;
 import com.ssaida.backend.drawing.dto.DrawingInfo;
@@ -13,11 +15,14 @@ import com.ssaida.backend.drawing.repository.DrawingRepository;
 import com.ssaida.backend.drawing.service.DrawingService;
 import com.ssaida.backend.family.entity.Family;
 import com.ssaida.backend.family.repository.FamilyRepository;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Transactional
@@ -26,27 +31,52 @@ public class DrawingServiceImpl implements DrawingService {
 
 	private final PromptGenerator promptGenerator;
 	private final StableDiffusionApiClient stableDiffusionApiClient;
+	private final BucketClient bucketClient;
 	private final DrawingRepository drawingRepository;
 	private final FamilyRepository familyRepository;
 
 	@Transactional(readOnly = true)
 	@Override
-	public byte[] convert(MultipartFile image, DrawingConvertRequest request) {
+	public String convert(DrawingConvertRequest request) {
 		// 프롬프트 작성
 		String prompt = promptGenerator
 			.generateConvertDrawingPrompt(request.name(), request.artStyle());
 
 		// AI API 호출
-		return stableDiffusionApiClient.convertImage(image, prompt, request.artStyle());
+		return stableDiffusionApiClient.convertImage(new Img2ImgRequest(request.drawing(), prompt,
+			request.artStyle()));
 	}
 
 	@Override
-	public Integer saveDrawing(Integer familyId, DrawingSaveRequest request) {
+	public Integer saveDrawing(Integer familyId, DrawingSaveRequest request) throws IOException {
 		// 요청자와 Family간의 검증이 필요하지만 생략
 		Family family = familyRepository.findById(familyId)
 			.orElseThrow(() -> new DrawingException(NOT_EXISTS));
 
-		return drawingRepository.save(request.toEntity(family)).getId();
+		// 요청받은 파일 변환
+
+		MockMultipartFile original =
+			new MockMultipartFile("original", "original",
+				MediaType.IMAGE_PNG_VALUE,
+				org.apache.commons.codec.binary.Base64.decodeBase64(request.originalImage()));
+
+		MockMultipartFile generated =
+			new MockMultipartFile("generated", "generated",
+				MediaType.IMAGE_PNG_VALUE,
+				org.apache.commons.codec.binary.Base64.decodeBase64(request.convertedImage()));
+
+		// OCI에 업로드
+		String originalUrl = bucketClient.uploadImage(original);
+		String generatedUrl = bucketClient.uploadImage(original);
+
+		return drawingRepository.save(Drawing.builder()
+				.name(request.name())
+				.originalUrl(originalUrl)
+				.generatedUrl(generatedUrl)
+				.isWallpaper(false)
+				.family(family)
+				.build())
+			.getId();
 	}
 
 	@Override
