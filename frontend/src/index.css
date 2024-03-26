@@ -19,9 +19,15 @@ html, body {
 }
 
 #root {
+    font-family: 'SamsungOne', sans-serif;
     max-width: 1440px;
     min-height: 100vh;
     margin: 0;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
