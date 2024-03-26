@@ -18,13 +18,15 @@ const Container = styled.div`
 const FamilyShare = () => {
   return (
     <DisplayContainer>
-      <Container>
+      <>
         <Header title={'가족 공유'} />
-        <ShareOrQuestion />
-        <AIImgAnswer />
-        <Calender />
-        <Navbar />
-      </Container>
+        <Container>
+          <ShareOrQuestion />
+          <AIImgAnswer />
+          <Calender />
+          <Navbar />
+        </Container>
+      </>
     </DisplayContainer>
   )
 }
