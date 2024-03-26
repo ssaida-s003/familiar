@@ -6,6 +6,14 @@ export const Container = styled.div`
   position: relative;
 `
 
+export const GalleryBtn = styled.img`
+  width: 10%;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
+`
+
 export const NextStepBtn = styled.img`
   width: 45%;
   position: absolute;
