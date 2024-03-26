@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/haru/answers")
@@ -28,6 +25,16 @@ public class AnswerController {
     ) {
         log.info("createAnswer 입력 : {}", createAnswerRequest);
         answerService.createAnswer(createAnswerRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{answerId}")
+    @Operation(summary = "답변 삭제")
+    public ResponseEntity<Void> deleteAnswer(
+            @Parameter(description = "답변Id") @PathVariable("answerId") Long answerId
+    ) {
+        log.info("deleteAnswer 입력 : {} ", answerId);
+        answerService.deleteAnswer(answerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

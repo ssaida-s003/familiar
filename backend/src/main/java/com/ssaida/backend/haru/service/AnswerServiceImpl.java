@@ -46,4 +46,9 @@ public class AnswerServiceImpl implements AnswerService {
 
         answerRepository.save(answer);
     }
+
+    @Override
+    public void deleteAnswer(Long answerId) {
+        answerRepository.deleteById(answerId);
+    }
 }

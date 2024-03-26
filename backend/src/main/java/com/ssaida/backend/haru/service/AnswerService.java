@@ -4,4 +4,7 @@ import com.ssaida.backend.haru.dto.CreateAnswerRequest;
 
 public interface AnswerService {
     void createAnswer(CreateAnswerRequest createAnswerRequest);
+
+    void deleteAnswer(Long answerId);
+
 }
