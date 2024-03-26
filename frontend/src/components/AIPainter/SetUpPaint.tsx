@@ -90,7 +90,12 @@ const SetUpPaint = () => {
   }
 
   if (mutation.isError) {
-    return alert('예기치 못한 에러가 발생하였어요')
+    return (
+      <s.ErrorContainer>
+        예기치 못한 에러가 발생하였습니다.
+        <s.ReturnButton onClick={() => window.location.reload()}>뒤로가기</s.ReturnButton>
+      </s.ErrorContainer>
+    )
   }
 
   if (mutation.isSuccess) {
