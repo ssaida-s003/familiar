@@ -6,7 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public record ObjectStorageProps(
 	String bucketName,
 	String bucketNameSpace,
-	String regionUrl
+	String regionUrl,
+	String readOnlyUrl
 
 ) {
 }

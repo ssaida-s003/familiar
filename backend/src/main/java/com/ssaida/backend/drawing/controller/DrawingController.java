@@ -8,6 +8,7 @@ import com.ssaida.backend.drawing.service.DrawingService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.Path;
+import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -33,12 +34,11 @@ public class DrawingController {
 	private final DrawingService drawingService;
 
 	@Operation(summary = "그림 변환 API")
-	@PostMapping(path = "/convert", produces = MediaType.IMAGE_PNG_VALUE)
-	public ResponseEntity<byte[]> convertDrawing(
-		@RequestPart @Valid @ValidImage MultipartFile drawing,
-		@RequestPart @Valid DrawingConvertRequest request
+	@PostMapping(path = "/convert")
+	public ResponseEntity<String> convertDrawing(
+		@RequestBody @Valid DrawingConvertRequest request
 	) {
-		return ResponseEntity.ok(drawingService.convert(drawing, request));
+		return ResponseEntity.ok(drawingService.convert(request));
 	}
 
 	@Operation(summary = "그림 저장 API")
@@ -46,7 +46,7 @@ public class DrawingController {
 	public ResponseEntity<Integer> saveDrawing(
 		@PathVariable("familyId") Integer familyId,
 		@RequestBody @Valid DrawingSaveRequest request
-	) {
+	) throws IOException {
 		return ResponseEntity.ok(drawingService.saveDrawing(familyId, request));
 	}
 
