@@ -10,8 +10,30 @@ const ShareOrQuestion = () => {
     <s.Container>
       {shareOrQuestion === 0 && (
         <s.ShareOrQuestionContainer>
-          <s.ShareContainerSmall></s.ShareContainerSmall>
-          <s.QuestionContainerSmall></s.QuestionContainerSmall>
+          <s.ShareContainerSmall>
+            <s.TopContainer>
+              <s.Title>하루 기록</s.Title>
+              <s.FamilyIconContainer>
+                <s.FamilyIcon></s.FamilyIcon>
+              </s.FamilyIconContainer>
+            </s.TopContainer>
+            <s.BottomContainer>
+              <s.SubTitle>오늘 하루를 간단하게 기록해보세요!</s.SubTitle>
+              <s.GoNexStepBtn>하루 기록 남기기</s.GoNexStepBtn>
+            </s.BottomContainer>
+          </s.ShareContainerSmall>
+          <s.QuestionContainerSmall>
+            <s.TopContainer>
+              <s.Title>오늘의 질문</s.Title>
+            </s.TopContainer>
+            <s.BottomContainer>
+              <s.SubTitle>
+                궁금한 것을 <br />
+                질문해보세요!
+              </s.SubTitle>
+              <s.GoNexStepBtn>음성 질문 남기기</s.GoNexStepBtn>
+            </s.BottomContainer>
+          </s.QuestionContainerSmall>
         </s.ShareOrQuestionContainer>
       )}
       {shareOrQuestion !== 0 && <s.SelectedContainer $shareOrQuestion={shareOrQuestion} />}
