@@ -1,21 +1,22 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 140px;
-  height: 13px;
+  width: 94%;
+  height: 24px;
   display: flex;
   align-items: center;
-  position: relative;
+  position: absolute;
   top: 0;
   left: 0;
-  margin: 4px;
+  margin: 3%;
 `
 
 export const GoBack = styled.img`
-  width: 4px;
-  margin: 0 4px;
+  width: 12px;
+  margin: 0 8px;
 `
 
 export const Title = styled.div`
-  font-size: 6px;
+  margin-left: 8px;
+  font-size: 18px;
 `
