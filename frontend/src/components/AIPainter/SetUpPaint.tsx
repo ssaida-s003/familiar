@@ -4,6 +4,8 @@ import * as s from '@components/AIPainter/style/SetUpPaintStyle'
 import { aiPaintConvert } from '@apis/aiPainter'
 import { useFamilyStore } from '@stores/family.ts'
 import { useMutation } from 'react-query'
+import Lottie from 'react-lottie'
+import loading from '@/assets/lotties/loading.json'
 
 interface CategorySetType {
   categoryName: string
@@ -70,8 +72,21 @@ const SetUpPaint = () => {
     }
   }
 
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loading,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+
   if (mutation.isLoading) {
-    return <div>로딩중...</div>
+    return (
+      <s.LottieContainer>
+        <Lottie options={defaultOptions} width={`50%`} height={`auto`} />
+      </s.LottieContainer>
+    )
   }
 
   if (mutation.isError) {
