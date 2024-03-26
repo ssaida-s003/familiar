@@ -19,9 +19,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedOriginPatterns("http://localhost:3000", "http://localhost:5173", "http://localhost:8081",
-                        "http://localhost:8090", "https://ssaida-front.duckdns.org")
+//                .allowedOrigins("*")
+                .allowedOriginPatterns("http://localhost:3000/**", "http://localhost:5173/**", "http://localhost:8081/**",
+                        "http://localhost:8090/**", "https://ssaida-front.duckdns.org/**")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type")
                 .exposedHeaders("Custom-Header")
