@@ -37,7 +37,7 @@ export const PinIcon = styled.img`
 
 export const SnowManIcon = styled.img`
   align-content: end;
-  width: 5px;
+  width: 1%;
   margin-left: auto;
 `
 
@@ -60,7 +60,7 @@ export const PaintContainer = styled.div`
 `
 
 export const Img = styled.img`
-  width: 45%;
+  width: 43%;
   height: auto;
 `
 
