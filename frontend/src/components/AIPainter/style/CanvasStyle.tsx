@@ -14,6 +14,14 @@ export const GalleryBtn = styled.img`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.2));
 `
 
+export const InfoText = styled.div`
+  font-size: 12px;
+  position: absolute;
+  bottom: 150px;
+  right: 20px;
+  margin-bottom: 5px;
+`
+
 export const NextStepBtn = styled.img`
   width: 45%;
   position: absolute;
