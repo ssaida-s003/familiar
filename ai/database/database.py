@@ -28,7 +28,7 @@ class Database(object):
         SQLModel.metadata.create_all(self.engine)
 
     #DB에서 알맞는 모델 불러오기 로직
-    def get_model_path(self, memberId : int):
+    def get_model_path(self, memberId : int) -> MyModel:
         with self.Session() as s:
             statement = select(MyModel).where(MyModel.member_id == memberId)
             result: MyModel = s.exec(statement).first()
@@ -36,9 +36,9 @@ class Database(object):
 
 
     #모델에 맞는 설정 가지고 오기
-    def get_configs(self, model_path : str):
+    def get_configs(self, model_path : str) -> Config :
         with self.Session() as s:
             statement = select(Config).where(Config.model_path == model_path)
             result : Config = s.exec(statement).first()
-            return result.model
+            return result
 

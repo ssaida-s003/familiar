@@ -1,5 +1,5 @@
 config = dict(
-    model_path = "weights/hj-rv2.0",
+    model_path = "weights/hj-rv6.0",
     scheduler = "Euler",
     CFG = 7.0,
     inference_step = 30,

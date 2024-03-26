@@ -6,9 +6,9 @@ from sampler.schedulers import scheduler
 from model import base_model, available_model
 import torch
 from huggingface_hub import login, hf_hub_download, snapshot_download
-
-class BaseModel():
-    def __init__(self, config):
+from ..database.Configs import Config
+class BaseModel(object):
+    def __init__(self, config : Config):
         self.config = config
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = base_model
@@ -48,13 +48,16 @@ class BaseModel():
         if self.config.offload:
             self.pipe.enable_sequential_cpu_offload()
 
+    def __new__(cls, *args, **kwargs):
+        return super().__new__(cls)
+
     #추론 실행
     def inference(self, input: InferenceParameter):
         with torch.inference_mode():
             sample = self.pipe(prompt=input.prompt,
                           negative_prompt=input.negative_prompt,
                           guidance_scale=self.config.CFG,
-                          seed=self.config.seed,
+                          seed=self.config.seed if self.config.use_seed == True else None,
                           num_inference_steps=self.config.num_inference_steps,
                           safety_checker=None)
             return sample.images[0]
