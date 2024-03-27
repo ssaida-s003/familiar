@@ -1,3 +1,10 @@
 fastapi
-torch
 uvicorn
+transformers
+scipy
+accelerate
+git+https://github.com/huggingface/diffusers
+sql
+mysql
+sqlmodel
+clip-interrogator==0.5.4
