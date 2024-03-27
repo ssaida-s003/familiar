@@ -34,8 +34,10 @@ class BaseModel(object):
 
         # 파이프라인 생성
         self.pipe = StableDiffusionPipeline.from_pretrained(
-            config.model_path, torch_dtype=torch.float16, safety_checker=None
-
+            config.model_path,
+            torch_dtype=torch.float16,
+            safety_checker=None,
+            use_safetensors = True
         ).to(self.device)
 
         # 추론 속도 상승 - RoLA 적용

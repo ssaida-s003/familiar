@@ -55,8 +55,11 @@ async def read_root():
 #가족 이미지 생성 API
 @app.post("/diarys")
 async def make_diary_image(requestDto : DiaryRequestDto):
-    model_info : Models = db.get_model_info(requestDto.memberId) # 맴버에 맞는 모델 불러오기
-    config: Config = db.get_configs(model_info.model_path) # 모델에 맞는 설정 파일 들고 오기
+    try:
+        model_info : Models = db.get_model_info(requestDto.memberId) # 맴버에 맞는 모델 불러오기
+        config: Config = db.get_configs(model_info.model_path) # 모델에 맞는 설정 파일 들고 오기
+    except:
+        return {"error_code": "400", "message": "bad request"}
 
     #추론 수행 모델 불러오기 및 추론 수행
     if models['diary'] == None or models['diary'].config.model_path != config.model_path : # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
