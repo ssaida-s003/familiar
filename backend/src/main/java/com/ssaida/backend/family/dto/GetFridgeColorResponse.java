@@ -1,6 +1,5 @@
 package com.ssaida.backend.family.dto;
 
-import com.ssaida.backend.family.entity.Color;
 import com.ssaida.backend.family.entity.Fridge;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +13,9 @@ public class GetFridgeColorResponse {
     String bottomRight;
 
     public GetFridgeColorResponse(Fridge fridge) {
-        this.topLeft = fridge.getTopLeft().getColorCode();
-        this.topRight = fridge.getTopRight().getColorCode();
-        this.bottomLeft = fridge.getBottomLeft().getColorCode();
-        this.bottomRight = fridge.getBottomRight().getColorCode();
+        this.topLeft = fridge.getTopLeft().getHex();
+        this.topRight = fridge.getTopRight().getHex();
+        this.bottomLeft = fridge.getBottomLeft().getHex();
+        this.bottomRight = fridge.getBottomRight().getHex();
     }
 }
