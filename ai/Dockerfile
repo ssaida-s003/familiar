@@ -22,13 +22,14 @@
 
 FROM pytorch/pytorch:2.2.1-cuda11.8-cudnn8-devel
 
-RUN apt-get update && apt-get install -y pkg-config
+RUN apt-get update && apt-get install -y pkg-config build-essential libmysqlclient-dev
 
 COPY . /ai
 WORKDIR /ai
 
 RUN pip3 install -U xformers --index-url https://download.pytorch.org/whl/cu118 # xformers 설치
 RUN pip3 install -U peft # LCM 위함
+RUN pip install diffusers["torch"] transformers
 
 RUN pip install -r requirements.txt
 RUN conda install -c conda-forge diffusers
