@@ -1,5 +1,5 @@
 import * as b from '@components/FamilyShare/style/BeforeRecordStyle'
-import { useShareStepStore } from '@stores/familyShare.ts'
+import { useShareStepStore } from '@stores/familyShare'
 
 const BeforeRecord = () => {
   const { step, setStep } = useShareStepStore()
