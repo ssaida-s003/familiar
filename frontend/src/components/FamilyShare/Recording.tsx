@@ -62,7 +62,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
         <r.TextAreaInput value={inputText} onChange={handleInputChange} />
         <r.ButtonContainer>
           {isCompleteRecord ? <r.ReRecordBtn onClick={handleReRecord}>다시 녹음할래요!</r.ReRecordBtn> : <r.CompleteRecordBtn onClick={handleStopRecord}>녹음 그만 할게요!</r.CompleteRecordBtn>}
-          <r.GoNextStepBtn onClick={handleSubmit}>이대로 할게요!</r.GoNextStepBtn>
+          <r.GoNextStepBtn onClick={handleSubmit}> {recordType === 0 ? `이대로 할게요!` : `이대로 질문 할게요!`}</r.GoNextStepBtn>
         </r.ButtonContainer>
       </r.BottomContainer>
     </>
