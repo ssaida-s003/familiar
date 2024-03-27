@@ -4,5 +4,5 @@ public interface PromptGenerator {
 
     String generateConvertDrawingPrompt(String title, String artStyle);
 
-    String generateConvertHaruPrompt(String content);
+    String generateConvertHaruPrompt(Integer memberId, String content);
 }
