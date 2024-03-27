@@ -1,5 +1,7 @@
 package com.ssaida.backend.common.prompt;
 
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
 
@@ -7,6 +9,8 @@ import org.springframework.web.service.annotation.PostExchange;
 public interface GeminiApiClient {
 
 //    @PostExchange
+//    @ResponseBody
+//    GeminiResponse getGeminiPrompt(@RequestParam)
 
 
 }
