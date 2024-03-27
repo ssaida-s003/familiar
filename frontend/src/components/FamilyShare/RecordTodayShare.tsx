@@ -5,9 +5,18 @@ import { useShareStepStore } from '@stores/familyShare'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: 3% auto;
   height: 32vh;
-  margin: 3% 0;
+  background: linear-gradient(144deg, #fff -13.94%, rgba(255, 255, 255, 0) 112.31%);
+  border-radius: 1rem;
+  filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.1));
+  backdrop-filter: blur(0.5rem);
+  border: 0.05rem solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `
 
 const RecordTodayShare = () => {
