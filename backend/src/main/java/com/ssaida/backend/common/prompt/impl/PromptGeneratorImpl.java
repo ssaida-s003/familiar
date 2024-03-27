@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class PromptGeneratorImpl implements PromptGenerator {
 
-//    @Value("${gemini.api-key}")
-//    private String apiKey;
+    @Value("${gemini.api-key}")
+    private String apiKey;
 
     private final LanguageTranslator languageTranslator;
 
