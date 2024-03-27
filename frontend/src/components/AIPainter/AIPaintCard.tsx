@@ -22,6 +22,7 @@ const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
       setIsSelected(!isSelected)
     },
   })
+
   const handleSelect = () => {
     selectMutation.mutate()
   }
