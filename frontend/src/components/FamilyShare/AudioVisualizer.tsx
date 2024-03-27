@@ -1,7 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import * as a from '@components/FamilyShare/style/AudioVisualizerStyle'
 
-const AudioVisualizer = () => {
+interface AudioVisualizerProps {
+  isCompleted: boolean
+}
+
+const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ isCompleted }) => {
   const audioContextRef = useRef<AudioContext | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
   const [bars, setBars] = useState<number[]>([])
@@ -33,8 +37,8 @@ const AudioVisualizer = () => {
       requestAnimationFrame(draw)
 
       analyser.getByteFrequencyData(dataArray)
-      const barsData = Array.from(dataArray).slice(0, 25) // 첫 50개의 주파수 데이터만 사용
-      setBars(barsData.map(n => (n / 400) * 90)) // 높이를 퍼센트로 변환
+      const barsData = Array.from(dataArray).slice(0, 20)
+      setBars(barsData.map(n => (n / 400) * 100))
     }
 
     draw()
@@ -43,7 +47,7 @@ const AudioVisualizer = () => {
   return (
     <a.VisualizerContainer>
       {bars.map((height, i) => (
-        <a.Bar key={i} height={height} />
+        <a.Bar key={i} height={isCompleted ? 0 : height} />
       ))}
     </a.VisualizerContainer>
   )
