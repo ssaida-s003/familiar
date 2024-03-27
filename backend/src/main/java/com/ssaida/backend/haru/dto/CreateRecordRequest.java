@@ -12,20 +12,7 @@ public class CreateRecordRequest {
     @NotNull
     private int memberId;
     private String content;
-    private String url;
+    @NotNull
+    private String image;
 
-    @Builder
-    public CreateRecordRequest(int memberId, String content, String url) {
-        this.memberId = memberId;
-        this.content = content;
-        this.url = url;
-    }
-
-    public DailyRecord toEntity(Member member)
-    {
-        return DailyRecord.builder()
-                .member(member)
-                .content(content)
-                .url(url).build();
-    }
 }

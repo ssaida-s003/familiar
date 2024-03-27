@@ -22,7 +22,7 @@ public class ConvertHaruController {
 
     @PatchMapping
     @Operation(summary = "일상공유(기록,답변) 그림 변환")
-    ResponseEntity<byte[]> convertRecord(
+    ResponseEntity<String> convertRecord(
             @Parameter(description = "기록 혹은 답변을 한 멤버Id, 내용") @RequestBody ConvertRecordRequest convertRecordRequest
     ) {
         log.info("convertRecord 입력 : {}", convertRecordRequest);

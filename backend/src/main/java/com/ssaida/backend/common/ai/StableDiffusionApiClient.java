@@ -12,7 +12,7 @@ public interface StableDiffusionApiClient {
     String convertImage(@RequestBody Img2ImgRequest request);
 
     @PostExchange(url = "/diaries")
-    byte[] convertHaru(@RequestParam("memberId") int memberId, @RequestParam("prompt") String prompt);
+    String convertHaru(@RequestParam("memberId") int memberId, @RequestParam("prompt") String prompt);
 
 }
 

@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/haru/records")
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class RecordController {
     @PostMapping
     @Operation(summary = "하루 기록 생성")
     ResponseEntity<Void> createRecord(
-            @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody CreateRecordRequest createRecordRequest) {
+            @Parameter(description = "멤버 ID, 하루일상공유 내용") @RequestBody CreateRecordRequest createRecordRequest){
         log.info("createRecord 입력 : {}", createRecordRequest);
         recordService.createRecord(createRecordRequest);
 
