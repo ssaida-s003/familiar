@@ -21,33 +21,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:8080", "http://localhost:5173", "http://localhost:8081", "http://localhost:8090",
                         "https://ssaida-front.duckdns.org", "https://ssaida-back.duckdns.org")
-                .allowedOriginPatterns("http://localhost:3000/**", "http://localhost:5173/**", "http://localhost:8081/**",
-                        "http://localhost:8090/**", "https://ssaida-front.duckdns.org/**", "https://ssaida-back.duckdns.org/**")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .exposedHeaders("Custom-Header")
-                .allowCredentials(false)
+                .allowCredentials(true)
                 .maxAge(3600L);
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.addAllowedOriginPattern("*");
-//        configuration.addAllowedOrigin("*");
-        configuration.setAllowedOrigins(
-            List.of("http://localhost:3000", "http://localhost:5173", "http://localhost:8081",
-                "http://localhost:8090", "https://ssaida-front.duckdns.org", "https://ssaida-back.duckdns.org/**"));
-        configuration.setAllowedOriginPatterns(
-            List.of("http://localhost:3000/**", "http://localhost:5173/**", "http://localhost:8081/**",
-                "http://localhost:8090/**", "https://ssaida-front.duckdns.org/**", "https://ssaida-back.duckdns.org/**"));
-        configuration.setAllowedMethods(Collections.singletonList("*"));
-        configuration.setAllowedHeaders(Collections.singletonList("*"));
-        configuration.setAllowCredentials(false);
-        configuration.setMaxAge(3600L);
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
+
 
 }

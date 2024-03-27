@@ -13,7 +13,7 @@ public class ConvertHaruServiceImpl implements ConvertHaruService {
     private final StableDiffusionApiClient stableDiffusionApiClient;
 
     @Override
-    public byte[] convertHaru(ConvertRecordRequest convertRecordRequest) {
+    public String convertHaru(ConvertRecordRequest convertRecordRequest) {
 
         String prompt = promptGenerator.generateConvertHaruPrompt(convertRecordRequest.getMemberId(), convertRecordRequest.getContent());
 
