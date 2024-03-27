@@ -1,11 +1,20 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
 
-const ShareOrQuestion = () => {
+interface ShareOrQuestionProps {
+  setIsTodayShareRecord: (isRecord: boolean) => void
+}
+
+const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord }) => {
   const [shareOrQuestion] = useState(0)
 
   //   api 통신 결과
   // 0 두개 1 하루공유 2 질문과답변
+
+  const handleRecordToday = () => {
+    setIsTodayShareRecord(true)
+  }
+
   return (
     <s.Container>
       {shareOrQuestion === 0 && (
@@ -19,7 +28,7 @@ const ShareOrQuestion = () => {
             </s.TopContainer>
             <s.BottomContainer>
               <s.SubTitle>오늘 하루를 간단하게 기록해보세요!</s.SubTitle>
-              <s.GoNexStepBtn>하루 기록 남기기</s.GoNexStepBtn>
+              <s.GoNexStepBtn onClick={handleRecordToday}>하루 기록 남기기</s.GoNexStepBtn>
             </s.BottomContainer>
           </s.ShareContainerSmall>
           <s.QuestionContainerSmall>
