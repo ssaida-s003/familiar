@@ -6,7 +6,7 @@ pipeline {
 
         DOCKERHUB_CREDENTIALS = credentials("dockerhub-token")
         dockerImage = ''
-        SSH_CONNECTION = "ubuntu@j10s003.p.ssafy.io"
+        SSH_CONNECTION = "fangdol888@ssaida-ai.duckdns.org"
     }
     agent any
     stages {
@@ -42,14 +42,14 @@ pipeline {
 
         stage('AI - Deploy') {
             steps {
-                sshagent (credentials: ['aws_key']) {
+//                 sshagent (credentials: ['aws_key']) {
                     script{
                         sh "ssh -o StrictHostKeyChecking=no  ${SSH_CONNECTION} uptime"
                         //docker-compose
                         sh "ssh -t ${SSH_CONNECTION} 'sudo docker compose pull ${docker_compose_ai_name}'"
                         sh "ssh -t ${SSH_CONNECTION} 'sudo docker compose up -d ${docker_compose_ai_name}'"
                     }
-                }
+//                 }
             }     
         }
     }

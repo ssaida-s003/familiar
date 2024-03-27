@@ -310,3 +310,5 @@ pyrightconfig.json
 
 ##### weights
 weights/*.safetensors
+weights/**
+result/**
