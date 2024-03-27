@@ -20,6 +20,7 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
   const [isDragging, setIsDragging] = useState(false)
   const [textPosition, setTextPosition] = useState<Position>({ x: 50, y: 50 })
   const textContent = content
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -39,13 +40,18 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
       }
     }
 
-    const handleMouseDown = () => setIsDragging(true)
+    const handleMouseDown = (event: MouseEvent) => {
+      const offsetX = event.clientX - textPosition.x
+      const offsetY = event.clientY - textPosition.y
+      setDragOffset({ x: offsetX, y: offsetY })
+      setIsDragging(true)
+    }
     const handleMouseUp = () => setIsDragging(false)
+
     const handleMouseMove = (event: MouseEvent) => {
-      if (isDragging) {
-        setTextPosition({ x: event.offsetX, y: event.offsetY })
-        redrawImageAndText(event.offsetX, event.offsetY)
-      }
+      if (!isDragging) return
+      setTextPosition({ x: event.clientX - dragOffset.x, y: event.clientY - dragOffset.y })
+      redrawImageAndText(event.offsetX, event.offsetY)
     }
 
     if (canvas) {
@@ -66,16 +72,21 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
   const redrawImageAndText = (x: number, y: number) => {
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
-    if (ctx) {
+    if (canvas && ctx) {
+      const rect = canvas.getBoundingClientRect()
+      const scaleX = canvas.width / rect.width
+      const scaleY = canvas.height / rect.height
+
+      const canvasX = (x - rect.left) * scaleX
+      const canvasY = (y - rect.top) * scaleY
+
       const image = new Image()
       image.src = imageUrl
       image.onload = () => {
-        if (canvas) {
-          ctx.clearRect(0, 0, canvas.width, canvas.height)
-          ctx.drawImage(image, 0, 0)
-          ctx.font = '20px Arial'
-          ctx.fillText(textContent, x, y)
-        }
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
+        ctx.font = '18px Arial white'
+        ctx.fillText(textContent, canvasX - dragOffset.x, canvasY - dragOffset.y)
       }
     }
   }
