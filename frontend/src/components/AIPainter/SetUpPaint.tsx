@@ -40,8 +40,6 @@ const SetUpPaint = () => {
     setTitle(e.target.value)
   }
 
-  console.log(image)
-
   const selectCategory = (categoryNameByEnglish: string) => {
     setSelectedCategory(categoryNameByEnglish)
   }
@@ -61,10 +59,8 @@ const SetUpPaint = () => {
 
       const aiPainterConvertReq = {
         drawing: image,
-        request: {
-          name: title,
-          artStyle: selectedCategory,
-        },
+        name: title,
+        artStyle: selectedCategory,
       }
 
       mutation.mutate(aiPainterConvertReq)

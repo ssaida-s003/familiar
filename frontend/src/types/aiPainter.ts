@@ -1,9 +1,7 @@
 export interface AiPainterConvertReqType {
   drawing: string
-  request: {
-    name: string
-    artStyle: string
-  }
+  name: string
+  artStyle: string
 }
 
 export interface AiPainterSaveReqType {
