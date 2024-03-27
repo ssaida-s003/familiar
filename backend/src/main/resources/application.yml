@@ -6,7 +6,7 @@ spring:
       - classpath:/config/keys.yml
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   datasource:
     # mysql 기본 설정
     driver-class-name: com.mysql.cj.jdbc.Driver
