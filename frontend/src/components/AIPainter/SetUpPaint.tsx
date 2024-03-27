@@ -40,8 +40,6 @@ const SetUpPaint = () => {
     setTitle(e.target.value)
   }
 
-  console.log(image)
-
   const selectCategory = (categoryNameByEnglish: string) => {
     setSelectedCategory(categoryNameByEnglish)
   }
