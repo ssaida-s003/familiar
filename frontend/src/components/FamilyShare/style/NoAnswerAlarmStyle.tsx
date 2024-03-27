@@ -9,6 +9,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-content: center;
   justify-content: center;
+  border: 0.05rem solid white;
 `
 
 export const AlarmText = styled.div`

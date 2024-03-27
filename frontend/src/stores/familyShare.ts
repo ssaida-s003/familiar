@@ -6,6 +6,6 @@ interface ShareStepState {
 }
 
 export const useShareStepStore = create<ShareStepState>(set => ({
-  step: 1,
+  step: 0,
   setStep: (step: number) => set({ step: step }),
 }))
