@@ -1,4 +1,13 @@
-from diffusers import *
+from diffusers.schedulers import (
+EulerDiscreteScheduler,
+EulerAncestralDiscreteScheduler,
+DPMSolverMultistepScheduler,
+DPMSolverSinglestepScheduler,
+KDPM2DiscreteScheduler,
+KDPM2AncestralDiscreteScheduler,
+HeunDiscreteScheduler,
+LMSDiscreteScheduler
+)
 
 scheduler = {
     "Euler" : EulerDiscreteScheduler,
