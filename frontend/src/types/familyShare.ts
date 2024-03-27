@@ -4,6 +4,11 @@ export interface PostTodayReqType {
   url: string
 }
 
+export interface FamilyTodayConvertReqType {
+  memberId: number
+  content: string
+}
+
 export interface StepProps {
   recordType: number
 }
