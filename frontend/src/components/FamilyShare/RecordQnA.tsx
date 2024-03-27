@@ -1,8 +1,10 @@
+import React from 'react'
+import styled from 'styled-components'
 import BeforeRecord from '@components/FamilyShare/BeforeRecord'
 import Recording from '@components/FamilyShare/Recording'
 import AfterRecord from '@components/FamilyShare/AfterRecord'
-import { useShareStepStore } from '@stores/familyShare'
-import styled from 'styled-components'
+import { useQnAStepStore } from '@stores/familyShare'
+import { StepProps } from '@/types/familyShare'
 
 const Container = styled.div`
   width: 90%;
@@ -19,15 +21,16 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-const RecordTodayShare = () => {
-  const { shareStep } = useShareStepStore()
+const RecordQnA: React.FC<StepProps> = () => {
+  const { qnaStep } = useQnAStepStore()
+
   return (
     <Container>
-      {shareStep == 0 && <BeforeRecord recordType={0} />}
-      {shareStep == 1 && <Recording recordType={0} />}
-      {shareStep == 2 && <AfterRecord />}
+      {qnaStep == 0 && <BeforeRecord recordType={1} />}
+      {qnaStep == 1 && <Recording recordType={1} />}
+      {qnaStep == 2 && <AfterRecord />}
     </Container>
   )
 }
 
-export default RecordTodayShare
+export default RecordQnA

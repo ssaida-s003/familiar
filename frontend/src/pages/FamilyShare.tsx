@@ -6,6 +6,7 @@ import ShareOrQuestion from '@components/FamilyShare/ShareOrQuestion'
 import Calender from '@components/FamilyShare/Calender'
 import AIImgAnswer from '@components/FamilyShare/AIImgAnswer'
 import RecordTodayShare from '@components/FamilyShare/RecordTodayShare'
+import RecordQnA from '@components/FamilyShare/RecordQnA'
 
 const Container = styled.div`
   width: 100%;
@@ -15,12 +16,14 @@ const Container = styled.div`
 
 const FamilyShare = () => {
   const [isTodayShareRecord, setIsTodayShareRecord] = useState(false)
+  const [isQnARecord, setIsQnARecord] = useState(false)
+
   return (
     <DisplayContainer>
       <>
         <Header title={'가족 공유'} />
         <Container>
-          {isTodayShareRecord ? <RecordTodayShare /> : <ShareOrQuestion setIsTodayShareRecord={setIsTodayShareRecord} />}
+          {isTodayShareRecord ? <RecordTodayShare /> : isQnARecord ? <RecordQnA /> : <ShareOrQuestion setIsTodayShareRecord={setIsTodayShareRecord} setIsQnARecord={setIsQnARecord} />}
           <AIImgAnswer />
           <Calender />
         </Container>
