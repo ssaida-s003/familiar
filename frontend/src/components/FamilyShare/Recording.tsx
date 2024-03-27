@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import * as r from '@components/FamilyShare/style/RecordingStyle'
 import useSpeechToText from '@hooks/useSpeechToText'
 import AudioVisualizer from '@components/FamilyShare/AudioVisualizer'
-import { useQnAStepStore, useShareStepStore } from '@stores/familyShare'
+import { useConvertTodayStore, useQnAStepStore, useShareStepStore } from '@stores/familyShare'
 import { StepProps } from '@/types/familyShare'
 import { useMutation } from 'react-query'
 import { familyTodayConvert } from '@apis/familyShare'
@@ -15,6 +15,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
   const [isCompleteRecord, setIsCompleteRecord] = useState(false)
   const { shareStep, setShareStep } = useShareStepStore()
   const { qnaStep, setQnAStep } = useQnAStepStore()
+  const { setImage, setContent, setMemberId } = useConvertTodayStore()
 
   useEffect(() => {
     setTimeout(() => {
@@ -47,8 +48,11 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
   }
 
   const { mutate, isLoading } = useMutation(familyTodayConvert, {
-    onSuccess: () => {
+    onSuccess: data => {
       setShareStep(shareStep + 1)
+      setMemberId(1)
+      setImage(data)
+      setContent(inputText)
     },
   })
 
