@@ -20,12 +20,12 @@ const Container = styled.div`
 `
 
 const RecordTodayShare = () => {
-  const { step } = useShareStepStore()
+  const { shareStep } = useShareStepStore()
   return (
     <Container>
-      {step == 0 && <BeforeRecord />}
-      {step == 1 && <Recording />}
-      {step == 2 && <AfterRecord />}
+      {shareStep == 0 && <BeforeRecord recordType={0} />}
+      {shareStep == 1 && <Recording recordType={0} />}
+      {shareStep == 2 && <AfterRecord />}
     </Container>
   )
 }
