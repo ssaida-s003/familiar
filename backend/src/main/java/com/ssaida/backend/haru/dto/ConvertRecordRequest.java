@@ -6,6 +6,6 @@ import lombok.*;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ConvertRecordRequest {
-    private int memberId;
+    private Integer memberId;
     private String content;
 }
