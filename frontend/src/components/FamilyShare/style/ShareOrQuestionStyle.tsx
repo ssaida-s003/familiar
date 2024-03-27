@@ -86,4 +86,5 @@ export const GoNexStepBtn = styled.button`
   border-radius: 1rem;
   margin: 5%;
   background: #80add9;
+  cursor: pointer;
 `
