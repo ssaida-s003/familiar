@@ -2,15 +2,13 @@ package com.ssaida.backend.family.entity;
 
 
 import com.ssaida.backend.common.BaseEntity;
+import com.ssaida.backend.family.dto.PutFridgeColorRequest;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Getter
-@ToString(of = {"id","topLeft","topRight","bottomLeft","bottomRight"})
+@ToString(of = {"id", "topLeft", "topRight", "bottomLeft", "bottomRight"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Fridge extends BaseEntity {
 
@@ -22,20 +20,27 @@ public class Fridge extends BaseEntity {
     @JoinColumn(name = "family_id")
     private Family family;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "top_left")
     private Color topLeft;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "top_right")
     private Color topRight;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bottom_left")
     private Color bottomLeft;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bottom_right")
     private Color bottomRight;
 
+    @Builder
+    public Fridge(Family family, Color topLeft, Color topRight, Color bottomLeft, Color bottomRight) {
+        this.family = family;
+        this.topLeft = topLeft;
+        this.topRight = topRight;
+        this.bottomLeft = bottomLeft;
+        this.bottomRight = bottomRight;
+    }
+
+    public void updateColor(Color[] colors) {
+        this.topLeft = colors[0];
+        this.topRight = colors[1];
+        this.bottomLeft = colors[2];
+        this.bottomRight = colors[3];
+    }
 }
