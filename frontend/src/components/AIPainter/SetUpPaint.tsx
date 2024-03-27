@@ -55,10 +55,10 @@ const SetUpPaint = () => {
   const handleConvert = async () => {
     if (selectedCategory && title && image) {
       paintStore.setTitle(title)
-      paintStore.setOriginalImage(image.split(',')[1])
+      paintStore.setOriginalImage(image)
 
       const aiPainterConvertReq = {
-        drawing: image,
+        drawing: image.split(',')[1],
         name: title,
         artStyle: selectedCategory,
       }
