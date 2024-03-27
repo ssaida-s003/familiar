@@ -26,7 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
                 .allowedHeaders("Authorization", "Content-Type")
                 .exposedHeaders("Custom-Header")
-                .allowCredentials(true)
+                .allowCredentials(false)
                 .maxAge(3600L);
     }
 
@@ -43,7 +43,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "http://localhost:8090/**", "https://ssaida-front.duckdns.org/**", "https://ssaida-back.duckdns.org/**"));
         configuration.setAllowedMethods(Collections.singletonList("*"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(false);
         configuration.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
