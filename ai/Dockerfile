@@ -32,7 +32,6 @@ RUN pip3 install -U peft # LCM 위함
 RUN pip install diffusers["torch"] transformers
 
 RUN pip install -r requirements.txt
-RUN conda install -c conda-forge diffusers
 
 EXPOSE 3002
 CMD ["python", "main.py"]
