@@ -40,6 +40,8 @@ const SetUpPaint = () => {
     setTitle(e.target.value)
   }
 
+  console.log(image)
+
   const selectCategory = (categoryNameByEnglish: string) => {
     setSelectedCategory(categoryNameByEnglish)
   }
@@ -55,7 +57,7 @@ const SetUpPaint = () => {
   const handleConvert = async () => {
     if (selectedCategory && title && image) {
       paintStore.setTitle(title)
-      paintStore.setOriginalImage(image)
+      paintStore.setOriginalImage(image.split(',')[1])
 
       const aiPainterConvertReq = {
         drawing: image,
