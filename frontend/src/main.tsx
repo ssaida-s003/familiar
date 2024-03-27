@@ -6,7 +6,7 @@ import './index.css'
 
 import axios from 'axios'
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
 
 const queryClient = new QueryClient()
 
