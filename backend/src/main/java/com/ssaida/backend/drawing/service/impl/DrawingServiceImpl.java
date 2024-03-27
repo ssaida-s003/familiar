@@ -67,7 +67,7 @@ public class DrawingServiceImpl implements DrawingService {
 
 		// OCI에 업로드
 		String originalUrl = bucketClient.uploadImage(original);
-		String generatedUrl = bucketClient.uploadImage(original);
+		String generatedUrl = bucketClient.uploadImage(generated);
 
 		return drawingRepository.save(Drawing.builder()
 				.name(request.name())
