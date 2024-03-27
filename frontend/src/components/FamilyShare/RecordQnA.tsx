@@ -1,10 +1,8 @@
-import React from 'react'
 import styled from 'styled-components'
 import BeforeRecord from '@components/FamilyShare/BeforeRecord'
 import Recording from '@components/FamilyShare/Recording'
 import AfterRecord from '@components/FamilyShare/AfterRecord'
 import { useQnAStepStore } from '@stores/familyShare'
-import { StepProps } from '@/types/familyShare'
 
 const Container = styled.div`
   width: 90%;
@@ -21,7 +19,7 @@ const Container = styled.div`
   flex-direction: column;
 `
 
-const RecordQnA: React.FC<StepProps> = () => {
+const RecordQnA = () => {
   const { qnaStep } = useQnAStepStore()
 
   return (
