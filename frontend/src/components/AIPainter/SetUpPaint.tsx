@@ -59,10 +59,8 @@ const SetUpPaint = () => {
 
       const aiPainterConvertReq = {
         drawing: image,
-        request: {
-          name: title,
-          artStyle: selectedCategory,
-        },
+        name: title,
+        artStyle: selectedCategory,
       }
 
       mutation.mutate(aiPainterConvertReq)
