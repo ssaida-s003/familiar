@@ -26,7 +26,9 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ isCompleted }) => {
     const source = audioContext.createMediaStreamSource(stream)
 
     source.connect(analyser)
-    analyser.fftSize = 256
+    analyser.fftSize = 512
+    analyser.smoothingTimeConstant = 0.5
+
     const bufferLength = analyser.frequencyBinCount
     const dataArray = new Uint8Array(bufferLength)
 
@@ -34,11 +36,12 @@ const AudioVisualizer: React.FC<AudioVisualizerProps> = ({ isCompleted }) => {
     analyserRef.current = analyser
 
     const draw = () => {
+      if (isCompleted) return
       requestAnimationFrame(draw)
 
       analyser.getByteFrequencyData(dataArray)
       const barsData = Array.from(dataArray).slice(0, 20)
-      setBars(barsData.map(n => (n / 400) * 100))
+      setBars(barsData.map(n => (n / 512) * 100))
     }
 
     draw()
