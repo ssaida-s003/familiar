@@ -21,7 +21,6 @@ const FamilyShare = () => {
           <ShareOrQuestion />
           <AIImgAnswer />
           <Calender />
-          <Navbar />
         </Container>
       </>
     </DisplayContainer>
