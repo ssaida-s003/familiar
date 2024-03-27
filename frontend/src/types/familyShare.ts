@@ -12,3 +12,13 @@ export interface FamilyTodayConvertReqType {
 export interface StepProps {
   recordType: number
 }
+
+export interface ShareStepState {
+  shareStep: number
+  setShareStep: (step: number) => void
+}
+
+export interface ShareQnAState {
+  qnaStep: number
+  setQnAStep: (step: number) => void
+}
