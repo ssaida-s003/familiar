@@ -27,6 +27,9 @@ RUN apt-get update && apt-get install -y pkg-config
 COPY . /ai
 WORKDIR /ai
 
+RUN pip3 install -U xformers --index-url https://download.pytorch.org/whl/cu118 # xformers 설치
+RUN pip3 install -U peft # LCM 위함
+
 RUN pip install -r requirements.txt
 RUN conda install -c conda-forge diffusers
 
