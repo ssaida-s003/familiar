@@ -1,11 +1,21 @@
 import { create } from 'zustand'
 
 interface ShareStepState {
-  step: number
-  setStep: (step: number) => void
+  shareStep: number
+  setShareStep: (step: number) => void
+}
+
+interface ShareQnAState {
+  qnaStep: number
+  setQnAStep: (step: number) => void
 }
 
 export const useShareStepStore = create<ShareStepState>(set => ({
-  step: 0,
-  setStep: (step: number) => set({ step: step }),
+  shareStep: 0,
+  setShareStep: (step: number) => set({ shareStep: step }),
+}))
+
+export const useQnAStepStore = create<ShareQnAState>(set => ({
+  qnaStep: 0,
+  setQnAStep: (step: number) => set({ qnaStep: step }),
 }))
