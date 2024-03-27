@@ -6,6 +6,7 @@ import com.ssaida.backend.common.prompt.records.request.*;
 import com.ssaida.backend.common.prompt.records.response.GeminiResponse;
 import com.ssaida.backend.common.traslator.LanguageTranslator;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class PromptGeneratorImpl implements PromptGenerator {
 
     @Value("${gemini.api-key}")
@@ -55,7 +57,7 @@ public class PromptGeneratorImpl implements PromptGenerator {
         return "a photo of sks, person, " + translatedContent + ", best quality, 4k, uhd";
     }
 
-    private GeminiResponse getPrompt(String inputText) {
+    public GeminiResponse getPrompt(String inputText) {
         GeminiRequest request = buildRequest(inputText, TEMPERATURE);
 
         WebClient webClient = WebClient.create("https://generativelanguage.googleapis.com");
