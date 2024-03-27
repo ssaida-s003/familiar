@@ -1,14 +1,5 @@
 import { create } from 'zustand'
-
-interface ShareStepState {
-  shareStep: number
-  setShareStep: (step: number) => void
-}
-
-interface ShareQnAState {
-  qnaStep: number
-  setQnAStep: (step: number) => void
-}
+import { ShareQnAState, ShareStepState } from '@/types/familyShare'
 
 export const useShareStepStore = create<ShareStepState>(set => ({
   shareStep: 0,

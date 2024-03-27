@@ -4,6 +4,9 @@ import useSpeechToText from '@hooks/useSpeechToText'
 import AudioVisualizer from '@components/FamilyShare/AudioVisualizer'
 import { useQnAStepStore, useShareStepStore } from '@stores/familyShare'
 import { StepProps } from '@/types/familyShare'
+import { useMutation } from 'react-query'
+import { familyTodayConvert } from '@apis/familyShare'
+import ConvertRecord from '@components/FamilyShare/ConvertRecord'
 
 const Recording: React.FC<StepProps> = ({ recordType }) => {
   const [result, startListening, stopListening] = useSpeechToText()
@@ -43,9 +46,18 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
     setIsEditing(false)
   }
 
+  const { mutate, isLoading } = useMutation(familyTodayConvert, {
+    onSuccess: () => {
+      setShareStep(shareStep + 1)
+    },
+  })
+
   const handleSubmit = () => {
     if (recordType == 0) {
-      setShareStep(shareStep + 1)
+      mutate({ memberId: 1, content: inputText })
+      if (isLoading) {
+        return <ConvertRecord />
+      }
     }
     if (recordType == 1) {
       setQnAStep(qnaStep + 1)
