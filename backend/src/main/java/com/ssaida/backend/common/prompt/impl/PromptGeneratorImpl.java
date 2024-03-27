@@ -24,7 +24,7 @@ public class PromptGeneratorImpl implements PromptGenerator {
     }
 
     @Override
-    public String generateConvertHaruPrompt(String content) {
+    public String generateConvertHaruPrompt(Integer memberId, String content) {
         String translatedContent = languageTranslator.translateToEnglish(content);
         return "a photo of sks, person, " + translatedContent + ", best quality, 4k, uhd";
     }

@@ -15,7 +15,7 @@ public class ConvertHaruServiceImpl implements ConvertHaruService {
     @Override
     public byte[] convertHaru(ConvertRecordRequest convertRecordRequest) {
 
-        String prompt = promptGenerator.generateConvertHaruPrompt(convertRecordRequest.getContent());
+        String prompt = promptGenerator.generateConvertHaruPrompt(convertRecordRequest.getMemberId(), convertRecordRequest.getContent());
 
         return stableDiffusionApiClient.convertHaru(convertRecordRequest.getMemberId(), prompt);
     }
