@@ -3,3 +3,7 @@ export interface PostTodayReqType {
   content: string
   url: string
 }
+
+export interface StepProps {
+  recordType: number
+}

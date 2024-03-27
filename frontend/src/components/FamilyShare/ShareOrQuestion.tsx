@@ -3,9 +3,10 @@ import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
 
 interface ShareOrQuestionProps {
   setIsTodayShareRecord: (isRecord: boolean) => void
+  setIsQnARecord: (isRecord: boolean) => void
 }
 
-const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord }) => {
+const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord, setIsQnARecord }) => {
   const [shareOrQuestion] = useState(0)
 
   //   api 통신 결과
@@ -13,6 +14,10 @@ const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord
 
   const handleRecordToday = () => {
     setIsTodayShareRecord(true)
+  }
+
+  const handleRecordQnA = () => {
+    setIsQnARecord(true)
   }
 
   return (
@@ -40,7 +45,7 @@ const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord
                 궁금한 것을 <br />
                 질문해보세요!
               </s.SubTitle>
-              <s.GoNexStepBtn>음성 질문 남기기</s.GoNexStepBtn>
+              <s.GoNexStepBtn onClick={handleRecordQnA}>음성 질문 남기기</s.GoNexStepBtn>
             </s.BottomContainer>
           </s.QuestionContainerSmall>
         </s.ShareOrQuestionContainer>
