@@ -22,3 +22,12 @@ export interface ShareQnAState {
   qnaStep: number
   setQnAStep: (step: number) => void
 }
+
+export interface ConvertTodayState {
+  memberId: number
+  content: string
+  image: string
+  setMemberId: (memberId: number) => void
+  setContent: (content: string) => void
+  setImage: (image: string) => void
+}
