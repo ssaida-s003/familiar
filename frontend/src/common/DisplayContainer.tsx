@@ -15,6 +15,7 @@ const Container = styled.div`
     rgba(65, 142, 176, 0.7) 81.67%,
     rgba(65, 142, 176, 0.4) 100%
   );
+  overflow: scroll;
 `
 
 interface DisplayContainerProps {
