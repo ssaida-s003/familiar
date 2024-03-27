@@ -23,8 +23,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                         "https://ssaida-front.duckdns.org", "https://ssaida-back.duckdns.org")
                 .allowedOriginPatterns("http://localhost:3000/**", "http://localhost:5173/**", "http://localhost:8081/**",
                         "http://localhost:8090/**", "https://ssaida-front.duckdns.org/**", "https://ssaida-back.duckdns.org/**")
-                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
-                .allowedHeaders("Authorization", "Content-Type")
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
                 .exposedHeaders("Custom-Header")
                 .allowCredentials(false)
                 .maxAge(3600L);
