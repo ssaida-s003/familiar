@@ -1,4 +1,4 @@
-import * as c from '@components/FamilyShare/style/ConvertRecordStyle.tsx'
+import * as c from '@components/FamilyShare/style/ConvertRecordStyle'
 
 const ConvertRecord = () => {
   return (
