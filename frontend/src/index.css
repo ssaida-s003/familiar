@@ -33,7 +33,7 @@ html, body {
 body {
     margin: 0;
     height: 100vh;
-    background-image: url('public/img/img_main_background.png');
+    background-image: url('/img/img_main_background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
