@@ -6,7 +6,7 @@ class Config(SQLModel, table=True):
     id: int = Field(primary_key=True, index=True)
     model_path: str = Field(max_length=1000)
     scheduler: str = Field(max_length=50, default="euler")
-    cfg: int = Field(default=7)
+    cfg: float = Field(default=7)
     inference_step: int = Field(default=20)
     xformer: bool = Field(default=True)
     offload: bool = Field(default=True)
@@ -14,3 +14,4 @@ class Config(SQLModel, table=True):
     fast_inference: bool = Field(default=True)
     use_seed: bool = Field(default=False)
     seed: int = Field(default=0)
+    base_model: str = Field(default="RV2_0")

@@ -7,7 +7,7 @@ from sqlmodel import (
 )
 
 from .Configs import Config
-from .MyModel import MyModel
+from .Models import Models
 
 
 class Database(object):
@@ -24,14 +24,14 @@ class Database(object):
             f"mysql://{db_user}:{db_pass}@{db_host}/{db_name}"
         )
 
-        self.session = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
+        self.Session = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
         SQLModel.metadata.create_all(self.engine)
 
     #DB에서 알맞는 모델 불러오기 로직
-    def get_model_path(self, memberId : int) -> MyModel:
+    def get_model_info(self, memberId : int) -> Models:
         with self.Session() as s:
-            statement = select(MyModel).where(MyModel.member_id == memberId)
-            result: MyModel = s.exec(statement).first()
+            statement = select(Models).where(Models.member_id == memberId)
+            result: Models = s.execute(statement).one()[0]
             return result
 
 
@@ -39,6 +39,6 @@ class Database(object):
     def get_configs(self, model_path : str) -> Config :
         with self.Session() as s:
             statement = select(Config).where(Config.model_path == model_path)
-            result : Config = s.exec(statement).first()
+            result : Config = s.execute(statement).one()[0]
             return result
 

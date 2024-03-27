@@ -1,2 +1,2 @@
 
-__all__ = ['database','MyModel']
+__all__ = ['database', 'Models']
