@@ -1,5 +1,9 @@
 import { publicRequest } from '@hooks/requestMethods'
-import { PostTodayReqType } from '@/types/familyShare'
+import { FamilyTodayConvertReqType, PostTodayReqType } from '@/types/familyShare'
+
+export const familyTodayConvert = async (data: FamilyTodayConvertReqType): Promise<string> => {
+  return publicRequest.patch(`/haru/convert`, data).then(res => res.data)
+}
 
 export const postToday = async (data: PostTodayReqType): Promise<string> => {
   return publicRequest.post(`/haru/records`, data).then(res => res.data)
