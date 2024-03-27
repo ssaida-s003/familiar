@@ -33,10 +33,11 @@ export const ShareContainerSmall = styled.div`
   width: 46%;
   background-image: url('/icon/icon_today_share_small.png');
   background-size: cover;
-  background-position: center;
+  background-position: right;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 1rem;
 `
 
 export const QuestionContainerSmall = styled.div`
@@ -46,10 +47,11 @@ export const QuestionContainerSmall = styled.div`
   height: 100%;
   background-image: url('/icon/icon_question_small.png');
   background-size: cover;
-  background-position: center;
+  background-position: right;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 1rem;
 `
 
 export const TopContainer = styled.div``
