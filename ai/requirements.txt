@@ -3,7 +3,6 @@ uvicorn
 transformers
 scipy
 accelerate
-git+https://github.com/huggingface/diffusers
 sql
 mysql
 sqlmodel
