@@ -1,12 +1,9 @@
 import React from 'react'
 import * as b from '@components/FamilyShare/style/BeforeRecordStyle'
 import { useQnAStepStore, useShareStepStore } from '@stores/familyShare'
+import { StepProps } from '@/types/familyShare'
 
-interface BeforeRecordProps {
-  recordType: number
-}
-
-const BeforeRecord: React.FC<BeforeRecordProps> = ({ recordType }) => {
+const BeforeRecord: React.FC<StepProps> = ({ recordType }) => {
   const { shareStep, setShareStep } = useShareStepStore()
   const { qnaStep, setQnAStep } = useQnAStepStore()
 
