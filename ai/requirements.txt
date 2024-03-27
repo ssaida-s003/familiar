@@ -1,8 +1,10 @@
 fastapi
 uvicorn
+transformers
+scipy
 accelerate
-xformers
+git+https://github.com/huggingface/diffusers
 sql
 mysql
 sqlmodel
-python-multipart
+clip-interrogator==0.5.4
