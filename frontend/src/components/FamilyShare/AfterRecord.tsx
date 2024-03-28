@@ -1,4 +1,4 @@
-import * as a from '@components/FamilyShare/style/AfterRecordStyle.tsx'
+import * as a from '@components/FamilyShare/style/AfterRecordStyle'
 import ImageCanvas from '@components/FamilyShare/ImageCanvas'
 import { useMutation } from 'react-query'
 import { familyTodayConvert, postToday } from '@apis/familyShare'
@@ -32,7 +32,7 @@ const AfterRecord = () => {
   }
 
   const handlePost = () => {
-    postTodayMutation.mutate({ memberId: 3, content: '오늘은 친구랑 서울 숲에 다녀왔어', url: 'asdfasdfsadf' })
+    postTodayMutation.mutate({ memberId: 3, content: content, url: image })
   }
 
   return (
