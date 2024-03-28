@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 
 public class QuestionDto {
     @Getter
+    @NoArgsConstructor
     public static class Response {
         private Long questionId;
         private int memberId;
