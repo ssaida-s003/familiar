@@ -37,3 +37,8 @@ export interface TodayShareResponse {
   todayShareResponse: FamilyShareRecordResType[]
   setTodayShareResponse: (todayShareResponse: FamilyShareRecordResType[]) => void
 }
+
+export interface QnAResponse {
+  qnAResponse: QnARecordResType
+  setQnAResponse: (qnAResponse: QnARecordResType) => void
+}
