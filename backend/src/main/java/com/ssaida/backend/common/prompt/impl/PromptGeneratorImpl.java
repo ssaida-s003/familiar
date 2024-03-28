@@ -1,10 +1,15 @@
 package com.ssaida.backend.common.prompt.impl;
 
+import com.ssaida.backend.common.ErrorCode;
+import com.ssaida.backend.common.NotFoundException;
 import com.ssaida.backend.common.prompt.PromptGenerator;
+import com.ssaida.backend.common.prompt.PromptValues;
 import com.ssaida.backend.common.prompt.records.Part;
 import com.ssaida.backend.common.prompt.records.request.*;
 import com.ssaida.backend.common.prompt.records.response.GeminiResponse;
 import com.ssaida.backend.common.traslator.LanguageTranslator;
+import com.ssaida.backend.family.entity.Member;
+import com.ssaida.backend.family.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,21 +31,13 @@ public class PromptGeneratorImpl implements PromptGenerator {
 
     private final LanguageTranslator languageTranslator;
 
-    private final String MAINPROMPT = "입력하는 일기 문단에 해당하는 내용으로 Stable Diffusion 이미지를 생성할 수 있게 영어로 Prompt를 생성해 줘.\n" +
-            "Prompt는 영어로, 내용을 키워드 별로 끊어서 쉼표로 연결해서 만들어 줘.\n" +
-            "최대한 구체적이게 단어들을 끊어 주고, 세부적으로 묘사해야 해.\n" +
-            "다른 문자열 없이, prompt만 제공해 줘.";
+    private final MemberRepository memberRepository;
 
-    private final Double TEMPERATURE = 0.2;
-
-    private final Integer examplesCount = 0;
-
-    private final List<String> inputExamples = List.of(
-
-    );
-    private final List<String> outputExamples = List.of(
-
-    );
+    private String MAIN_PROMPT = PromptValues.MAIN_PROMPT;
+    private final Double TEMPERATURE = PromptValues.TEMPERATURE;
+    private final Integer examplesCount = PromptValues.examplesCount;
+    private final List<String> inputExamples = PromptValues.inputExamples;
+    private final List<String> outputExamples = PromptValues.outputExamples;
 
 
     @Override
@@ -53,8 +50,21 @@ public class PromptGeneratorImpl implements PromptGenerator {
 
     @Override
     public String generateConvertHaruPrompt(Integer memberId, String content) {
-        String translatedContent = languageTranslator.translateToEnglish(content);
-        return "a photo of sks, person, " + translatedContent + ", best quality, 4k, uhd";
+        String generatedPrompt = getPrompt(content)
+                .candidates().get(0)
+                .content()
+                .parts().get(0)
+                .text();
+
+        Member member = memberRepository.getMemberById(memberId).orElseThrow(RuntimeException::new);
+
+        StringBuilder haruPromptBuilder = new StringBuilder();
+        haruPromptBuilder.append("a photo of ")
+                .append(member.getUniqueToken()).append(" ").append(member.getClassToken()).append(", ")
+                .append(generatedPrompt).append(", ")
+                .append(PromptValues.POST_PROMPT);
+
+        return haruPromptBuilder.toString();
     }
 
     public GeminiResponse getPrompt(String inputText) {
@@ -83,7 +93,7 @@ public class PromptGeneratorImpl implements PromptGenerator {
                 new SafetySetting("HARM_CATEGORY_DANGEROUS_CONTENT", "BLOCK_MEDIUM_AND_ABOVE"));
 
         List<Part> partList = new ArrayList<>();
-        partList.add(new Part(MAINPROMPT));
+        partList.add(new Part(MAIN_PROMPT));
         for (int i = 0; i < examplesCount; i++) {
             partList.add(new Part("input: " + inputExamples.get(i)));
             partList.add(new Part("output: " + outputExamples.get(i)));

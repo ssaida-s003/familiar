@@ -1,7 +1,6 @@
 package com.ssaida.backend.config;
 
 import com.ssaida.backend.common.ai.StableDiffusionApiClient;
-import com.ssaida.backend.common.prompt.GeminiApiClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
@@ -15,11 +14,6 @@ public class HttpInterfaceConfig {
 	@Bean
 	public StableDiffusionApiClient stableDiffusionApiClient() {
 		return createHttpInterfaceByRestClient(StableDiffusionApiClient.class);
-	}
-
-	@Bean
-	public GeminiApiClient stableGeminiApiClient() {
-		return createHttpInterfaceByRestClient(GeminiApiClient.class);
 	}
 
 	private <T> T createHttpInterfaceByRestClient(Class<T> clazz) {
