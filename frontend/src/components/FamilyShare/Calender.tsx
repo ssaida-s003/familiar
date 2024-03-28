@@ -10,11 +10,11 @@ const Calender = () => {
   const [today, setToday] = useState<Value>(new Date())
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date())
   const { setDate } = useTodayDateStore()
-  const handleDateChange = (newDate: Value) => {
-    setToday(newDate)
-    if (newDate && 'toISOString' in newDate) {
-      const formattedValue = newDate.toISOString().split('T')[0]
-      setDate(formattedValue)
+
+  const handleDateChange = (value: Value) => {
+    if (value instanceof Date) {
+      setToday(value)
+      setDate(dayjs(value).format('YYYY-MM-DD'))
     }
   }
 
