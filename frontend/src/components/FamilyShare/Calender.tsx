@@ -1,27 +1,35 @@
-import * as c from '@components/FamilyShare/style/CalenderStyle.tsx'
-import { useState } from 'react'
+import * as c from '@components/FamilyShare/style/CalenderStyle'
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
+import { useTodayDateStore } from '@stores/familyShare'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
 const Calender = () => {
-  const today = new Date()
-  const [date, setDate] = useState<Value>(today)
+  const [today, setToday] = useState<Value>(new Date())
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date())
+  const { setDate } = useTodayDateStore()
 
-  const handleDateChange = (newDate: Value) => {
-    setDate(newDate)
+  useEffect(() => {
+    setDate(dayjs(new Date()).format('YYYY-MM-DD'))
+  }, [])
+
+  const handleDateChange = (value: Value) => {
+    if (value instanceof Date) {
+      setToday(value)
+      setDate(dayjs(value).format('YYYY-MM-DD'))
+    }
   }
 
   return (
     <c.CalendarWrapper>
       <c.StyledCalendar
-        value={date}
+        value={today}
         onChange={handleDateChange}
-        formatDay={date => dayjs(date).format('D')}
-        formatYear={date => dayjs(date).format('YYYY')}
-        formatMonthYear={date => dayjs(date).format('YYYY. MM')}
+        formatDay={(_locale, date) => dayjs(date).format('DD')}
+        formatYear={(_locale, date) => dayjs(date).format('YYYY')}
+        formatMonthYear={(_locale, date) => dayjs(date).format('YYYY. MM')}
         calendarType="gregory"
         showNeighboringMonth={false}
         minDetail="year"

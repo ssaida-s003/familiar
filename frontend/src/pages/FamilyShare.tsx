@@ -7,6 +7,7 @@ import Calender from '@components/FamilyShare/Calender'
 import AIImgAnswer from '@components/FamilyShare/AIImgAnswer'
 import RecordTodayShare from '@components/FamilyShare/RecordTodayShare'
 import RecordQnA from '@components/FamilyShare/RecordQnA'
+import { useTodayDateStore } from '@stores/familyShare'
 
 const Container = styled.div`
   width: 100%;
@@ -17,6 +18,7 @@ const Container = styled.div`
 const FamilyShare = () => {
   const [isTodayShareRecord, setIsTodayShareRecord] = useState(false)
   const [isQnARecord, setIsQnARecord] = useState(false)
+  const { date } = useTodayDateStore()
 
   return (
     <DisplayContainer>
@@ -25,6 +27,7 @@ const FamilyShare = () => {
         <Container>
           {isTodayShareRecord ? <RecordTodayShare /> : isQnARecord ? <RecordQnA /> : <ShareOrQuestion setIsTodayShareRecord={setIsTodayShareRecord} setIsQnARecord={setIsQnARecord} />}
           <AIImgAnswer />
+          <div>{date}</div>
           <Calender />
         </Container>
       </>
