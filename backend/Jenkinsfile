@@ -2,7 +2,7 @@ pipeline {
   agent any
     environment {
       AWS_PUBLIC_IP = '43.201.249.248'
-      SSH_CMD = 'ssh -i /root/.ssh/id_rsa ubuntu@j10s003.p.ssafy.io'
+      SSH_CMD = 'ssh -i /root/.ssh/id_rsa ubuntu@j10s003.p.ssafy.io -o StrictHostKeyChecking=no'
       DOCKER = 'sudo docker'
       repository = "sejinnnnnn/s003_backend"  //docker hub id와 repository 이름
       repo_name = "s003_backend"
