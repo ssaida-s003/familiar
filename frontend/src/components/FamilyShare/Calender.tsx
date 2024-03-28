@@ -1,5 +1,5 @@
 import * as c from '@components/FamilyShare/style/CalenderStyle.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { useTodayDateStore } from '@stores/familyShare'
 
@@ -10,6 +10,10 @@ const Calender = () => {
   const [today, setToday] = useState<Value>(new Date())
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date())
   const { setDate } = useTodayDateStore()
+
+  useEffect(() => {
+    setDate(dayjs(new Date()).format('YYYY-MM-DD'))
+  }, [])
 
   const handleDateChange = (value: Value) => {
     if (value instanceof Date) {
