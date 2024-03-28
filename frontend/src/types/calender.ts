@@ -1,3 +1,7 @@
+export interface DateReqType {
+  data: string
+}
+
 export interface FamilyShareRecordResType {
   recordId: number
   memberId: number
