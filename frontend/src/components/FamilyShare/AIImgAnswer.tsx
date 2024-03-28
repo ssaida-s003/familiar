@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import NoAnswerAlarm from '@components/FamilyShare/NoAnswerAlarm'
 import { useQnAResponse, useResponseCategory, useTodayShareResponse } from '@stores/calender'
-import CustomCarousel from '@components/CustomCarousel.tsx'
+import CustomCarousel from '@components/FamilyShare/CustomCarousel'
 
 type Slide = {
   key: string | number
