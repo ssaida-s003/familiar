@@ -13,6 +13,7 @@ import com.ssaida.backend.haru.dto.CreateRecordRequest;
 import com.ssaida.backend.haru.entity.DailyRecord;
 import com.ssaida.backend.haru.repository.RecordRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RecordServiceImpl implements RecordService {
 
     private final RecordRepository recordRepository;
@@ -35,12 +37,13 @@ public class RecordServiceImpl implements RecordService {
                 .orElseThrow(() -> new NotFoundException(ErrorCode.MemberNotFoundException));
 
         MockMultipartFile image =
-                new MockMultipartFile("record", "record",
-                        MediaType.IMAGE_PNG_VALUE,
+                new MockMultipartFile("record", "record.jpg",
+                        MediaType.IMAGE_JPEG_VALUE,
                         org.apache.commons.codec.binary.Base64.decodeBase64(createRecordRequest.getImage()));
+//        log.info(image.getName()+" "+image.getSize());
         try {
             String imageUrl = bucketClient.uploadImage(image);
-
+            log.info(imageUrl);
             DailyRecord dailyRecord = DailyRecord.builder()
                     .content(createRecordRequest.getContent())
                     .member(member)

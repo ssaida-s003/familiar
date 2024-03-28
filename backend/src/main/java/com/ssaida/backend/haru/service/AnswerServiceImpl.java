@@ -45,8 +45,8 @@ public class AnswerServiceImpl implements AnswerService {
 
 
         MockMultipartFile image =
-                new MockMultipartFile("answer", "answer",
-                        MediaType.IMAGE_PNG_VALUE,
+                new MockMultipartFile("answer", "answer.jpg",
+                        MediaType.IMAGE_JPEG_VALUE,
                         org.apache.commons.codec.binary.Base64.decodeBase64(createAnswerRequest.getImage()));
         try {
             String imageUrl = bucketClient.uploadImage(image);
