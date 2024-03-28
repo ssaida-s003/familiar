@@ -33,9 +33,20 @@ public class ConvertHaruController {
 
 
     @GetMapping("/test")
+    @Operation(summary = "Gemini 프롬프트 생성 테스트")
     public ResponseEntity<GeminiResponse> testPrompt(@RequestParam String inputText) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(promptGenerator.getPrompt(inputText));
     }
+    
+    @GetMapping("/final-prompt")
+    @Operation(summary = "DreamBooth 키워드 + 생성 프롬프트 + Post 프롬프트 테스트")
+    public ResponseEntity<String> testFullPrompt(@RequestParam Integer memberId, @RequestParam String inputText) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(promptGenerator.generateConvertHaruPrompt(memberId, inputText));
+    }
+    
+    
 }
