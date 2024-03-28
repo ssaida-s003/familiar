@@ -3,7 +3,7 @@ import ImageCanvas from '@components/FamilyShare/ImageCanvas'
 import { useMutation } from 'react-query'
 import { familyTodayConvert, postToday } from '@apis/familyShare'
 import { useConvertTodayStore, useShareStepStore } from '@stores/familyShare'
-import ConvertRecord from '@components/FamilyShare/ConvertRecord.tsx'
+import ConvertRecord from '@components/FamilyShare/ConvertRecord'
 import { useNavigate } from 'react-router-dom'
 
 const AfterRecord = () => {

@@ -31,3 +31,8 @@ export interface ConvertTodayState {
   setContent: (content: string) => void
   setImage: (image: string) => void
 }
+
+export interface TodayDateSTate {
+  date: string
+  setDate: (date: string) => void
+}

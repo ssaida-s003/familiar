@@ -4,6 +4,7 @@ import 'react-calendar/dist/Calendar.css'
 
 export const CalendarWrapper = styled.div`
     width: 90%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,10 +13,11 @@ export const CalendarWrapper = styled.div`
     .react-calendar {
         width: 100%;
         height: 100%;
-        border: none;
-        border-radius: 5px;
-        padding: 5px;
-        background-color: white;
+        border-radius: 1rem;
+        padding: 0.5rem;
+        filter: drop-shadow(0px 20px 40px rgba(0, 0, 0, 0.10));
+        background: linear-gradient(144deg, #FFF -13.94%, rgba(255, 255, 255, 0.00) 112.31%);
+        border: 0.05rem solid white;
     }
 
     .react-calendar__month-view {
@@ -24,23 +26,20 @@ export const CalendarWrapper = styled.div`
         }
     }
 
-    /* 네비게이션 가운데 정렬 */
-
     .react-calendar__navigation {
         justify-content: center;
         height: 5%;
     }
 
-    /* 네비게이션 폰트 설정 */
-
     .react-calendar__navigation button {
-        font-size: 6px;
+        font-size: 1rem;
     }
 
     /* 네비게이션 버튼 컬러 */
 
     .react-calendar__navigation button:focus {
         background-color: white;
+
     }
 
     /* 네비게이션 비활성화 됐을때 스타일 */
