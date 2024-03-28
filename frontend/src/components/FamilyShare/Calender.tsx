@@ -6,8 +6,7 @@ type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
 const Calender = () => {
-  const today = new Date()
-  const [date, setDate] = useState<Value>(today)
+  const [today, setToday] = useState<Value>(new Date())
   const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date())
 
   const handleDateChange = (newDate: Value) => {
@@ -17,7 +16,7 @@ const Calender = () => {
   return (
     <c.CalendarWrapper>
       <c.StyledCalendar
-        value={date}
+        value={today}
         onChange={handleDateChange}
         formatDay={(_locale, date) => dayjs(date).format('DD')}
         formatYear={(_locale, date) => dayjs(date).format('YYYY')}
