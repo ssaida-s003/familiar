@@ -22,3 +22,8 @@ export interface QnARecordResType {
   content: string
   answers: Answer[]
 }
+
+export interface TodayDateState {
+  date: string
+  setDate: (date: string) => void
+}
