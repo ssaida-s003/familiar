@@ -30,6 +30,7 @@ export const ReConvertBtn = styled.div`
   font-size: 0.8rem;
   padding: 0.5rem 1rem;
   text-align: center;
+  cursor: pointer;
 
   :focus {
     border: none;
@@ -45,4 +46,5 @@ export const GoNextStepBtn = styled.div`
   font-size: 0.8rem;
   padding: 0.5rem 1rem;
   text-align: center;
+  cursor: pointer;
 `
