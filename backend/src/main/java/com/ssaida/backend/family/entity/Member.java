@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
     @Id
@@ -21,4 +20,11 @@ public class Member extends BaseEntity {
     @JoinColumn
     private Family family;
     private String name;
+
+    @Column(name = "unique_token")
+    private String uniqueToken;
+
+    @Column(name = "class_token")
+    private String classToken;
+
 }
