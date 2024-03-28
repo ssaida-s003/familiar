@@ -2,7 +2,7 @@
 import os
 
 import torch
-from diffusers import StableDiffusionXLPipeline, AutoencoderKL
+from diffusers import StableDiffusionXLPipeline, AutoencoderKL, DiffusionPipeline
 from huggingface_hub import login, snapshot_download
 
 from database.Configs import Config
@@ -38,7 +38,7 @@ class XLBase(BaseModel):
         # 파이프라인 생성
         vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
 
-        self.pipe = StableDiffusionXLPipeline.from_pretrained(
+        self.pipe = DiffusionPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0",
             torch_dtype=torch.float16,
             variant='fp16',
@@ -53,7 +53,7 @@ class XLBase(BaseModel):
     # 사람 로라 붙이는 로직
     def attach_person_lora(self):
         local_path = self.model_info.model_path[:-(len(self.model_info.lora_filename)+1)]
-        self.pipe.load_lora_weights(local_path, weights_name=self.model_info.lora_filename, adapter_name="person")
+        self.pipe.load_lora_weights(local_path, weight_name=self.model_info.lora_filename+".safetensors", adapter_name="person")
 
     # LCM과 합하는 로직
     def fuse_lora_weights(self):

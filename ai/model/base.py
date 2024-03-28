@@ -1,6 +1,7 @@
 import os
 
 import torch
+from torch import autocast
 from diffusers import (StableDiffusionPipeline, LCMScheduler)
 from huggingface_hub import login, snapshot_download
 
@@ -43,7 +44,13 @@ class BaseModel(object):
             if self.config.model_version == 'sd1.5':
                 self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdv1-5", adapter_name='fast')
             elif self.config.model_version == 'sdxl':
-                self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdxl", adapter_name='fast')
+                # LCM-LoRA 적용
+                # self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdxl", adapter_name='fast')
+                # SDXL Lightening LoRA 적용
+                self.pipe.load_lora_weights("ByteDance/SDXL-Lightning", weight_name="sdxl_lightning_8step_lora.safetensors", adapter_name='fast')
+                self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
+                self.config.cfg = 1.0
+                self.config.inference_step = 8
 
             # # LCM 젹용 시 추천 기본 설정
             # self.config.inference_step = 5
@@ -79,15 +86,15 @@ class BaseModel(object):
 
     # 추론 실행
     def inference(self, input: InferenceParameter):
-        seed = int.from_bytes(os.urandom(4), byteorder="big") % 1000000
-        # Generator 생성
-        self.generator = torch.manual_seed(seed)
-
         # 만약 시드를 사용한다면
         if self.config.use_seed:
             self.generator = torch.Generator(device=self.device).manual_seed(self.config.seed)
+        else:
+            seed = int.from_bytes(os.urandom(4), byteorder="big") % 1000000
+            # Generator 생성
+            self.generator = torch.manual_seed(seed)
 
-        with torch.inference_mode():
+        with autocast("cuda"), torch.inference_mode():
             sample = self.pipe(prompt=input.prompt,
                                negative_prompt=input.negative_prompt,
                                guidance_scale=self.config.cfg,
