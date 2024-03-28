@@ -1,5 +1,5 @@
 export interface DateReqType {
-  data: string
+  date: string
 }
 
 export interface FamilyShareRecordResType {
