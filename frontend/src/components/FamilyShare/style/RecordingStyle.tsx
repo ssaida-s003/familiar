@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 
+export const Container = styled.div`
+  width: 100%;
+  height: 32vh;
+`
+
 export const TopContainer = styled.div`
+  width: 100%;
   height: 45%;
   display: flex;
 `
@@ -37,7 +43,7 @@ export const ButtonContainer = styled.div`
   margin: 0 auto 2.5% auto;
   display: flex;
   justify-content: space-between;
-  height: 25%;
+  height: 30%;
 `
 
 export const ReRecordBtn = styled.button`
@@ -60,7 +66,7 @@ export const CompleteRecordBtn = styled.button`
   font-weight: 700;
   border-radius: 0.5rem;
   border: 0.1rem solid #93b2d4;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   padding: 0.5rem 1.5rem;
 `
 

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const VisualizerContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
   width: 100%;
   gap: 4px;
