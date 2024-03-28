@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { FamilyShareRecordResType, ResponseCategory, TodayDateState, TodayShareResponse } from '@/types/calender'
+import { FamilyShareRecordResType, QnARecordResType, QnAResponse, ResponseCategory, TodayDateState, TodayShareResponse } from '@/types/calender'
 
 export const useTodayDateStore = create<TodayDateState>(set => ({
   date: '',
@@ -14,4 +14,14 @@ export const useResponseCategory = create<ResponseCategory>(set => ({
 export const useTodayShareResponse = create<TodayShareResponse>(set => ({
   todayShareResponse: [],
   setTodayShareResponse: (todayShareResponse: FamilyShareRecordResType[]) => set({ todayShareResponse: todayShareResponse }),
+}))
+
+export const useQnAResponse = create<QnAResponse>(set => ({
+  qnAResponse: {
+    questionId: -1,
+    memberId: -1,
+    content: '',
+    answers: [],
+  },
+  setQnAResponse: (qnAResponse: QnARecordResType) => set({ qnAResponse: qnAResponse }),
 }))
