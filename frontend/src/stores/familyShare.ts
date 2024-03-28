@@ -21,6 +21,6 @@ export const useConvertTodayStore = create<ConvertTodayState>(set => ({
 }))
 
 export const useTodayDateStore = create<TodayDateSTate>(set => ({
-  date: '2024-03-01',
+  date: '',
   setDate: (date: string) => set({ date: date }),
 }))
