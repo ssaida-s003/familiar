@@ -18,7 +18,7 @@ from model.RV2_0 import RV2_0
 from PIL import Image
 import argparse, sys
 from fastapi.responses import StreamingResponse
-import io
+import io, base64
 
 app = FastAPI()
 
@@ -53,7 +53,7 @@ async def read_root():
     return {"message": "Hello, World"}
 
 #가족 이미지 생성 API
-@app.post("/diarys")
+@app.post("/diaries")
 async def make_diary_image(requestDto : DiaryRequestDto):
     try:
         model_info : Models = db.get_model_info(requestDto.memberId) # 맴버에 맞는 모델 불러오기
@@ -74,7 +74,7 @@ async def make_diary_image(requestDto : DiaryRequestDto):
     result.save(img_byte_array, format="JPEG")
     img_byte_array.seek(0)
 
-    return StreamingResponse(img_byte_array, media_type="image/jpeg")
+    return { "image" : base64.b64encode(img_byte_array.read()) }
 
 # 스케치로 그림 생성 API
 @app.post("drawing/style-transfer")
