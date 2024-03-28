@@ -7,14 +7,15 @@ const Container = styled.div`
   min-height: 795px;
   padding-top: 50px;
   background: linear-gradient(
-    163deg,
-    rgba(65, 142, 176, 0.3) 0%,
-    rgba(65, 142, 176, 0.7) 20.17%,
-    rgba(65, 142, 176, 0.6) 40.67%,
-    rgba(65, 142, 176, 0.4) 60.17%,
-    rgba(65, 142, 176, 0.7) 81.67%,
-    rgba(65, 142, 176, 0.4) 100%
-  );
+      163deg,
+      rgba(65, 142, 176, 0.3) 0%,
+      rgba(65, 142, 176, 0.7) 20.17%,
+      rgba(65, 142, 176, 0.6) 40.67%,
+      rgba(65, 142, 176, 0.4) 60.17%,
+      rgba(65, 142, 176, 0.7) 81.67%,
+      rgba(65, 142, 176, 0.4) 100%
+    ),
+    white;
   overflow: scroll;
 `
 
