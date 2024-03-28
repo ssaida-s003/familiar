@@ -58,7 +58,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
 
   const handleSubmit = () => {
     if (recordType == 0) {
-      mutate({ memberId: 1, content: inputText })
+      mutate({ memberId: 3, content: inputText })
       if (isLoading) {
         return <ConvertRecord />
       }

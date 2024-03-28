@@ -38,7 +38,7 @@ const AfterRecord = () => {
   return (
     <>
       <a.ImgContainer>
-        <ImageCanvas imageUrl={'/img/img_wallpapers1.png'} content={'오늘은 친구랑 서울 숲에 다녀왔어'} />
+        <ImageCanvas imageUrl={image} content={content} />
         <a.InfoText>텍스트의 위치를 바꿀 수 있어요!</a.InfoText>
       </a.ImgContainer>
       <a.ButtonContainer>
