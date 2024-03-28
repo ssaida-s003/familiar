@@ -57,12 +57,12 @@ public class DrawingServiceImpl implements DrawingService {
 
 		MockMultipartFile original =
 			new MockMultipartFile("original", "original",
-				MediaType.IMAGE_PNG_VALUE,
+				MediaType.IMAGE_JPEG_VALUE,
 				org.apache.commons.codec.binary.Base64.decodeBase64(request.originalImage()));
 
 		MockMultipartFile generated =
 			new MockMultipartFile("generated", "generated",
-				MediaType.IMAGE_PNG_VALUE,
+				MediaType.IMAGE_JPEG_VALUE,
 				org.apache.commons.codec.binary.Base64.decodeBase64(request.convertedImage()));
 
 		// OCI에 업로드
