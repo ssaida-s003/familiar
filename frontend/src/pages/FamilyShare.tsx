@@ -7,7 +7,7 @@ import Calender from '@components/FamilyShare/Calender'
 import AIImgAnswer from '@components/FamilyShare/AIImgAnswer'
 import RecordTodayShare from '@components/FamilyShare/RecordTodayShare'
 import RecordQnA from '@components/FamilyShare/RecordQnA'
-import { useTodayDateStore } from '@stores/familyShare'
+import { useTodayDateStore } from '@stores/calender'
 
 const Container = styled.div`
   width: 100%;

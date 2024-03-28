@@ -1,24 +1,60 @@
 import * as c from '@components/FamilyShare/style/CalenderStyle'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
-import { useTodayDateStore } from '@stores/familyShare'
+import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@stores/calender'
+import { fetchFamilyShareRecord, fetchQnARecord } from '@apis/calender'
+import { useFamilyStore } from '@stores/family'
+import { useQueries } from 'react-query'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
 const Calender = () => {
-  const [today, setToday] = useState<Value>(new Date())
-  const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date())
-  const { setDate } = useTodayDateStore()
+  const [today, setToday] = useState<Date>(new Date())
+  const { date, setDate } = useTodayDateStore()
+  const { familyId } = useFamilyStore()
+  const { setCategoryId } = useResponseCategory()
+  const { setTodayShareResponse } = useTodayShareResponse()
+  const { setQnAResponse } = useQnAResponse()
 
   useEffect(() => {
-    setDate(dayjs(new Date()).format('YYYY-MM-DD'))
+    const initialDate = dayjs().format('YYYY-MM-DD')
+    setDate(initialDate)
   }, [])
+
+  const queryResults = useQueries([
+    {
+      queryKey: ['familyShareRecord', familyId, date],
+      queryFn: () => fetchFamilyShareRecord(familyId, { date }),
+      enabled: !!date,
+    },
+    {
+      queryKey: ['qnaRecord', familyId, date],
+      queryFn: () => fetchQnARecord(familyId, { date }),
+      enabled: !!date,
+    },
+  ])
+
+  useEffect(() => {
+    const shareRecord = queryResults[0].data
+    const qnaRecord = queryResults[1].data
+
+    if (shareRecord && shareRecord.length > 0) {
+      setCategoryId(0)
+      setTodayShareResponse(shareRecord)
+    }
+
+    if (qnaRecord && qnaRecord.questionId !== null) {
+      setCategoryId(1)
+      setQnAResponse(qnaRecord)
+    }
+  }, [queryResults[0].data, queryResults[1].data])
 
   const handleDateChange = (value: Value) => {
     if (value instanceof Date) {
+      const formatDate = dayjs(value).format('YYYY-MM-DD')
       setToday(value)
-      setDate(dayjs(value).format('YYYY-MM-DD'))
+      setDate(formatDate)
     }
   }
 
@@ -33,8 +69,6 @@ const Calender = () => {
         calendarType="gregory"
         showNeighboringMonth={false}
         minDetail="year"
-        activeStartDate={activeStartDate === null ? undefined : activeStartDate}
-        onActiveStartDateChange={({ activeStartDate }) => setActiveStartDate(activeStartDate)}
       />
     </c.CalendarWrapper>
   )
