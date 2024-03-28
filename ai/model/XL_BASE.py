@@ -2,7 +2,7 @@
 import os
 
 import torch
-from diffusers import StableDiffusionXLPipeline
+from diffusers import StableDiffusionXLPipeline, AutoencoderKL
 from huggingface_hub import login, snapshot_download
 
 from database.Configs import Config
@@ -36,10 +36,13 @@ class XLBase(BaseModel):
             )
     def make_pipeline(self):
         # 파이프라인 생성
+        vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
+
         self.pipe = StableDiffusionXLPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0",
             torch_dtype=torch.float16,
             variant='fp16',
+            vae=vae,
             safety_checker=None,
             use_safetensors=True
         ).to(self.device)
