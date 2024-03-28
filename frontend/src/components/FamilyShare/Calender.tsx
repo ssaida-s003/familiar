@@ -42,11 +42,12 @@ const Calender = () => {
     if (shareRecord && shareRecord.length > 0) {
       setCategoryId(0)
       setTodayShareResponse(shareRecord)
-    }
-
-    if (qnaRecord && qnaRecord.questionId !== null) {
+      console.log(shareRecord)
+    } else if (qnaRecord && qnaRecord.questionId !== null) {
       setCategoryId(1)
       setQnAResponse(qnaRecord)
+    } else {
+      setCategoryId(-1)
     }
   }, [queryResults[0].data, queryResults[1].data])
 
