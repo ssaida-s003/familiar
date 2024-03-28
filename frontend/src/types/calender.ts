@@ -27,3 +27,8 @@ export interface TodayDateState {
   date: string
   setDate: (date: string) => void
 }
+
+export interface ResponseCategory {
+  categoryId: number
+  setCategoryId: (categoryId: number) => void
+}
