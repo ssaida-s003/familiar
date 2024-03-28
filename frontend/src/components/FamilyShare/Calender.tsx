@@ -19,9 +19,9 @@ const Calender = () => {
       <c.StyledCalendar
         value={date}
         onChange={handleDateChange}
-        formatDay={date => dayjs(date).format('D')}
-        formatYear={date => dayjs(date).format('YYYY')}
-        formatMonthYear={date => dayjs(date).format('YYYY. MM')}
+        formatDay={(_locale, date) => dayjs(date).format('DD')}
+        formatYear={(_locale, date) => dayjs(date).format('YYYY')}
+        formatMonthYear={(_locale, date) => dayjs(date).format('YYYY. MM')}
         calendarType="gregory"
         showNeighboringMonth={false}
         minDetail="year"
