@@ -69,7 +69,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
   }
 
   return (
-    <>
+    <r.Container>
       <r.TopContainer>
         <AudioVisualizer isCompleted={isCompleteRecord} />
       </r.TopContainer>
@@ -81,7 +81,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
           <r.GoNextStepBtn onClick={handleSubmit}> {recordType === 0 ? `이대로 할게요!` : `이대로 질문 할게요!`}</r.GoNextStepBtn>
         </r.ButtonContainer>
       </r.BottomContainer>
-    </>
+    </r.Container>
   )
 }
 
