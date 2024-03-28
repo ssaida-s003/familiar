@@ -34,8 +34,7 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
           canvas.width = imageRef.current.width
           canvas.height = imageRef.current.height
           ctx.drawImage(imageRef.current, 0, 0)
-          ctx.font = '20px Arial'
-          ctx.fillText(content, textPosition.x, textPosition.y)
+          drawText(ctx, content, textPosition.x, textPosition.y, canvas.width)
           setImageLoaded(true)
         }
       }
@@ -84,15 +83,18 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
   const drawText = (ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number) => {
     ctx.font = '20px Arial'
     const lineHeight = 24
+    const lineSpacing = 15
+    const padding = 10
     const lines = []
 
-    let line = ''
     const words = text.split(' ')
+    let line = ''
+
     words.forEach(word => {
       const testLine = line + word + ' '
       const metrics = ctx.measureText(testLine)
       const testWidth = metrics.width
-      if (testWidth > maxWidth) {
+      if (testWidth > maxWidth && line !== '') {
         lines.push(line)
         line = word + ' '
       } else {
@@ -101,16 +103,16 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
     })
     lines.push(line)
 
-    console.log(lines)
+    lines.forEach((line, i) => {
+      const lineY = y + i * (lineHeight + lineSpacing)
 
-    for (let i = 0; i < lines.length; i++) {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'
-      const metrics = ctx.measureText(lines[i])
-      ctx.fillRect(x - 5, y + i * lineHeight - 20, metrics.width + 10, lineHeight)
+      const metrics = ctx.measureText(line)
 
+      ctx.fillRect(x - padding, lineY - lineHeight, metrics.width + padding * 2, lineHeight + padding)
       ctx.fillStyle = 'black'
-      ctx.fillText(lines[i], x, y + i * lineHeight)
-    }
+      ctx.fillText(line, x, lineY)
+    })
   }
 
   return <CanvasStyled ref={canvasRef} />
