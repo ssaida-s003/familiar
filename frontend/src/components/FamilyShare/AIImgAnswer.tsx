@@ -27,7 +27,6 @@ const AiImgAnswer = () => {
   useEffect(() => {
     let newSlides: Slide[] = []
     console.log(todayShareResponse)
-    console.log(qnAResponse)
     if (categoryId === 0 && todayShareResponse) {
       newSlides = todayShareResponse.map((item, index) => ({
         key: index,
@@ -40,7 +39,6 @@ const AiImgAnswer = () => {
       }))
     }
     setSlides(newSlides)
-    console.log(newSlides)
   }, [categoryId, todayShareResponse, qnAResponse])
 
   return <Container>{slides.length > 0 ? <CustomCarousel cards={slides} height="300px" width="40%" margin="0 auto" offset={2} showArrows={false} /> : <NoAnswerAlarm />}</Container>
