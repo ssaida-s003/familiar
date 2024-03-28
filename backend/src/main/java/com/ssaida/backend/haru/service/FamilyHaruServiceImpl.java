@@ -17,10 +17,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,7 +59,6 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
         }
 
         //질문 조회
-        // TODO: 질문,답변 결과 받기
         List<Question> questionCount = questionRepository.findAllByFamilyIdAndMonth(familyId, yearMonth.getYear(), yearMonth.getMonthValue());
 
         log.info("월간 question 조회 : {}", questionCount);
@@ -99,8 +95,12 @@ public class FamilyHaruServiceImpl implements FamilyHaruService {
 
     @Override
     public QuestionDto.Response getQuestion(int familyId, LocalDate date) {
-        return new QuestionDto.Response(questionRepository.findByFamilyIdAndDate(familyId, date)
-                .orElseThrow(() -> new NotFoundException(ErrorCode.QuestionNotFoundException)));
+        Optional<Question> question=questionRepository.findByFamilyIdAndDate(familyId, date);
+        if(!question.isPresent())
+        {
+            return new QuestionDto.Response();
+        }
+        return new QuestionDto.Response(question.get());
     }
 
 
