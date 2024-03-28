@@ -19,23 +19,23 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const [textPosition, setTextPosition] = useState<Position>({ x: 50, y: 50 })
-  const textContent = content
+  const [imageLoaded, setImageLoaded] = useState(false)
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
+  const imageRef = useRef(new Image())
 
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
 
-    if (ctx) {
-      const image = new Image()
-      image.src = imageUrl
-      image.onload = () => {
+    if (ctx && !imageLoaded) {
+      imageRef.current.src = imageUrl
+      imageRef.current.onload = () => {
         if (canvas) {
-          canvas.width = image.width
-          canvas.height = image.height
-          ctx.drawImage(image, 0, 0)
-          ctx.font = '20px Arial'
-          ctx.fillText(textContent, textPosition.x, textPosition.y)
+          canvas.width = imageRef.current.width
+          canvas.height = imageRef.current.height
+          ctx.drawImage(imageRef.current, 0, 0)
+          drawText(ctx, content, textPosition.x, textPosition.y, canvas.width)
+          setImageLoaded(true)
         }
       }
     }
@@ -46,12 +46,13 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
       setDragOffset({ x: offsetX, y: offsetY })
       setIsDragging(true)
     }
+
     const handleMouseUp = () => setIsDragging(false)
 
     const handleMouseMove = (event: MouseEvent) => {
       if (!isDragging) return
       setTextPosition({ x: event.clientX - dragOffset.x, y: event.clientY - dragOffset.y })
-      redrawImageAndText(event.offsetX, event.offsetY)
+      redrawImageAndText()
     }
 
     if (canvas) {
@@ -67,28 +68,51 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
         canvas.removeEventListener('mousemove', handleMouseMove)
       }
     }
-  }, [isDragging, imageUrl, textPosition])
+  }, [isDragging, imageUrl, textPosition, imageLoaded])
 
-  const redrawImageAndText = (x: number, y: number) => {
+  const redrawImageAndText = () => {
     const canvas = canvasRef.current
     const ctx = canvas?.getContext('2d')
-    if (canvas && ctx) {
-      const rect = canvas.getBoundingClientRect()
-      const scaleX = canvas.width / rect.width
-      const scaleY = canvas.height / rect.height
-
-      const canvasX = (x - rect.left) * scaleX
-      const canvasY = (y - rect.top) * scaleY
-
-      const image = new Image()
-      image.src = imageUrl
-      image.onload = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
-        ctx.font = '18px Arial white'
-        ctx.fillText(textContent, canvasX - dragOffset.x, canvasY - dragOffset.y)
-      }
+    if (canvas && ctx && imageLoaded) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(imageRef.current, 0, 0, canvas.width, canvas.height)
+      drawText(ctx, content, textPosition.x, textPosition.y, canvas.width)
     }
+  }
+
+  const drawText = (ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number) => {
+    ctx.font = '20px Arial'
+    const lineHeight = 24
+    const lineSpacing = 15
+    const padding = 10
+    const lines = []
+
+    const words = text.split(' ')
+    let line = ''
+
+    words.forEach(word => {
+      const testLine = line + word + ' '
+      const metrics = ctx.measureText(testLine)
+      const testWidth = metrics.width
+      if (testWidth > maxWidth && line !== '') {
+        lines.push(line)
+        line = word + ' '
+      } else {
+        line = testLine
+      }
+    })
+    lines.push(line)
+
+    lines.forEach((line, i) => {
+      const lineY = y + i * (lineHeight + lineSpacing)
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)'
+      const metrics = ctx.measureText(line)
+
+      ctx.fillRect(x - padding, lineY - lineHeight, metrics.width + padding * 2, lineHeight + padding)
+      ctx.fillStyle = 'black'
+      ctx.fillText(line, x, lineY)
+    })
   }
 
   return <CanvasStyled ref={canvasRef} />
