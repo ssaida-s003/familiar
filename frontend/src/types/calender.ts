@@ -32,3 +32,8 @@ export interface ResponseCategory {
   categoryId: number
   setCategoryId: (categoryId: number) => void
 }
+
+export interface TodayShareResponse {
+  todayShareResponse: FamilyShareRecordResType[]
+  setTodayShareResponse: (todayShareResponse: FamilyShareRecordResType[]) => void
+}
