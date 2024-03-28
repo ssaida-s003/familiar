@@ -1,4 +1,4 @@
-import NoAnswerAlarm from '@components/FamilyShare/NoAnswerAlarm.tsx'
+import NoAnswerAlarm from '@components/FamilyShare/NoAnswerAlarm'
 import styled from 'styled-components'
 
 const Container = styled.div`

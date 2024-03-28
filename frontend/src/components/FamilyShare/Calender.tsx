@@ -1,4 +1,4 @@
-import * as c from '@components/FamilyShare/style/CalenderStyle.tsx'
+import * as c from '@components/FamilyShare/style/CalenderStyle'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { useTodayDateStore } from '@stores/familyShare'
