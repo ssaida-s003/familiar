@@ -4,7 +4,7 @@ available_model = {
 }
 base_model = 'sd1.5'
 
-__all__ = ["RV2_0", "RV6_0"]
+__all__ = ["RV2_0", "RV6_0", "XL_BASE"]
 
 class InferenceParameter():
     def __init__(self, input: dict):

@@ -3,7 +3,7 @@ from diffusers import AutoencoderKL
 from model.base import BaseModel
 from database.Configs import Config
 from database.Models import Models
-
+import torch
 
 #RV 6.0
 class RV6_0(BaseModel):
@@ -11,7 +11,7 @@ class RV6_0(BaseModel):
         super().__init__(model_info, config)
 
         #vae 인코더 새로 달아주기
-        vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse").to(self.device)
+        vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", torch_dtype=torch.float16).to(self.device)
         self.pipe.vae = vae
 
     def inference(self, input):
