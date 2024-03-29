@@ -32,7 +32,7 @@ const AfterRecord = () => {
   }
 
   const handlePost = () => {
-    postTodayMutation.mutate({ memberId: 3, content: content, url: image })
+    postTodayMutation.mutate({ memberId: 3, content: content, image: image })
   }
 
   return (
