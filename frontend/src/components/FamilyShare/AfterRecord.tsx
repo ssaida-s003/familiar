@@ -13,7 +13,7 @@ const AfterRecord = () => {
 
   const reConvertMutation = useMutation(familyTodayConvert, {
     onSuccess: data => {
-      setImage(data)
+      setImage(data.image)
     },
   })
 
@@ -38,12 +38,12 @@ const AfterRecord = () => {
   return (
     <>
       <a.ImgContainer>
-        <ImageCanvas imageUrl={image} content={content} />
+        <ImageCanvas imageUrl={'data:image/png;base64,' + image} content={content} />
         <a.InfoText>텍스트의 위치를 바꿀 수 있어요!</a.InfoText>
       </a.ImgContainer>
       <a.ButtonContainer>
         <a.ReConvertBtn onClick={handleReConvert}>다시 생성할래요!</a.ReConvertBtn>
-        <a.GoNextStepBtn onClick={handlePost}>이대로 답변할게요!</a.GoNextStepBtn>
+        <a.GoNextStepBtn onClick={handlePost}>이대로 응답할게요!</a.GoNextStepBtn>
       </a.ButtonContainer>
     </>
   )
