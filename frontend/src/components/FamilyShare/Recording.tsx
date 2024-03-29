@@ -51,7 +51,8 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
     onSuccess: data => {
       setShareStep(shareStep + 1)
       setMemberId(1)
-      setImage(data)
+      const base64Image = 'data:image/png;base64,' + data.image
+      setImage(base64Image)
       setContent(inputText)
     },
   })
