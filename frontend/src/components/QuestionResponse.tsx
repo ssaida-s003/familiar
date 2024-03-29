@@ -8,7 +8,7 @@ const QuestionResponse = () => {
     <q.Container>
       <q.QuestionerImg src={'/icon/icon_daughter.png'} />
       <q.QuestionText>
-        <q.Q>Q.</q.Q>
+        <q.Q>Q&nbsp;.</q.Q>
         {qnAResponse.content}
       </q.QuestionText>
     </q.Container>

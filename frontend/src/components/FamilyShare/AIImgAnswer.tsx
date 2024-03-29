@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import NoAnswerAlarm from '@components/FamilyShare/NoAnswerAlarm'
-import { useQnAResponse, useResponseCategory, useTodayShareResponse } from '@stores/calender'
+import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@stores/calender'
 import CustomCarousel from '@components/FamilyShare/CustomCarousel'
 import QuestionResponse from '@components/QuestionResponse'
 
@@ -20,11 +20,19 @@ const Container = styled.div`
   align-items: center;
 `
 
+const Date = styled.div`
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem 0;
+`
+
 const AiImgAnswer = () => {
   const { categoryId } = useResponseCategory()
   const [slides, setSlides] = useState<Slide[]>([])
-  const { todayShareResponse } = useTodayShareResponse() // 오늘의 공유된 이미지 응답
+  const { todayShareResponse } = useTodayShareResponse()
   const { qnAResponse } = useQnAResponse()
+  const { date } = useTodayDateStore()
 
   useEffect(() => {
     let newSlides: Slide[] = []
@@ -45,6 +53,7 @@ const AiImgAnswer = () => {
 
   return (
     <Container>
+      <Date>{date.split('-').join('.')}</Date>
       {categoryId === 1 && <QuestionResponse />}
       {slides.length > 0 ? <CustomCarousel cards={slides} height="300px" width="40%" margin="0 auto" offset={2} showArrows={false} /> : <NoAnswerAlarm />}
     </Container>
