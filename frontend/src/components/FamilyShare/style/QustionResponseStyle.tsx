@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 90%;
   min-height: 2rem;
   display: flex;
-  margin: 1rem;
+  margin-bottom: 0.5rem;
   padding: 1rem 0;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +15,7 @@ export const Container = styled.div`
 `
 
 export const QuestionerImg = styled.img`
-  width: 12%;
+  width: 11%;
   height: auto;
   border-radius: 5rem;
   margin-bottom: 0.5rem;
