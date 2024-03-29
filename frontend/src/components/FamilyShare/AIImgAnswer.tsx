@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import NoAnswerAlarm from '@components/FamilyShare/NoAnswerAlarm'
 import { useQnAResponse, useResponseCategory, useTodayShareResponse } from '@stores/calender'
 import CustomCarousel from '@components/FamilyShare/CustomCarousel'
+import QuestionResponse from '@components/QuestionResponse'
 
 type Slide = {
   key: string | number
@@ -13,7 +14,8 @@ const Container = styled.div`
   width: 100%;
   min-height: 8rem;
   display: flex;
-  margin: 5% 0;
+  flex-direction: column;
+  margin: 2% 0;
   justify-content: center;
   align-items: center;
 `
@@ -41,7 +43,12 @@ const AiImgAnswer = () => {
     setSlides(newSlides)
   }, [categoryId, todayShareResponse, qnAResponse])
 
-  return <Container>{slides.length > 0 ? <CustomCarousel cards={slides} height="300px" width="40%" margin="0 auto" offset={2} showArrows={false} /> : <NoAnswerAlarm />}</Container>
+  return (
+    <Container>
+      {categoryId === 1 && <QuestionResponse />}
+      {slides.length > 0 ? <CustomCarousel cards={slides} height="300px" width="40%" margin="0 auto" offset={2} showArrows={false} /> : <NoAnswerAlarm />}
+    </Container>
+  )
 }
 
 export default AiImgAnswer
