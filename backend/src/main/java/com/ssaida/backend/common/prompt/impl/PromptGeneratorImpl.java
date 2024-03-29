@@ -50,13 +50,13 @@ public class PromptGeneratorImpl implements PromptGenerator {
 
     @Override
     public String generateConvertHaruPrompt(Integer memberId, String content) {
-        String generatedPrompt = getPrompt(content)
+        Member member = memberRepository.getMemberById(memberId).orElseThrow(RuntimeException::new);
+
+        String generatedPrompt = getPrompt(member.getClassToken() + " : " + content)
                 .candidates().get(0)
                 .content()
                 .parts().get(0)
                 .text();
-
-        Member member = memberRepository.getMemberById(memberId).orElseThrow(RuntimeException::new);
 
         StringBuilder haruPromptBuilder = new StringBuilder();
         haruPromptBuilder.append("a photo of ")
