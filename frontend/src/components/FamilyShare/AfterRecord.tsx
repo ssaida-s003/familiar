@@ -4,12 +4,13 @@ import { useMutation } from 'react-query'
 import { familyTodayConvert, postToday } from '@apis/familyShare'
 import { useConvertTodayStore, useShareStepStore } from '@stores/familyShare'
 import ConvertRecord from '@components/FamilyShare/ConvertRecord'
-import { useNavigate } from 'react-router-dom'
+import { useTodayDateStore } from '@stores/calender'
+import dayjs from 'dayjs'
 
 const AfterRecord = () => {
   const { image, content, setImage } = useConvertTodayStore()
   const { setShareStep } = useShareStepStore()
-  const navigate = useNavigate()
+  const { setDate } = useTodayDateStore()
 
   const reConvertMutation = useMutation(familyTodayConvert, {
     onSuccess: data => {
@@ -20,7 +21,7 @@ const AfterRecord = () => {
   const postTodayMutation = useMutation(postToday, {
     onSuccess: () => {
       setShareStep(0)
-      navigate('/display/share-family')
+      setDate(dayjs().format('YYYY-MM-DD'))
     },
   })
 
