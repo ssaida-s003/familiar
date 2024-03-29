@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@ToString
+@ToString(of = {"memberId", "questionId"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateAnswerRequest {
     @NotNull

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
-@ToString
+@ToString(of = {"memberId","content"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CreateRecordRequest {
     @NotNull
@@ -14,5 +14,4 @@ public class CreateRecordRequest {
     private String content;
     @NotNull
     private String image;
-
 }
