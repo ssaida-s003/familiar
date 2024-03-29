@@ -20,6 +20,13 @@ const Container = styled.div`
   align-items: center;
 `
 
+const Date = styled.div`
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+`
+
 const AiImgAnswer = () => {
   const { categoryId } = useResponseCategory()
   const [slides, setSlides] = useState<Slide[]>([])
