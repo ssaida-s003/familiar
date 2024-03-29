@@ -13,10 +13,10 @@ interface Position {
 interface ImageCanvasProps {
   imageUrl: string
   content: string
+  canvasRef: React.RefObject<HTMLCanvasElement>
 }
 
-const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content, canvasRef }) => {
   const [isDragging, setIsDragging] = useState(false)
   const [textPosition, setTextPosition] = useState<Position>({ x: 50, y: 50 })
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -34,6 +34,7 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
           canvas.width = imageRef.current.width
           canvas.height = imageRef.current.height
           ctx.drawImage(imageRef.current, 0, 0)
+          console.log(canvas.width)
           drawText(ctx, content, textPosition.x, textPosition.y, canvas.width)
           setImageLoaded(true)
         }
@@ -81,10 +82,10 @@ const ImageCanvas: React.FC<ImageCanvasProps> = ({ imageUrl, content }) => {
   }
 
   const drawText = (ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number) => {
-    ctx.font = '20px Arial'
-    const lineHeight = 24
-    const lineSpacing = 15
-    const padding = 10
+    ctx.font = '80px Arial'
+    const lineHeight = 80
+    const lineSpacing = 80
+    const padding = 20
     const lines = []
 
     const words = text.split(' ')

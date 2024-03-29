@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
+import { useQnAStepStore, useShareStepStore } from '@stores/familyShare.ts'
 
 interface ShareOrQuestionProps {
   setIsTodayShareRecord: (isRecord: boolean) => void
@@ -8,16 +9,20 @@ interface ShareOrQuestionProps {
 
 const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord, setIsQnARecord }) => {
   const [shareOrQuestion] = useState(0)
+  const { shareStep, setShareStep } = useShareStepStore()
+  const { qnaStep, setQnAStep } = useQnAStepStore()
 
   //   api 통신 결과
   // 0 두개 1 하루공유 2 질문과답변
 
   const handleRecordToday = () => {
     setIsTodayShareRecord(true)
+    setShareStep(shareStep + 1)
   }
 
   const handleRecordQnA = () => {
     setIsQnARecord(true)
+    setQnAStep(qnaStep + 1)
   }
 
   return (

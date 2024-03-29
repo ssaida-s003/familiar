@@ -1,7 +1,7 @@
 import { publicRequest } from '@hooks/requestMethods'
 import { FamilyTodayConvertReqType, PostTodayReqType } from '@/types/familyShare'
 
-export const familyTodayConvert = async (data: FamilyTodayConvertReqType): Promise<string> => {
+export const familyTodayConvert = async (data: FamilyTodayConvertReqType): Promise<{ image: string }> => {
   return publicRequest.patch(`/haru/convert`, data).then(res => res.data)
 }
 

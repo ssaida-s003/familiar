@@ -23,9 +23,9 @@ const RecordTodayShare = () => {
   const { shareStep } = useShareStepStore()
   return (
     <Container>
-      {shareStep == 0 && <BeforeRecord recordType={0} />}
-      {shareStep == 1 && <Recording recordType={0} />}
-      {shareStep == 2 && <AfterRecord />}
+      {shareStep == 1 && <BeforeRecord recordType={0} />}
+      {shareStep == 2 && <Recording recordType={0} />}
+      {shareStep == 3 && <AfterRecord />}
     </Container>
   )
 }
