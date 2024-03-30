@@ -18,7 +18,7 @@ const FamilyIconContainer = () => {
   const { setMemberId } = useConvertTodayStore()
 
   const handleIconClick = (index: number) => {
-    setMemberId(index)
+    setMemberId(index + 1)
   }
 
   return (
