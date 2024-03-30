@@ -6,7 +6,7 @@ interface ColorState {
 }
 
 export const useColorStore = create<ColorState>(set => ({
-  selectedColorCode: ['', '', '', ''],
+  selectedColorCode: ['#F0EFED', '#F0EFED', '#F0EFED', '#F0EFED'],
   updateSelectedColorCode: (quadrant: number, colorCode: string) =>
     set(state => {
       const newColorCodes = [...state.selectedColorCode]
