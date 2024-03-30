@@ -2,23 +2,48 @@ import * as h from '@pages/style/HomePageStyle'
 import DoorColorPalette from '@components/Home/DoorColorPalette'
 import { useColorStore } from '@stores/refrigerator'
 import { useState } from 'react'
+import { useMutation } from 'react-query'
+import { putDoorColors } from '@apis/doors'
+import useThemeStore from '@stores/theme'
+
+interface DataReqType {
+  topLeft: string
+  topRight: string
+  bottomLeft: string
+  bottomRight: string
+}
 
 const HomePage = () => {
+  const { selectedColorCode } = useColorStore()
   const setSelectedColorCode = useColorStore(state => state.selectedColorCode)
   const [isShowPalette, setIsShowPalette] = useState([false, false, false, false])
   const [isCloseUp, setIsCloseUp] = useState(false)
   const [showPanel, setShowPanel] = useState(false)
+  const { setMainColor } = useThemeStore()
 
   const handleClick = (doorNum: number) => () => {
     setIsShowPalette(current => current.map((_, index) => index === doorNum))
   }
 
+  const mutation = useMutation(({ familyId, data }: { familyId: number; data: DataReqType }) => putDoorColors(familyId, data), {
+    onSuccess: data => {
+      setMainColor(data.themeColor)
+      setIsShowPalette(current => current.map(() => false))
+      setIsCloseUp(true)
+      setTimeout(() => {
+        setShowPanel(true)
+      }, 1500)
+    },
+  })
+
   const goToNextStep = () => {
-    setIsShowPalette(current => current.map(() => false))
-    setIsCloseUp(true)
-    setTimeout(() => {
-      setShowPanel(true)
-    }, 1500)
+    const data = {
+      topLeft: selectedColorCode[0],
+      topRight: selectedColorCode[1],
+      bottomLeft: selectedColorCode[2],
+      bottomRight: selectedColorCode[3],
+    }
+    mutation.mutate({ familyId: 1, data: data })
   }
 
   return (
