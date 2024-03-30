@@ -6,9 +6,6 @@ export const Container = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
   padding: 10px;
 `
 

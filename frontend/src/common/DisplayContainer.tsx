@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import Header from '@common/Header.tsx'
 
 interface ContainerProps {
   $paddingTop: string
@@ -9,9 +10,7 @@ interface ContainerProps {
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   width: 444px;
-  height: 840px;
-  padding-top: ${props => props.$paddingTop};
-
+  height: 820px;
   background: linear-gradient(
       163deg,
       rgba(65, 142, 176, 0.3) 0%,
@@ -32,7 +31,7 @@ const Footer = styled.footer`
   align-items: center;
   justify-content: space-around;
   position: fixed;
-  top: 840px;
+  bottom: 0;
   display: flex;
 `
 
@@ -44,14 +43,16 @@ const Icon = styled.img`
 
 interface DisplayContainerProps {
   children: React.ReactNode
+  title: string
 }
 
-const DisplayContainer: React.FC<DisplayContainerProps> = ({ children }) => {
+const DisplayContainer: React.FC<DisplayContainerProps> = ({ children, title }) => {
   const navigate = useNavigate()
   const paddingTop = location.pathname === '/display/wallpapers' ? '0px' : '50px'
 
   return (
     <Container $paddingTop={paddingTop}>
+      <Header title={title} />
       {children}
       <Footer>
         <Icon src={'/icon/icon_record.png'} onClick={() => navigate('/display/share-family')} />
