@@ -6,8 +6,10 @@ from clip_interrogator import Config, Interrogator
 from controlnet_aux import HEDdetector
 from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
 from huggingface_hub import login, snapshot_download
+
 import database.Configs as Configs
 from model import InferenceParameter
+from sampler.schedulers import scheduler
 
 
 class ControlNet(object):
@@ -23,15 +25,28 @@ class ControlNet(object):
             "crayon" : "weights/lora/crayon-v1.1-000005.safetensors",
             '3dmm':"weights/lora/3DMM_V12.safetensors",
         }
+        #lora_download
+        self.lora_download()
 
         # 파이프라인 설정
         self.make_pipeline()
 
-        #lora_download
-        self.lora_download()
+        #Scheduler 달기
+        self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
+
 
         # clip interrogartor 설정하기
         self.set_clip_interrogator()
+
+        # # 최적화 여부
+        # if self.config.xformer:
+        #     self.pipe.enable_xformers_memory_efficient_attention()
+
+        # 메모리 오프로드 설정
+        if self.config.offload:
+            self.pipe.enable_model_cpu_offload()
+
+
 
     def lora_download(self):
         model_repo = "fangdol888/my-dreambooth-lora"
@@ -76,9 +91,14 @@ class ControlNet(object):
     # 프롬프트 생성
     def get_prompt(self, image : Image):
         # 그림으로 부터 설명 추출
-        preprompt = self.ci.interrogate(image, min_flavors=8, max_flavors=8)
+        if self.config.fast_inference:
+            preprompt = self.ci.interrogate_fast(image)
+        else:
+            preprompt = self.ci.interrogate(image, min_flavors=4, max_flavors=4)
+
+
         pp = self.artStyle +', '+ 'painting, ' if self.artStyle != '3dmm' else '3d, '
-        prompt = pp + " high, super, hyper, best quality, finely detailed, (4k, 8k, high_resolution), perfect_finger"
+        prompt = pp + preprompt + " high, super, hyper, best quality, finely detailed, (4k, 8k, high_resolution), perfect_finger"
         return prompt # 정제한 프롬프트 생성
 
     # 본인이 가진 로라를 적용한다.
@@ -119,7 +139,7 @@ class ControlNet(object):
         image = self.hed(input.input_image, scribble=True)
 
         # 프롬프트 추출
-        input.prompt = self.get_prompt(input.input_image )
+        input.prompt = self.get_prompt(input.input_image)
 
         with torch.inference_mode():
             sample = self.pipe(prompt=input.prompt,

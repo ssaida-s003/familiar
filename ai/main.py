@@ -6,6 +6,7 @@ import os
 
 from dto.DiaryRequestDto import DiaryRequestDto
 from dto.DrawingRequestDto import DrawingRequestDto
+from model.BaseModel import BaseModel
 from model.ControlNet import ControlNet
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
@@ -42,12 +43,15 @@ db = database.Database()
 
 #모델 로딩 - 가족 모델, 다이어리 모델
 models = {}
+#
+# ## 가족 일기 모델
+# models['diary']  = None
+#
+# ## 스케치 그림 생성 모델
+# models['drawing'] = None
 
-## 가족 일기 모델
-models['diary']  = None
+app.loaded_model = None
 
-## 스케치 그림 생성 모델
-models['drawing'] = None
 
 @app.get("/")
 async def read_root():
@@ -63,12 +67,12 @@ async def make_diary_image(requestDto : DiaryRequestDto):
         return {"error_code": "400", "message": "bad request"}
 
     #추론 수행 모델 불러오기 및 추론 수행
-    if models['diary'] == None or models['diary'].config.model_path != config.model_path : # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
+    if app.loaded_model == None or app.loaded_model.config.model_path != config.model_path : # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
         myModel = model_selector[config.base_model]
-        models['diary'] = myModel(model_info, config) #모델 정보 불러오기
+        app.loaded_model = myModel(model_info, config) #모델 정보 불러오기
 
     input : InferenceParameter = InferenceParameter({'prompt': requestDto.prompt})
-    result : Image = models['diary'].inference(input) # 모델 추론 결과
+    result : Image = app.loaded_model.inference(input) # 모델 추론 결과
 
     # PIL 이미지를 바이트로 변환
     img_byte_array = io.BytesIO()
@@ -81,7 +85,6 @@ async def make_diary_image(requestDto : DiaryRequestDto):
 @app.post("/drawing/style-transfer")
 async def drawing_by_ai(requestDto : DrawingRequestDto):
     # hard coding
-    config = Config()
     height = 512
     width = 512
     negative_prompt = "bad-hands-5, negative_hand-neg, easynegative, mutated, ugly, disfigured, bad hand"
@@ -103,16 +106,19 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     config.cfg = guidance_scale
     config.model_path = model_path
     config.use_seed = False
+    config.offload = False
+    config.fast_inference= False
+    config.scheduler = 'Euler'
 
-    # 한번도 로딩이 안되어 있었다면
-    if models['drawing'] == None:
-        models['drawing'] = ControlNet(config) # 불러오기
+    # 한번도 로딩이 안되어 있었거나 같은 모델이 아니라면
+    if app.loaded_model == None or app.loaded_model.config.model_path != model_path:
+        app.loaded_model = ControlNet(config) # 불러오기
 
     # 스타일에 따른 로라 적용
-    models['drawing'].set_style_lora(requestDto.artStyle)
+    app.loaded_model.set_style_lora(requestDto.artStyle)
 
     # 추론하기
-    result: Image = models['drawing'].inference(input)  # 모델 추론 결과
+    result: Image = app.loaded_model.inference(input)  # 모델 추론 결과
 
     # PIL 이미지를 바이트로 변환
     img_byte_array = io.BytesIO()
