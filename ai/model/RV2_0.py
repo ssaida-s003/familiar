@@ -1,6 +1,6 @@
 from database.Configs import Config
 from database.Models import Models
-from .base import BaseModel
+from .BaseModel import BaseModel
 
 
 #RV 2.0
