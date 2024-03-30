@@ -22,8 +22,8 @@ public class FridgeController {
     final private FridgeService fridgeService;
 
     @GetMapping
-    @Operation(summary = "냉장고 색상 조회")
-    public ResponseEntity<GetFridgeColorResponse> getFridgeColor(@Parameter(description = "가족Id") @PathVariable("familyId") int familyId) {
+    @Operation(summary = "냉장고 매칭 색상 조회")
+    public ResponseEntity<String> getFridgeColor(@Parameter(description = "가족Id") @PathVariable("familyId") int familyId) {
         log.info("getFridgeColor 입력 : {}", familyId);
         return new ResponseEntity(fridgeService.getFridgeColor(familyId), HttpStatus.OK);
     }
