@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
 import { useQnAStepStore, useShareStepStore } from '@stores/familyShare.ts'
+import FamilyIconContainer from '@components/FamilyShare/FamilyIconContainer'
 
 interface ShareOrQuestionProps {
   setIsTodayShareRecord: (isRecord: boolean) => void
@@ -32,9 +33,7 @@ const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord
           <s.ShareContainerSmall>
             <s.TopContainer>
               <s.Title>하루 기록</s.Title>
-              <s.FamilyIconContainer>
-                <s.FamilyIcon></s.FamilyIcon>
-              </s.FamilyIconContainer>
+              <FamilyIconContainer />
             </s.TopContainer>
             <s.BottomContainer>
               <s.SubTitle>오늘 하루를 간단하게 기록해보세요!</s.SubTitle>
