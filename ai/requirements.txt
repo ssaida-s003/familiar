@@ -7,3 +7,4 @@ sql
 mysql
 sqlmodel
 clip-interrogator==0.5.4
+controlnet-aux==0.0.1

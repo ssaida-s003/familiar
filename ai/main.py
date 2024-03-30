@@ -6,6 +6,7 @@ import os
 
 from dto.DiaryRequestDto import DiaryRequestDto
 from dto.DrawingRequestDto import DrawingRequestDto
+from model.ControlNet import ControlNet
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
@@ -77,10 +78,48 @@ async def make_diary_image(requestDto : DiaryRequestDto):
     return { "image" : base64.b64encode(img_byte_array.read()) }
 
 # 스케치로 그림 생성 API
-@app.post("drawing/style-transfer")
+@app.post("/drawing/style-transfer")
 async def drawing_by_ai(requestDto : DrawingRequestDto):
+    # hard coding
+    config = Config()
+    height = 512
+    width = 512
+    negative_prompt = "bad-hands-5, negative_hand-neg, easynegative, mutated, ugly, disfigured, bad hand"
+    guidance_scale = 5
+    num_inference_steps = 30
+    model_path = "lykon/dreamshaper-8"
 
-    pass
+    # 입력 값 설정
+    input: InferenceParameter = InferenceParameter({})
+    input.height = height
+    input.width = width
+    input.negative_prompt = negative_prompt
+    data = base64.b64decode(requestDto.image)
+    input.input_image = Image.open(io.BytesIO(data)) # base64 -> PIL.Image 변환
+
+    # 추론 설정
+    config = Config()
+    config.inference_step = num_inference_steps
+    config.cfg = guidance_scale
+    config.model_path = model_path
+    config.use_seed = False
+
+    # 한번도 로딩이 안되어 있었다면
+    if models['drawing'] == None:
+        models['drawing'] = ControlNet(config) # 불러오기
+
+    # 스타일에 따른 로라 적용
+    models['drawing'].set_style_lora(requestDto.artStyle)
+
+    # 추론하기
+    result: Image = models['drawing'].inference(input)  # 모델 추론 결과
+
+    # PIL 이미지를 바이트로 변환
+    img_byte_array = io.BytesIO()
+    result.save(img_byte_array, format="JPEG")
+    img_byte_array.seek(0)
+
+    return {"image": base64.b64encode(img_byte_array.read())}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
