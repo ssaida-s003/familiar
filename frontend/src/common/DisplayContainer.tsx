@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -25,6 +26,8 @@ interface DisplayContainerProps {
 
 const DisplayContainer: React.FC<DisplayContainerProps> = ({ children }) => {
   return <Container>{children} </Container>
+  const navigate = useNavigate()
+  const paddingTop = location.pathname === '/display/wallpapers' ? '0px' : '50px'
 }
 
 export default DisplayContainer
