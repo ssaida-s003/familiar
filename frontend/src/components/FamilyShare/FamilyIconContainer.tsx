@@ -14,7 +14,7 @@ const FamilyIcon = styled.img`
 `
 
 const FamilyIconContainer = () => {
-  const family = ['mother', 'father', 'son', 'daughter']
+  const family = ['mother', 'father', 'daughter', 'son']
   const { setMemberId } = useConvertTodayStore()
 
   const handleIconClick = (index: number) => {
