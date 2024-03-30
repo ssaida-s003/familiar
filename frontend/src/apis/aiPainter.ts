@@ -18,5 +18,5 @@ export const selectWallPaper = async (familyId: number, drawingId: number, isWal
 }
 
 export const deletePaint = async (familyId: number, drawingId: number): Promise<null> => {
-  return publicRequest.delete(`/families/${familyId}/drawings${drawingId}`).then(res => res.data)
+  return publicRequest.delete(`/families/${familyId}/drawings/${drawingId}`).then(res => res.data)
 }
