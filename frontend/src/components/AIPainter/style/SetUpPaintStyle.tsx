@@ -4,6 +4,10 @@ interface CategoryProps {
   $isSelected: boolean
 }
 
+interface themeProps {
+  $mainColor: string
+}
+
 export const LottieContainer = styled.div`
   width: 100%;
   height: 745px;
@@ -93,12 +97,23 @@ export const ReturnButton = styled.button`
   color: gray;
 `
 
-export const MakeButton = styled.button`
+const hexToRgb = (hex: string) => {
+  let r = 0,
+    g = 0,
+    b = 0
+  r = parseInt(hex[0] + hex[1], 16)
+  g = parseInt(hex[2] + hex[3], 16)
+  b = parseInt(hex[4] + hex[5], 16)
+  console.log(`${r}, ${g}, ${b}`)
+  return `${r}, ${g}, ${b}`
+}
+
+export const MakeButton = styled.button<themeProps>`
   width: 48%;
   padding: 2%;
   border-radius: 50px;
-  border: 2px solid rgba(128, 173, 217, 0.7);
-  background: linear-gradient(92deg, rgba(128, 173, 217, 0.7) 0.01%, rgba(255, 255, 255, 0.4) 109.3%);
+  border: 2px solid rgba(${props => hexToRgb(props.$mainColor)}, 0.7);
+  background: linear-gradient(92deg, rgba(${props => hexToRgb(props.$mainColor)}, 0.7) 0.01%, rgba(255, 255, 255, 0.4) 109.3%);
   font-weight: 700;
 `
 

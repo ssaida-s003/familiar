@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import * as s from '@components/FamilyShare/style/ShareOrQuestionStyle'
 import { useQnAStepStore, useShareStepStore } from '@stores/familyShare.ts'
 import FamilyIconContainer from '@components/FamilyShare/FamilyIconContainer'
+import { useThemeStore } from '@stores/theme.ts'
 
 interface ShareOrQuestionProps {
   setIsTodayShareRecord: (isRecord: boolean) => void
@@ -12,9 +13,7 @@ const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord
   const [shareOrQuestion] = useState(0)
   const { shareStep, setShareStep } = useShareStepStore()
   const { qnaStep, setQnAStep } = useQnAStepStore()
-
-  //   api 통신 결과
-  // 0 두개 1 하루공유 2 질문과답변
+  const { mainColor } = useThemeStore()
 
   const handleRecordToday = () => {
     setIsTodayShareRecord(true)
@@ -37,7 +36,9 @@ const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord
             </s.TopContainer>
             <s.BottomContainer>
               <s.SubTitle>오늘 하루를 간단하게 기록해보세요!</s.SubTitle>
-              <s.GoNexStepBtn onClick={handleRecordToday}>하루 기록 남기기</s.GoNexStepBtn>
+              <s.GoNexStepBtn $mainColor={mainColor} onClick={handleRecordToday}>
+                하루 기록 남기기
+              </s.GoNexStepBtn>
             </s.BottomContainer>
           </s.ShareContainerSmall>
           <s.QuestionContainerSmall>
@@ -49,7 +50,9 @@ const ShareOrQuestion: React.FC<ShareOrQuestionProps> = ({ setIsTodayShareRecord
                 궁금한 것을 <br />
                 질문해보세요!
               </s.SubTitle>
-              <s.GoNexStepBtn onClick={handleRecordQnA}>음성 질문 남기기</s.GoNexStepBtn>
+              <s.GoNexStepBtn $mainColor={mainColor} onClick={handleRecordQnA}>
+                음성 질문 남기기
+              </s.GoNexStepBtn>
             </s.BottomContainer>
           </s.QuestionContainerSmall>
         </s.ShareOrQuestionContainer>

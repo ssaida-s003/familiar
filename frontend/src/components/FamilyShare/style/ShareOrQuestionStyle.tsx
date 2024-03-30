@@ -4,6 +4,10 @@ interface ShareOrQuestionProps {
   $shareOrQuestion: number
 }
 
+interface themeProps {
+  $mainColor: string
+}
+
 export const Container = styled.div`
   width: 100%;
   display: flex;
@@ -31,6 +35,7 @@ export const ShareContainerSmall = styled.div`
   box-sizing: border-box;
   padding: 2%;
   width: 46%;
+  border: 0.5px white solid;
   background-image: url('/icon/icon_today_share_small.png');
   background-size: cover;
   background-position: right;
@@ -45,6 +50,7 @@ export const QuestionContainerSmall = styled.div`
   padding: 2%;
   width: 46%;
   height: 100%;
+  border: 0.5px white solid;
   background-image: url('/icon/icon_question_small.png');
   background-size: cover;
   background-position: right;
@@ -79,12 +85,12 @@ export const SubTitle = styled.div`
   font-size: 1rem;
 `
 
-export const GoNexStepBtn = styled.button`
+export const GoNexStepBtn = styled.button<themeProps>`
   width: 90%;
   height: 2rem;
   border: none;
   border-radius: 1rem;
   margin: 5%;
-  background: #80add9;
+  background: ${props => `#${props.$mainColor}`};
   cursor: pointer;
 `

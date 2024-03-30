@@ -7,6 +7,7 @@ import { StepProps } from '@/types/familyShare'
 import { useMutation } from 'react-query'
 import { familyTodayConvert } from '@apis/familyShare'
 import ConvertRecord from '@components/FamilyShare/ConvertRecord'
+import { useThemeStore } from '@stores/theme'
 
 const Recording: React.FC<StepProps> = ({ recordType }) => {
   const [result, startListening, stopListening] = useSpeechToText()
@@ -16,6 +17,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
   const { shareStep, setShareStep } = useShareStepStore()
   const { qnaStep, setQnAStep } = useQnAStepStore()
   const { setImage, setContent, memberId } = useConvertTodayStore()
+  const { mainColor } = useThemeStore()
 
   useEffect(() => {
     setTimeout(() => {
@@ -77,7 +79,13 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
           <r.BottomContainer>
             <r.TextAreaInput value={inputText} onChange={handleInputChange} />
             <r.ButtonContainer>
-              {isCompleteRecord ? <r.ReRecordBtn onClick={handleReRecord}>다시 녹음할래요!</r.ReRecordBtn> : <r.CompleteRecordBtn onClick={handleStopRecord}>녹음 그만 할게요!</r.CompleteRecordBtn>}
+              {isCompleteRecord ? (
+                <r.ReRecordBtn onClick={handleReRecord}>다시 녹음할래요!</r.ReRecordBtn>
+              ) : (
+                <r.CompleteRecordBtn $mainColor={mainColor} onClick={handleStopRecord}>
+                  녹음 그만 할게요!
+                </r.CompleteRecordBtn>
+              )}
               <r.GoNextStepBtn onClick={handleSubmit}>{recordType === 0 ? `이대로 할게요!` : `이대로 질문 할게요!`}</r.GoNextStepBtn>
             </r.ButtonContainer>
           </r.BottomContainer>
