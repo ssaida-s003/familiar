@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface themeProps {
+  $mainColor: string
+}
+
 export const Container = styled.div`
   width: 100%;
   height: 32vh;
@@ -60,12 +64,12 @@ export const ReRecordBtn = styled.button`
   }
 `
 
-export const CompleteRecordBtn = styled.button`
+export const CompleteRecordBtn = styled.button<themeProps>`
   width: 47%;
-  color: #93b2d4;
+  color: ${props => `#${props.$mainColor}`};
   font-weight: 700;
   border-radius: 0.5rem;
-  border: 0.1rem solid #93b2d4;
+  border: 0.1rem solid ${props => `#${props.$mainColor}`};
   font-size: 0.7rem;
   padding: 0.5rem 1.5rem;
 `
