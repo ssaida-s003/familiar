@@ -12,7 +12,7 @@ export const useQnAStepStore = create<ShareQnAState>(set => ({
 }))
 
 export const useConvertTodayStore = create<ConvertTodayState>(set => ({
-  memberId: 0,
+  memberId: 3,
   content: '',
   image: '',
   setMemberId: (memberId: number) => set({ memberId: memberId }),
