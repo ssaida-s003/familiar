@@ -2,7 +2,7 @@ from diffusers import StableDiffusionPipeline
 
 from database.Configs import Config
 from database.Models import Models
-from model.base import BaseModel
+from model.BaseModel import BaseModel
 
 
 class BaseLoraModel(BaseModel):
