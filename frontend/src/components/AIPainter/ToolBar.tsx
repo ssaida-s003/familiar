@@ -13,6 +13,8 @@ interface ToolBarProps {
 const Container = styled.div`
   width: 100%;
   height: 65px;
+  position: absolute;
+  bottom: 0;
 `
 
 const ToolBar: React.FC<ToolBarProps> = ({ setLineWidth, setIsErasing, clearCanvas, undo, redo, setBrushColor }) => {

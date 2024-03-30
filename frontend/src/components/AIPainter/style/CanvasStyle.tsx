@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
   background-color: white;
   width: 100%;
+  height: 90%;
   position: relative;
 `
 
@@ -25,6 +26,6 @@ export const InfoText = styled.div`
 export const NextStepBtn = styled.img`
   width: 45%;
   position: absolute;
-  bottom: 100px;
+  bottom: 60px;
   right: 10px;
 `

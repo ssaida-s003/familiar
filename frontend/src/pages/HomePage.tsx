@@ -7,6 +7,7 @@ const HomePage = () => {
   const setSelectedColorCode = useColorStore(state => state.selectedColorCode)
   const [isShowPalette, setIsShowPalette] = useState([false, false, false, false])
   const [isCloseUp, setIsCloseUp] = useState(false)
+  const [showPanel, setShowPanel] = useState(false)
 
   const handleClick = (doorNum: number) => () => {
     setIsShowPalette(current => current.map((_, index) => index === doorNum))
@@ -15,15 +16,17 @@ const HomePage = () => {
   const goToNextStep = () => {
     setIsShowPalette(current => current.map(() => false))
     setIsCloseUp(true)
+    setTimeout(() => {
+      setShowPanel(true)
+    }, 1500)
   }
 
   return (
     <h.Container>
       <h.NextBtn onClick={goToNextStep} src="/icon/icon_next.png" />
+      {showPanel && <h.Panel src="/display/share-family" />}
       <h.RefrigeratorContainer $isCloseUp={isCloseUp}>
-        <h.PanelContainer onClick={handleClick(0)}>
-          <h.Panel src="/display/share-family" />
-        </h.PanelContainer>
+        <h.PanelContainer onClick={handleClick(0)} />
         <h.Quadrants onClick={handleClick(0)} $selectedColor={setSelectedColorCode[0]} $quadrantsNum={0} />
         {!isCloseUp && isShowPalette[0] && <DoorColorPalette quadrantNum={0} />}
         <h.Quadrants onClick={handleClick(1)} $selectedColor={setSelectedColorCode[1]} $quadrantsNum={1} />

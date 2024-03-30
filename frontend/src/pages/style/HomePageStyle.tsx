@@ -70,11 +70,12 @@ export const PanelContainer = styled.div`
 `
 
 export const Panel = styled.iframe`
-  width: 148px;
-  height: 265px;
+  width: 444px;
+  height: 820px;
   background: white;
   z-index: 1;
   border: none;
+  position: absolute;
 `
 
 export const SmallRefrigerator = styled.div`
