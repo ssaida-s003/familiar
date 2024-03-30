@@ -14,6 +14,7 @@ class ControlNet(object):
     def __init__(self, config : Configs.Config):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.config = config
+        self.artStyle = None
 
         # 로라 종류
         self.lora_path = {
@@ -73,10 +74,10 @@ class ControlNet(object):
         self.ci = Interrogator(config)
 
     # 프롬프트 생성
-    def get_prompt(self, image : Image, artStyle : str):
+    def get_prompt(self, image : Image):
         # 그림으로 부터 설명 추출
-        preprompt = self.ci.interrogate(image, min_flavors=4, max_flavors=4)
-        pp = artStyle +', '+ 'painting, ' if artStyle != '3dmm' else '3d, '
+        preprompt = self.ci.interrogate(image, min_flavors=8, max_flavors=8)
+        pp = self.artStyle +', '+ 'painting, ' if self.artStyle != '3dmm' else '3d, '
         prompt = pp + " high, super, hyper, best quality, finely detailed, (4k, 8k, high_resolution), perfect_finger"
         return prompt # 정제한 프롬프트 생성
 
@@ -100,6 +101,7 @@ class ControlNet(object):
             network_alphas=network_alphas,
             unet=self.pipe.unet
         )
+        self.artStyle = artStyle
 
     def detach_lora(self):
         self.pipe.unload_lora_weights()
@@ -117,7 +119,7 @@ class ControlNet(object):
         image = self.hed(input.input_image, scribble=True)
 
         # 프롬프트 추출
-        input.prompt = self.get_prompt(input.input_image)
+        input.prompt = self.get_prompt(input.input_image )
 
         with torch.inference_mode():
             sample = self.pipe(prompt=input.prompt,
