@@ -7,18 +7,20 @@ from huggingface_hub import login, snapshot_download
 
 from database.Configs import Config
 from database.Models import Models
-from .base import BaseModel
+from .BaseLora import BaseLoraModel
+from .BaseModel import BaseModel
 
 
 #XL 모델 - 1.0base 기반 Lora로 개인화
-class XLBase(BaseModel):
+class XLBase(BaseLoraModel):
     def __init__(self, model_info : Models, config : Config):
         super().__init__(model_info, config)
         self.base_model = 'sdxl'
-        self.fuse_lora_weights()
 
-    def model_download(self):
+        # lora weight 조절
+        self.fuse_lora_weights('fast','person', 1.0,1.0)
 
+    def model_download(self): # 로라
         # 사용할 모델이 존재하는지 확인하기
         if not os.path.exists(self.config.model_path+ ".safetensors"):  # 만약 모델이 없다면 다운로드를 수행한다.
             access_token = os.environ.get('HUGGINGFACE_TOKEN')
@@ -38,6 +40,7 @@ class XLBase(BaseModel):
         # 파이프라인 생성
         vae = AutoencoderKL.from_pretrained("madebyollin/sdxl-vae-fp16-fix", torch_dtype=torch.float16)
 
+        #기본 모델 불러오기
         self.pipe = DiffusionPipeline.from_pretrained(
             "stabilityai/stable-diffusion-xl-base-1.0",
             torch_dtype=torch.float16,
@@ -48,17 +51,12 @@ class XLBase(BaseModel):
         ).to(self.device)
 
         # 사람 Lora 붙이기
-        self.attach_person_lora()
-
-    # 사람 로라 붙이는 로직
-    def attach_person_lora(self):
-        local_path = self.model_info.model_path[:-(len(self.model_info.lora_filename)+1)]
-        self.pipe.load_lora_weights(local_path, weight_name=self.model_info.lora_filename+".safetensors", adapter_name="person")
+        self.attach_lora("person")
 
     # LCM과 합하는 로직
-    def fuse_lora_weights(self):
+    def fuse_lora_weights(self, first:str, second:str, f_weight:float, s_weight: float):
         if self.config.fast_inference:
-            self.pipe.set_adapters(['fast', 'person'], adapter_weights=[1.0, 1.0])
+            self.pipe.set_adapters([first, second], adapter_weights=[f_weight, s_weight])
 
     def inference(self, input):
         # input.prompt = "a photo of " + input.prompt + ", best quality, studio lighting, makeup, 8k uhd, high quality, dramatic, cinematic, 200mm 1.4f macro shot, beautiful, professional, highly detailed, photography very realist"
