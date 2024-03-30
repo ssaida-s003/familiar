@@ -1,6 +1,6 @@
 import * as h from '@common/style/HeaderStyle'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 interface HeaderProps {
   title: string
@@ -8,8 +8,13 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
   const navigate = useNavigate()
+  const location = useLocation()
   const goBack = () => {
-    navigate(-1)
+    if (location.pathname.startsWith('/display/share-family')) {
+      navigate('/display/share-family')
+    } else if (location.pathname.startsWith('/display/AI-painter')) {
+      navigate('/display/AI-painter')
+    }
   }
 
   return (
