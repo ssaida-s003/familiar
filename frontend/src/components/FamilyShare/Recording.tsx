@@ -15,7 +15,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
   const [isCompleteRecord, setIsCompleteRecord] = useState(false)
   const { shareStep, setShareStep } = useShareStepStore()
   const { qnaStep, setQnAStep } = useQnAStepStore()
-  const { setImage, setContent, setMemberId } = useConvertTodayStore()
+  const { setImage, setContent, memberId } = useConvertTodayStore()
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,7 +50,6 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
   const { mutate, isLoading } = useMutation(familyTodayConvert, {
     onSuccess: data => {
       setShareStep(shareStep + 1)
-      setMemberId(1)
       setImage(data.image)
       setContent(inputText)
     },
@@ -58,7 +57,7 @@ const Recording: React.FC<StepProps> = ({ recordType }) => {
 
   const handleSubmit = () => {
     if (recordType == 0) {
-      mutate({ memberId: 3, content: inputText })
+      mutate({ memberId: memberId, content: inputText })
     }
     if (recordType == 1) {
       setQnAStep(qnaStep + 1)

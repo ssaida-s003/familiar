@@ -15,6 +15,7 @@ const AfterRecord = () => {
   const { setDate } = useTodayDateStore()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const { memberId } = useConvertTodayStore()
 
   const reConvertMutation = useMutation(familyTodayConvert, {
     onMutate: () => setIsLoading(true),
@@ -32,7 +33,7 @@ const AfterRecord = () => {
   })
 
   const handleReConvert = () => {
-    reConvertMutation.mutate({ memberId: 3, content: content })
+    reConvertMutation.mutate({ memberId: memberId, content: content })
   }
 
   const handlePost = () => {
@@ -40,7 +41,7 @@ const AfterRecord = () => {
     if (canvas) {
       const imageDataUrl = canvas.toDataURL().split(',')[1]
 
-      postTodayMutation.mutate({ memberId: 3, content: content, image: imageDataUrl })
+      postTodayMutation.mutate({ memberId: memberId, content: content, image: imageDataUrl })
     }
   }
 
