@@ -9,6 +9,7 @@ import loading from '@/assets/lotties/loading.json'
 import { usePaintStore } from '@stores/aiPaint'
 import { AiPainterConvertReqType } from '@/types/aiPainter'
 import AxiosError from '@common/AxiosError'
+import { useThemeStore } from '@stores/theme'
 
 interface CategorySetType {
   categoryName: string
@@ -35,6 +36,7 @@ const SetUpPaint = () => {
   const navigate = useNavigate()
   const familyId = useFamilyStore(state => state.familyId)
   const paintStore = usePaintStore()
+  const { mainColor } = useThemeStore()
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
@@ -110,7 +112,9 @@ const SetUpPaint = () => {
         </s.CategoryContainer>
         <s.ButtonContainer>
           <s.ReturnButton onClick={handleRePaint}>다시 그릴게요!</s.ReturnButton>
-          <s.MakeButton onClick={handleConvert}>이렇게 만들어 주세요!</s.MakeButton>
+          <s.MakeButton $mainColor={mainColor} onClick={handleConvert}>
+            이렇게 만들어 주세요!
+          </s.MakeButton>
         </s.ButtonContainer>
       </s.SetUpContainer>
     </>

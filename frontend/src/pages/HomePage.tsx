@@ -4,7 +4,7 @@ import { useColorStore } from '@stores/refrigerator'
 import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { putDoorColors } from '@apis/doors'
-import useThemeStore from '@stores/theme'
+import { useThemeStore } from '@stores/theme'
 
 interface DataReqType {
   topLeft: string
@@ -27,12 +27,8 @@ const HomePage = () => {
 
   const mutation = useMutation(({ familyId, data }: { familyId: number; data: DataReqType }) => putDoorColors(familyId, data), {
     onSuccess: data => {
-      setMainColor(data.themeColor)
-      setIsShowPalette(current => current.map(() => false))
-      setIsCloseUp(true)
-      setTimeout(() => {
-        setShowPanel(true)
-      }, 1500)
+      console.log('업데이트 성공:', data)
+      setMainColor(data)
     },
   })
 
@@ -43,7 +39,17 @@ const HomePage = () => {
       bottomLeft: selectedColorCode[2],
       bottomRight: selectedColorCode[3],
     }
-    mutation.mutate({ familyId: 1, data: data })
+
+    try {
+      mutation.mutate({ familyId: 1, data })
+      setIsShowPalette(current => current.map(() => false))
+      setIsCloseUp(true)
+      setTimeout(() => {
+        setShowPanel(true)
+      }, 1500)
+    } catch (error) {
+      console.error('업데이트 실패:', error)
+    }
   }
 
   return (

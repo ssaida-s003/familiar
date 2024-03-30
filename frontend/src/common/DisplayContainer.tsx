@@ -2,9 +2,23 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import Header from '@common/Header.tsx'
+import { useThemeStore } from '@stores/theme'
 
 interface ContainerProps {
+  $mainColor: string
   $paddingTop: string
+}
+
+const hexToRgba = (hex: string, opacity: number) => {
+  let r = 0,
+    g = 0,
+    b = 0
+  if (hex.length === 6) {
+    r = parseInt(hex[0] + hex[1], 16)
+    g = parseInt(hex[2] + hex[3], 16)
+    b = parseInt(hex[4] + hex[5], 16)
+  }
+  return `rgba(${r},${g},${b},${opacity})`
 }
 
 const Container = styled.div<ContainerProps>`
@@ -13,12 +27,12 @@ const Container = styled.div<ContainerProps>`
   height: 820px;
   background: linear-gradient(
       163deg,
-      rgba(65, 142, 176, 0.3) 0%,
-      rgba(65, 142, 176, 0.7) 20.17%,
-      rgba(65, 142, 176, 0.6) 40.67%,
-      rgba(65, 142, 176, 0.4) 60.17%,
-      rgba(65, 142, 176, 0.7) 81.67%,
-      rgba(65, 142, 176, 0.4) 100%
+      ${props => hexToRgba(props.$mainColor, 0.3)} 0%,
+      ${props => hexToRgba(props.$mainColor, 0.7)} 20.17%,
+      ${props => hexToRgba(props.$mainColor, 0.6)} 40.67%,
+      ${props => hexToRgba(props.$mainColor, 0.4)} 60.17%,
+      ${props => hexToRgba(props.$mainColor, 0.7)} 81.67%,
+      ${props => hexToRgba(props.$mainColor, 0.4)} 100%
     ),
     white;
   overflow: auto;
@@ -27,7 +41,7 @@ const Container = styled.div<ContainerProps>`
 const Footer = styled.footer`
   width: 444px;
   height: 40px;
-  background: #444;
+  background: #aeaeae;
   align-items: center;
   justify-content: space-around;
   position: fixed;
@@ -49,9 +63,10 @@ interface DisplayContainerProps {
 const DisplayContainer: React.FC<DisplayContainerProps> = ({ children, title }) => {
   const navigate = useNavigate()
   const paddingTop = location.pathname === '/display/wallpapers' ? '0px' : '50px'
+  const { mainColor } = useThemeStore()
 
   return (
-    <Container $paddingTop={paddingTop}>
+    <Container $mainColor={mainColor} $paddingTop={paddingTop}>
       <Header title={title} />
       {children}
       <Footer>
