@@ -4,7 +4,7 @@ import com.ssaida.backend.family.dto.GetFridgeColorResponse;
 import com.ssaida.backend.family.dto.PutFridgeColorRequest;
 
 public interface FridgeService {
-    GetFridgeColorResponse getFridgeColor(int familyId);
+    String getFridgeColor(int familyId);
 
     String putFridgeColor(int familyId, PutFridgeColorRequest putFridgeColorRequest);
 }

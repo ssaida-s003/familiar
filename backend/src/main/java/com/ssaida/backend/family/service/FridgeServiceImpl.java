@@ -23,7 +23,7 @@ public class FridgeServiceImpl implements FridgeService {
     final private FamilyRepository familyRepository;
 
     @Override
-    public GetFridgeColorResponse getFridgeColor(int familyId) {
+    public String getFridgeColor(int familyId) {
         Fridge fridge = fridgeRepository.findById(familyId).orElseGet(() -> {
             Optional<Family> family = familyRepository.findById(familyId);
             if (family.isPresent()) {
@@ -40,7 +40,7 @@ public class FridgeServiceImpl implements FridgeService {
             }
         });
 
-        return new GetFridgeColorResponse(fridge);
+        return findMatchingColor(new Color[]{fridge.getTopLeft(),fridge.getTopRight(),fridge.getBottomLeft(),fridge.getBottomRight()});
     }
 
     @Override
