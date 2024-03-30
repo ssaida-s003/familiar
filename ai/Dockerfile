@@ -22,7 +22,7 @@
 
 FROM pytorch/pytorch:2.2.1-cuda11.8-cudnn8-devel
 
-RUN apt-get update && apt-get install -y pkg-config build-essential libmysqlclient-dev
+RUN apt-get update && apt-get install -y pkg-config build-essential libmysqlclient-dev libgl1-mesa-glx
 
 COPY . /ai
 WORKDIR /ai
