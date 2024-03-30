@@ -1,6 +1,6 @@
 from diffusers import AutoencoderKL
 
-from model.base import BaseModel
+from model.BaseModel import BaseModel
 from database.Configs import Config
 from database.Models import Models
 import torch

@@ -8,7 +8,7 @@ from huggingface_hub import login, snapshot_download
 from database.Configs import Config
 from database.Models import Models
 from .BaseLora import BaseLoraModel
-from .base import BaseModel
+from .BaseModel import BaseModel
 
 
 #XL 모델 - 1.0base 기반 Lora로 개인화
