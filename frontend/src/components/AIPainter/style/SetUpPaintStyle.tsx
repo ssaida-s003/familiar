@@ -14,26 +14,24 @@ export const LottieContainer = styled.div`
 
 export const PaintContainer = styled.div`
   width: 100%;
-  height: 60%;
+  height: 55%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 5%;
 `
 
 export const Paint = styled.img`
-  width: 60%;
+  width: 50%;
   background-color: white;
   filter: drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.25));
 `
 
 export const SetUpContainer = styled.div`
-  box-sizing: border-box;
-  width: 100%;
+  width: 90%;
   height: 35%;
   background: linear-gradient(113deg, rgba(255, 255, 255, 0.56) 1.61%, rgba(255, 255, 255, 0.32) 100%);
-  padding: 5%;
+  padding: 2% 5%;
 `
 
 export const TitleInfo = styled.div`

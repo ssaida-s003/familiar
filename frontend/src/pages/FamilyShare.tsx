@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Header from '@common/Header'
 import DisplayContainer from '@common/DisplayContainer'
 import ShareOrQuestion from '@components/FamilyShare/ShareOrQuestion'
 import Calender from '@components/FamilyShare/Calender'
@@ -14,8 +13,7 @@ const FamilyShare = () => {
   const { shareStep } = useShareStepStore()
 
   return (
-    <DisplayContainer>
-      <Header title={'가족 공유'} />
+    <DisplayContainer title={'가족 공유'}>
       {shareStep === 0 && <ShareOrQuestion setIsTodayShareRecord={setIsTodayShareRecord} setIsQnARecord={setIsQnARecord} />}
       {shareStep !== 0 && isTodayShareRecord ? <RecordTodayShare /> : isQnARecord && <RecordQnA />}
       <AIImgAnswer />
