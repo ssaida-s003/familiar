@@ -19,15 +19,15 @@ interface CategorySetType {
 const SetUpPaint = () => {
   const categorySet: CategorySetType[] = [
     {
-      categoryName: '실사화',
-      categoryNameByEnglish: 'realistic',
+      categoryName: '수채화',
+      categoryNameByEnglish: 'watercolor',
     },
-    { categoryName: '만화', categoryNameByEnglish: 'cartoon' },
+    { categoryName: '유화', categoryNameByEnglish: 'oil' },
     {
-      categoryName: '실사화2',
-      categoryNameByEnglish: 'realistic2',
+      categoryName: '크레용',
+      categoryNameByEnglish: 'crayon',
     },
-    { categoryName: '만화2', categoryNameByEnglish: 'cartoon2' },
+    { categoryName: '3D', categoryNameByEnglish: '3dmm' },
   ]
   const location = useLocation()
   const image = location.state?.image
