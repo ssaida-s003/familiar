@@ -53,6 +53,19 @@ class XLBase(BaseLoraModel):
         # 사람 Lora 붙이기
         self.attach_lora("person")
 
+
+    def change_lora(self, model_info, config, adapter_name:str = 'person'):
+        # 있는 로라 떼고
+        self.detach_lora()
+
+        # 모델 정보 갱신
+        self.model_info = model_info
+        self.config = config
+
+        # 다시 붙이기
+        self.attach_lora(adapter_name)
+
+
     # LCM과 합하는 로직
     def fuse_lora_weights(self, first:str, second:str, f_weight:float, s_weight: float):
         if self.config.fast_inference:

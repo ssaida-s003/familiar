@@ -72,14 +72,19 @@ async def make_diary_image(requestDto : DiaryRequestDto):
     #추론 수행 모델 불러오기 및 추론 수행
     if app.loaded_model == None or app.loaded_model.config.model_path != config.model_path : # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
         delete_model()
-        myModel = model_selector[config.base_model]
-        app.loaded_model = myModel(model_info, config) #모델 정보 불러오기
+
+        # 같은 xl 모델이면 로라를 바꾸기만 한다.
+        if app.loaded_model != None and app.loaded_model.config.model_version == "sdxl" and config.model_version == 'sdxl':
+            app.loaded_model.change_lora(model_info,config,'person')
+        else:
+            myModel = model_selector[config.base_model]
+            app.loaded_model = myModel(model_info, config) #모델 정보 불러오기
 
     input : InferenceParameter = InferenceParameter({'prompt': requestDto.prompt})
     result : Image = app.loaded_model.inference(input) # 모델 추론 결과
 
     # PIL 이미지를 바이트로 변환
-    img_byte_array = io.BytesIO()
+    img_byte_array = io.BytesIO(),
     result.save(img_byte_array, format="JPEG")
     img_byte_array.seek(0)
 
@@ -109,6 +114,7 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     config.inference_step = num_inference_steps
     config.cfg = guidance_scale
     config.model_path = model_path
+    config.model_version = None
     config.use_seed = False
     config.offload = False
     config.fast_inference= False
