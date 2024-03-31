@@ -8,6 +8,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from dto.DiaryRequestDto import DiaryRequestDto
 from dto.DrawingRequestDto import DrawingRequestDto
+from model.CLIP import CLIP
 from model.ControlNet import ControlNet
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
@@ -116,20 +117,33 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     config.model_path = model_path
     config.model_version = None
     config.use_seed = False
+    # config.offload = True
     config.offload = False
-    config.fast_inference= False
+    config.xformer = True
+    config.fast_inference = True
     config.scheduler = 'Euler'
+
+
+    #CLIP으로 prompt 추출
+    clip = CLIP(config) # CLIP 생성
+    input.prompt = clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
+    del clip # 메모리에서 내리기
+    gc.collect()
 
     # 한번도 로딩이 안되어 있었거나 같은 모델이 아니라면
     if app.loaded_model == None or app.loaded_model.config.model_path != model_path:
         delete_model()
         app.loaded_model = ControlNet(config) # 불러오기
-
     try:
         # 스타일에 따른 로라 적용
         app.loaded_model.set_style_lora(requestDto.artStyle)
+
+    # 잘못된 요청이면 예외 처리한다.
     except TypeError | binascii.Error as e:
         return {"error_code": "400", "message": "요청이 잘못되거나 없는 데이터입니다."}
+
+    # #프롬프트 추출하기 - Interroagtor 이용
+    # input.prompt = app.loaded_model.get_prompt(input.input_image)
 
     # 추론하기
     result: Image = app.loaded_model.inference(input)  # 모델 추론 결과
