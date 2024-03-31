@@ -105,6 +105,7 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
       const newHistory = history.slice(0, step + 1)
       newHistory.push(canvas.toDataURL())
       setHistory(newHistory)
+      console.log(newHistory)
     }
   }
 
@@ -129,7 +130,9 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
     image.src = history[step]
     if (canvas) {
       image.onload = () => {
-        context?.drawImage(image, 0, 0, canvas.width, canvas.height)
+        const ratio = window.devicePixelRatio || 1
+        context?.clearRect(0, 0, canvas.width, canvas.height)
+        context?.drawImage(image, 0, 0, canvas.width / ratio, canvas.height / ratio)
       }
       image.onerror = error => {
         console.error('Failed to load image', error)
