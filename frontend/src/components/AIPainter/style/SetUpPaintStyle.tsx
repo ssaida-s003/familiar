@@ -104,7 +104,6 @@ const hexToRgb = (hex: string) => {
   r = parseInt(hex[0] + hex[1], 16)
   g = parseInt(hex[2] + hex[3], 16)
   b = parseInt(hex[4] + hex[5], 16)
-  console.log(`${r}, ${g}, ${b}`)
   return `${r}, ${g}, ${b}`
 }
 
