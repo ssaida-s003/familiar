@@ -87,8 +87,6 @@ class ControlNet(object):
     def make_pipeline(self):
         self.pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
             self.config.model_path,
-            torch_dtype=torch.float16,
-            variant='fp16',
             safety_checker=None,
         )
     # 본인이 가진 로라를 적용한다.
