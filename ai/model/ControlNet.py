@@ -1,3 +1,4 @@
+import gc
 import os
 
 import torch
@@ -31,22 +32,19 @@ class ControlNet(object):
         # 파이프라인 설정
         self.make_pipeline()
 
-        #Scheduler 달기
+        # Scheduler 달기
         self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
 
 
-        # clip interrogartor 설정하기
-        self.set_clip_interrogator()
-
         # # 최적화 여부
-        # if self.config.xformer:
-        #     self.pipe.enable_xformers_memory_efficient_attention()
+        if self.config.xformer:
+            self.pipe.enable_xformers_memory_efficient_attention()
 
         # 메모리 오프로드 설정
         if self.config.offload:
-            self.pipe.enable_model_cpu_offload()
-
-
+            self.pipe.enable_sequential_cpu_offload()
+        else:
+            self.pipe.to(self.device)
 
     def lora_download(self):
         model_repo = "fangdol888/my-dreambooth-lora"
@@ -65,41 +63,9 @@ class ControlNet(object):
                 local_dir=local_dir
             )
     def make_pipeline(self):
-
-        # self.hed = HEDdetector.from_pretrained('lllyasviel/ControlNet')
-        #
-        # self.controlnet = ControlNetModel.from_pretrained(
-        #     "lllyasviel/sd-controlnet-scribble"
-        # )
-
         self.pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
             self.config.model_path,
-        ).to(self.device)
-
-
-    def set_clip_interrogator(self):
-        caption_model_name = 'git-large-coco'  # @param ["blip-base", "blip-large", "git-large-coco"]
-        clip_model_name = 'ViT-H-14/laion2b_s32b_b79k'  # @param ["ViT-L-14/openai", "ViT-H-14/laion2b_s32b_b79k"]
-        config = Config()
-        config.clip_model_name = clip_model_name
-        config.caption_model_name = caption_model_name
-
-        # interrogator
-        self.ci = Interrogator(config)
-
-    # 프롬프트 생성
-    def get_prompt(self, image : Image):
-        # 그림으로 부터 설명 추출
-        if self.config.fast_inference:
-            preprompt = self.ci.interrogate_fast(image)
-        else:
-            preprompt = self.ci.interrogate(image, min_flavors=4, max_flavors=4)
-
-
-        pp = self.artStyle +', '+ 'painting, ' if self.artStyle != '3dmm' else '3d, '
-        prompt = pp + preprompt + " high, super, hyper, best quality, finely detailed, (4k, 8k, high_resolution), perfect_finger"
-        return prompt # 정제한 프롬프트 생성
-
+        )
     # 본인이 가진 로라를 적용한다.
     def set_style_lora(self,  artStyle: str):
         # lora 떼기
@@ -133,12 +99,6 @@ class ControlNet(object):
             seed = int.from_bytes(os.urandom(4), byteorder="big") % 1000000
             # Generator 생성
             self.generator = torch.manual_seed(seed)
-
-        # # controlnet으로 한번 정제
-        # image = self.hed(input.input_image, scribble=True)
-
-        # 프롬프트 추출
-        input.prompt = self.get_prompt(input.input_image)
 
         with torch.inference_mode():
             sample = self.pipe(prompt=input.prompt,
