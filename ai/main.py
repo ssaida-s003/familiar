@@ -100,7 +100,7 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     # hard coding
     height = 512
     width = 512
-    negative_prompt = "bad-hands-5, negative_hand-neg, easynegative, mutated, ugly, disfigured, bad hand"
+    negative_prompt = "nsfw, bad-hands-5, negative_hand-neg, easynegative, mutated, ugly, disfigured, bad hand"
     guidance_scale = 5
     num_inference_steps = 30
     model_path = "lykon/dreamshaper-8"
