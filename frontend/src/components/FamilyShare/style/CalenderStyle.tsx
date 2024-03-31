@@ -9,6 +9,7 @@ export const CalendarWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     position: relative;
+    margin-bottom: 10px;
 
     .react-calendar {
         width: 100%;

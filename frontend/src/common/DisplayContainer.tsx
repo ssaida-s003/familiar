@@ -25,7 +25,7 @@ const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   width: 444px;
   height: 820px;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
   background: linear-gradient(
       163deg,
       ${props => hexToRgba(props.$mainColor, 0.3)} 0%,
