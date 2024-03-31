@@ -118,12 +118,12 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     config.inference_step = num_inference_steps
     config.cfg = guidance_scale
     config.model_path = model_path
-    config.model_version = None
+    config.model_version = 'sd1.5'
     config.use_seed = False
-    # config.offload = True
     config.offload = False
+    # config.offload = False
     config.xformer = False
-    config.fast_inference = True
+    config.fast_inference = False
     config.scheduler = 'Euler'
 
     # 한번도 로딩이 안되어 있었거나 같은 모델이 아니라면
@@ -143,9 +143,11 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     # #프롬프트 추출하기 - Interroagtor 이용
     # input.prompt = app.loaded_model.get_prompt(input.input_image)
     input.prompt = app.clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
+    # 여기까지 20초 소요
 
     # 추론하기
     result: Image = app.loaded_model.inference(input)  # 모델 추론 결과
+    # 추론만 50초 소요
 
     # PIL 이미지를 바이트로 변환
     img_byte_array = io.BytesIO()

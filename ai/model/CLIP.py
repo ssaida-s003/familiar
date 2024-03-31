@@ -11,7 +11,7 @@ class CLIP(object):
         self.config = config
 
     def set_clip_interrogator(self):
-        caption_model_name = 'blip-base'  # @param ["blip-base", "blip-large", "git-large-coco"]
+        caption_model_name = 'git-large-coco'  # @param ["blip-base", "blip-large", "git-large-coco"]
         clip_model_name = 'ViT-L-14/openai'  # @param ["ViT-L-14/openai", "ViT-H-14/laion2b_s32b_b79k"]
         config = Config()
         config.clip_model_name = clip_model_name
