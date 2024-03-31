@@ -4,7 +4,7 @@ import torch
 from PIL.Image import Image
 from clip_interrogator import Config, Interrogator
 from controlnet_aux import HEDdetector
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel
+from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, StableDiffusionImg2ImgPipeline
 from huggingface_hub import login, snapshot_download
 
 import database.Configs as Configs
@@ -66,21 +66,20 @@ class ControlNet(object):
             )
     def make_pipeline(self):
 
-        self.hed = HEDdetector.from_pretrained('lllyasviel/ControlNet')
+        # self.hed = HEDdetector.from_pretrained('lllyasviel/ControlNet')
+        #
+        # self.controlnet = ControlNetModel.from_pretrained(
+        #     "lllyasviel/sd-controlnet-scribble"
+        # )
 
-        self.controlnet = ControlNetModel.from_pretrained(
-            "lllyasviel/sd-controlnet-scribble"
-        )
-
-        self.pipe = StableDiffusionControlNetPipeline.from_pretrained(
+        self.pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
             self.config.model_path,
-            controlnet=self.controlnet,
         ).to(self.device)
 
 
     def set_clip_interrogator(self):
-        caption_model_name = 'blip-large'  # @param ["blip-base", "blip-large", "git-large-coco"]
-        clip_model_name = 'ViT-L-14/openai'  # @param ["ViT-L-14/openai", "ViT-H-14/laion2b_s32b_b79k"]
+        caption_model_name = 'git-large-coco'  # @param ["blip-base", "blip-large", "git-large-coco"]
+        clip_model_name = 'ViT-H-14/laion2b_s32b_b79k'  # @param ["ViT-L-14/openai", "ViT-H-14/laion2b_s32b_b79k"]
         config = Config()
         config.clip_model_name = clip_model_name
         config.caption_model_name = caption_model_name
@@ -135,8 +134,8 @@ class ControlNet(object):
             # Generator 생성
             self.generator = torch.manual_seed(seed)
 
-        # controlnet으로 한번 정제
-        image = self.hed(input.input_image, scribble=True)
+        # # controlnet으로 한번 정제
+        # image = self.hed(input.input_image, scribble=True)
 
         # 프롬프트 추출
         input.prompt = self.get_prompt(input.input_image)
@@ -144,12 +143,13 @@ class ControlNet(object):
         with torch.inference_mode():
             sample = self.pipe(prompt=input.prompt,
                                negative_prompt=input.negative_prompt,
-                               image=image,
+                               image=input.input_image,
                                guidance_scale=self.config.cfg,
                                generator=self.generator,
                                num_inference_steps=self.config.inference_step,
                                safety_checker=None,
                                height=input.height,
                                width=input.width,
+                               strength=0.75
                                )
         return sample.images[0]
