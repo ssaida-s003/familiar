@@ -1,12 +1,13 @@
-import uvicorn
-from fastapi import FastAPI, UploadFile, File, Form
-from starlette.middleware.cors import CORSMiddleware
-
+import binascii
+import gc
 import os
+
+import uvicorn
+from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 
 from dto.DiaryRequestDto import DiaryRequestDto
 from dto.DrawingRequestDto import DrawingRequestDto
-from model.BaseModel import BaseModel
 from model.ControlNet import ControlNet
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
@@ -16,10 +17,8 @@ from database.Models import Models
 from database import database
 from model import InferenceParameter
 from model.model_selector import model_selector
-from model.RV2_0 import RV2_0
 from PIL import Image
-import argparse, sys
-from fastapi.responses import StreamingResponse
+import argparse
 import io, base64
 
 app = FastAPI()
@@ -52,6 +51,10 @@ models = {}
 
 app.loaded_model = None
 
+def delete_model():
+    del app.loaded_model
+    gc.collect()
+    app.loaded_model=None
 
 @app.get("/")
 async def read_root():
@@ -64,10 +67,11 @@ async def make_diary_image(requestDto : DiaryRequestDto):
         model_info : Models = db.get_model_info(requestDto.memberId) # 맴버에 맞는 모델 불러오기
         config: Config = db.get_configs(model_info.model_path) # 모델에 맞는 설정 파일 들고 오기
     except:
-        return {"error_code": "400", "message": "bad request"}
+        return {"error_code": "400", "message": "요청이 잘못되거나 없는 데이터입니다."}
 
     #추론 수행 모델 불러오기 및 추론 수행
     if app.loaded_model == None or app.loaded_model.config.model_path != config.model_path : # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
+        delete_model()
         myModel = model_selector[config.base_model]
         app.loaded_model = myModel(model_info, config) #모델 정보 불러오기
 
@@ -112,10 +116,14 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
 
     # 한번도 로딩이 안되어 있었거나 같은 모델이 아니라면
     if app.loaded_model == None or app.loaded_model.config.model_path != model_path:
+        delete_model()
         app.loaded_model = ControlNet(config) # 불러오기
 
-    # 스타일에 따른 로라 적용
-    app.loaded_model.set_style_lora(requestDto.artStyle)
+    try:
+        # 스타일에 따른 로라 적용
+        app.loaded_model.set_style_lora(requestDto.artStyle)
+    except TypeError | binascii.Error as e:
+        return {"error_code": "400", "message": "요청이 잘못되거나 없는 데이터입니다."}
 
     # 추론하기
     result: Image = app.loaded_model.inference(input)  # 모델 추론 결과
