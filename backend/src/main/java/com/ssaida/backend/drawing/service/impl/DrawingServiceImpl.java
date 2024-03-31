@@ -6,6 +6,7 @@ import com.ssaida.backend.common.ai.Img2ImgRequest;
 import com.ssaida.backend.common.ai.StableDiffusionApiClient;
 import com.ssaida.backend.common.bucket.BucketClient;
 import com.ssaida.backend.common.prompt.PromptGenerator;
+import com.ssaida.backend.common.traslator.LanguageTranslator;
 import com.ssaida.backend.drawing.dto.DrawingConvertRequest;
 import com.ssaida.backend.drawing.dto.DrawingInfo;
 import com.ssaida.backend.drawing.dto.DrawingSaveRequest;
@@ -34,13 +35,14 @@ public class DrawingServiceImpl implements DrawingService {
 	private final BucketClient bucketClient;
 	private final DrawingRepository drawingRepository;
 	private final FamilyRepository familyRepository;
+	private final LanguageTranslator translator;
 
 	@Transactional(readOnly = true)
 	@Override
 	public String convert(DrawingConvertRequest request) {
 		// AI API 호출
 		return stableDiffusionApiClient.convertImage(new Img2ImgRequest(request.drawing(),
-			request.name(), 
+			translator.translateToEnglish(request.name()),
 			request.artStyle()));
 	}
 
