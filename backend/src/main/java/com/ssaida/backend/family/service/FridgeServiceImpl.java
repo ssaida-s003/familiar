@@ -72,13 +72,7 @@ public class FridgeServiceImpl implements FridgeService {
             return "418EB0";
         }
 
-        HashMap<Color, Integer> count = new HashMap<>();
-        for (Color color : colors) {
-            count.put(color, count.getOrDefault(color, 0) + 1);
-        }
-        Optional<Map.Entry<Color, Integer>> maxColor = count.entrySet().stream()
-                .max(Map.Entry.comparingByValue());
-        return maxColor.get().getKey().getHex();
+        return colors[0].getHex();
     }
 
 }

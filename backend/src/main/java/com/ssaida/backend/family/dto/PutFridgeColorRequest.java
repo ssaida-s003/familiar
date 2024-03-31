@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @NoArgsConstructor
-@Setter
 @Getter
 @ToString
 public class PutFridgeColorRequest {
