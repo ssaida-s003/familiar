@@ -100,7 +100,7 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     # hard coding
     height = 512
     width = 512
-    negative_prompt = "bad-hands-5, negative_hand-neg, easynegative, mutated, ugly, disfigured, bad hand"
+    negative_prompt = "nsfw, bad-hands-5, negative_hand-neg, easynegative, mutated, ugly, disfigured, bad hand"
     guidance_scale = 5
     num_inference_steps = 30
     model_path = "lykon/dreamshaper-8"
@@ -126,11 +126,18 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     config.fast_inference = False
     config.scheduler = 'Euler'
 
+    # CLIP으로 prompt 추출
+    app.clip = CLIP(config)  # CLIP 생성
+    input.prompt = app.clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
+
+    del app.clip
+    gc.collect()
+    app.clip = None
+
     # 한번도 로딩이 안되어 있었거나 같은 모델이 아니라면
     if app.loaded_model == None or app.loaded_model.config.model_path != model_path:
         delete_model()
-        # CLIP으로 prompt 추출
-        app.clip = CLIP(config)  # CLIP 생성
+
         app.loaded_model = ControlNet(config) # 불러오기
     try:
         # 스타일에 따른 로라 적용
@@ -142,7 +149,7 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
 
     # #프롬프트 추출하기 - Interroagtor 이용
     # input.prompt = app.loaded_model.get_prompt(input.input_image)
-    input.prompt = app.clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
+    # input.prompt = app.clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
     # 여기까지 20초 소요
 
     # 추론하기

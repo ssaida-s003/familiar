@@ -32,7 +32,7 @@ class CLIP(object):
             preprompt = self.ci.interrogate(image, min_flavors=4, max_flavors=4)
 
         pp = self.artStyle + ', ' + 'painting, ' if self.artStyle != '3dmm' else '3d, '
-        prompt = pp + preprompt + " high, super, hyper, best quality, finely detailed, (4k, 8k, high_resolution), perfect_finger"
+        prompt = pp + ','.join(preprompt.split(',')[0:4]) + " high, super, hyper, best quality, finely detailed, (4k, 8k, high_resolution), perfect_finger"
 
         # # 생성된 interrogator 삭제
         # del self.ci
