@@ -43,7 +43,6 @@ public enum Color {
                 .filter(value->value.hex.equals(hexCode))
                 .findAny()
                 .orElseThrow(()-> {
-                    System.out.println(hexCode);
                     throw new NotFoundException(ErrorCode.ColorNotFoundException);});
     }
 
