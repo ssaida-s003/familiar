@@ -5,6 +5,7 @@ import os
 import uvicorn
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
+from torchvision.transforms import transforms
 
 from dto.DiaryRequestDto import DiaryRequestDto
 from dto.DrawingRequestDto import DrawingRequestDto
@@ -111,7 +112,11 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     input.width = width
     input.negative_prompt = negative_prompt
     data = base64.b64decode(requestDto.image)
-    input.input_image = Image.open(io.BytesIO(data)) # base64 -> PIL.Image 변환
+    image = Image.open(io.BytesIO(data)) # base64 -> PIL.Image 변환
+
+    # 혹시 모를 transforms 수행
+    resize_transform = transforms.Resize((512, 512))
+    input.input_image = resize_transform(image)
 
     # 추론 설정
     config = Config()
