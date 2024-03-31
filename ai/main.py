@@ -84,7 +84,7 @@ async def make_diary_image(requestDto : DiaryRequestDto):
     result : Image = app.loaded_model.inference(input) # 모델 추론 결과
 
     # PIL 이미지를 바이트로 변환
-    img_byte_array = io.BytesIO(),
+    img_byte_array = io.BytesIO()
     result.save(img_byte_array, format="JPEG")
     img_byte_array.seek(0)
 
