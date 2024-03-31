@@ -24,7 +24,7 @@ const hexToRgba = (hex: string, opacity: number) => {
 const Container = styled.div<ContainerProps>`
   box-sizing: border-box;
   width: 444px;
-  height: 820px;
+  height: 860px;
   background: linear-gradient(
       163deg,
       ${props => hexToRgba(props.$mainColor, 0.3)} 0%,
