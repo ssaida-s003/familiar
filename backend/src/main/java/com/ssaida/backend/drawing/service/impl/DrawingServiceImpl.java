@@ -38,12 +38,9 @@ public class DrawingServiceImpl implements DrawingService {
 	@Transactional(readOnly = true)
 	@Override
 	public String convert(DrawingConvertRequest request) {
-		// 프롬프트 작성
-		String prompt = promptGenerator
-			.generateConvertDrawingPrompt(request.name(), request.artStyle());
-
 		// AI API 호출
-		return stableDiffusionApiClient.convertImage(new Img2ImgRequest(request.drawing(), prompt,
+		return stableDiffusionApiClient.convertImage(new Img2ImgRequest(request.drawing(),
+			request.name(), 
 			request.artStyle()));
 	}
 
