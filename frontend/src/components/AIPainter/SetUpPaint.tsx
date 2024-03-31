@@ -91,8 +91,8 @@ const SetUpPaint = () => {
   }
 
   if (mutation.isSuccess) {
-    console.log(mutation.data)
-    navigate('/display/AI-painter', { state: { backgroundImage: mutation.data } })
+    const formatData = 'data:image/png;base64,' + mutation.data.image
+    navigate('/display/AI-painter', { state: { backgroundImage: formatData } })
   }
 
   return (
