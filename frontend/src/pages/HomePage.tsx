@@ -67,7 +67,7 @@ const HomePage = () => {
         <h.Quadrants onClick={handleClick(3)} $selectedColor={setSelectedColorCode[3]} $quadrantsNum={3} />
         {!isCloseUp && isShowPalette[3] && <DoorColorPalette quadrantNum={3} />}
       </h.RefrigeratorContainer>
-      {isCloseUp && <h.SmallRefrigerator />}
+      {isCloseUp}
     </h.Container>
   )
 }
