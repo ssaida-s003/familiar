@@ -1,7 +1,11 @@
 import { publicRequest } from '@hooks/requestMethods'
 import { AiPainterConvertReqType, AiPainterSaveReqType, getPaintResType } from '@/types/aiPainter'
 
-export const aiPaintConvert = async (familyId: number, data: AiPainterConvertReqType): Promise<string> => {
+interface convertResType {
+  image: string
+}
+
+export const aiPaintConvert = async (familyId: number, data: AiPainterConvertReqType): Promise<convertResType> => {
   return publicRequest.post(`/families/${familyId}/drawings/convert`, data).then(res => res.data)
 }
 

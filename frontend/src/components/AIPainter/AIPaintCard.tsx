@@ -46,9 +46,9 @@ const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
       </a.CardHeader>
       <a.CreatedDate>{paint.createdAt.split('T')[0]}</a.CreatedDate>
       <a.PaintContainer>
-        <a.Img src="/img/img_sample_wallpapers.png"></a.Img>
+        <a.Img src={`${paint.originalImage}`}></a.Img>
         <a.ArrowIcon src="/icon/icon_arrow.png"></a.ArrowIcon>
-        <a.Img src="/img/img_sample_wallpapers.png"></a.Img>
+        <a.Img src={`${paint.convertedImage}`}></a.Img>
       </a.PaintContainer>
     </a.Container>
   )
