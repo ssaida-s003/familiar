@@ -5,7 +5,7 @@ import torch
 from PIL.Image import Image
 from clip_interrogator import Config, Interrogator
 from controlnet_aux import HEDdetector
-from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, StableDiffusionImg2ImgPipeline
+from diffusers import StableDiffusionControlNetPipeline, ControlNetModel, StableDiffusionImg2ImgPipeline, LCMScheduler
 from huggingface_hub import login, snapshot_download
 
 import database.Configs as Configs
@@ -32,19 +32,41 @@ class ControlNet(object):
         # 파이프라인 설정
         self.make_pipeline()
 
-        # Scheduler 달기
-        self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
-
-
-        # # 최적화 여부
-        if self.config.xformer:
-            self.pipe.enable_xformers_memory_efficient_attention()
+        if self.config.fast_inference:
+            self.set_fast_inference()
+        else:
+            # 일반 스케쥴러 등록
+            self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
 
         # 메모리 오프로드 설정
         if self.config.offload:
             self.pipe.enable_sequential_cpu_offload()
         else:
             self.pipe.to(self.device)
+
+        # LCM 적용
+    def set_LCM_Lora(self):
+        if self.config.model_version == 'sd1.5':
+            # load LCM-LoRA
+            self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdv1-5", adapter_name='fast')
+        elif self.config.model_version == 'sdxl':
+            # SDXL Lightening LoRA 적용
+            self.pipe.load_lora_weights("latent-consistency/lcm-lora-sdxl", adapter_name='fast')
+        # set scheduler
+        self.pipe.scheduler = LCMScheduler.from_config(self.pipe.scheduler.config)
+
+    def set_fast_inference(self):
+        if self.config.model_version == 'sd1.5':
+           # LCM lora 적용 및 스케쥴러 설정
+           self.set_LCM_Lora()
+           self.config.cfg = 1.0
+           self.config.inference_step = 8
+        elif self.config.model_version == 'sdxl':
+            # SDXL Lightening LoRA 적용
+            self.pipe.load_lora_weights("ByteDance/SDXL-Lightning", weight_name="sdxl_lightning_8step_lora.safetensors", adapter_name='fast')
+            self.pipe.scheduler = scheduler[self.config.scheduler].from_config(self.pipe.scheduler.config)
+            self.config.cfg = 1.0
+            self.config.inference_step = 8
 
     def lora_download(self):
         model_repo = "fangdol888/my-dreambooth-lora"
@@ -65,6 +87,9 @@ class ControlNet(object):
     def make_pipeline(self):
         self.pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
             self.config.model_path,
+            torch_dtype=torch.float16,
+            variant='fp16',
+            safety_checker=None,
         )
     # 본인이 가진 로라를 적용한다.
     def set_style_lora(self,  artStyle: str):
@@ -74,18 +99,13 @@ class ControlNet(object):
         # lora path 가지고 오기
         lora_path = self.lora_path.get(artStyle, None)
 
-        # state 불러오기
-        state_dict, network_alphas = self.pipe.lora_state_dict(
-            lora_path,
-            unet_config=self.pipe.unet.config,
-        )
+        if self.config.fast_inference:
+            self.set_fast_inference()
 
-        # 불러온 state 기반으로 붙이기
-        self.pipe.load_lora_into_unet(
-            state_dict,
-            network_alphas=network_alphas,
-            unet=self.pipe.unet
-        )
+        # state 불러오기
+        self.pipe.load_lora_weights(lora_path)
+
+
         self.artStyle = artStyle
 
     def detach_lora(self):
