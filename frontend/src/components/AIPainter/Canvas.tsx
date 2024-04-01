@@ -206,7 +206,9 @@ const Canvas: React.FC<CanvasProps> = () => {
       <canvas onMouseDown={startDrawing} onMouseUp={endDrawing} onMouseMove={draw} onMouseLeave={() => isDrawing && endDrawing()} ref={canvasRef} />
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
       {backgroundStore.convertPaint !== '' && <c.InfoText>그림을 추가로 꾸밀 수 있어요!</c.InfoText>}
-      <c.NextStepBtn src={backgroundStore.convertPaint !== '' ? '/icon/icon_AIStoreBtn.png' : '/icon/icon_AIChangeBtn.png'} onClick={goNextStep} />
+      <c.NextStepBtn $mainColor={mainColor} onClick={goNextStep}>
+        {backgroundStore.convertPaint !== '' ? '변환하기' : '저장하기'}
+      </c.NextStepBtn>
     </c.Container>
   )
 }

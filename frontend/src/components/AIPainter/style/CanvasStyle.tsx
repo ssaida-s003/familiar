@@ -37,9 +37,19 @@ export const InfoText = styled.div`
   margin-bottom: 5px;
 `
 
-export const NextStepBtn = styled.img`
-  width: 45%;
+export const NextStepBtn = styled.div<themeProps>`
+  width: 20%;
+  height: 4%;
+  color: white;
   position: absolute;
-  bottom: 60px;
+  bottom: 50px;
   right: 10px;
+  border-radius: 1rem;
+  border: 0.05rem solid #fff;
+  background: ${props => `#${props.$mainColor}`};
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.1rem;
 `
