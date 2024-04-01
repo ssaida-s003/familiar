@@ -23,7 +23,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, heig
     onClick: () => setGoToSlide(index),
   }))
 
-  key.toString()
+  key
 
   const [offsetRadius, setOffsetRadius] = useState<number>(offset)
   const [showArrowsState, setShowArrows] = useState<boolean>(showArrows)
