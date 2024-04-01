@@ -39,13 +39,13 @@ const Calender = () => {
     const shareRecord = queryResults[0].data
     const qnaRecord = queryResults[1].data
 
-    if (shareRecord) {
-      setCategoryId(0)
-      setTodayShareResponse(shareRecord)
-      console.log(shareRecord)
-    } else if (qnaRecord) {
+    if (qnaRecord) {
       setCategoryId(1)
       setQnAResponse(qnaRecord)
+      console.log(qnaRecord)
+    } else if (shareRecord) {
+      setCategoryId(0)
+      setTodayShareResponse(shareRecord)
       console.log(shareRecord)
     } else {
       setCategoryId(-1)
