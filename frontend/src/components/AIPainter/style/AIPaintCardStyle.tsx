@@ -2,13 +2,18 @@ import styled from 'styled-components'
 
 interface ContainerProps {
   $isWallpaper: boolean
+  $mainColor: string
+}
+
+interface themeProps {
+  $mainColor: string
 }
 
 export const Container = styled.div<ContainerProps>`
   width: 90%;
   aspect-ratio: 1 / 0.9;
   border-radius: 1rem;
-  border: 3px solid ${props => (props.$isWallpaper ? '#80add9' : 'transparent')};
+  border: 3px solid ${props => (props.$isWallpaper ? `#${props.$mainColor}` : 'transparent')};
   background: linear-gradient(101deg, rgba(255, 255, 255, 0.7) 1%, rgba(255, 255, 255, 0.4) 100%);
   padding: 3%;
   margin-bottom: 4%;
@@ -72,7 +77,7 @@ export const ArrowIcon = styled.img`
   margin: auto 0;
 `
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div<themeProps>`
   display: flex;
   width: 30%;
   flex-direction: column;
@@ -82,7 +87,7 @@ export const ButtonContainer = styled.div`
   right: 4%;
   border-radius: 0.3rem;
   border: 0.1rem solid rgba(255, 255, 255, 0.3);
-  background: rgba(128, 173, 217, 0.9);
+  background: ${props => `#${props.$mainColor}`};
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
   padding: 1%;
 `
