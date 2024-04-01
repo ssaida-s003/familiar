@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useBackgroundStore } from '@stores/background'
 import { useThemeStore } from '@stores/theme'
 import { useQueries } from 'react-query'
-import { fetchFamilyShareRecord, fetchQnARecord } from '@apis/calender'
+import { fetchFamilyShareRecord, fetchQnARecord } from '@apis/calendar'
 import { useTodayDateStore } from '@stores/calendar'
 
 interface themeProps {
