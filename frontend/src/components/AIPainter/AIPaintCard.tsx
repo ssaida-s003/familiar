@@ -26,10 +26,12 @@ const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
     selectMutation.mutate()
     paint.isWallpaper = !paint.isWallpaper
     appendPaintBackground(paint.generatedImage)
+    setShowButtons(!showButtons)
   }
 
   const handleDelete = () => {
     onDeleted(paint.drawingId)
+    setShowButtons(!showButtons)
   }
 
   return (
