@@ -103,7 +103,7 @@ const SetUpPaint = () => {
       <s.PaintContainer>{image && <s.Paint src={image} alt="Canvas Painting" />}</s.PaintContainer>
       <s.SetUpContainer>
         <s.TitleInfo>그림의 제목을 지어주세요!</s.TitleInfo>
-        <s.TitleInput onChange={handleTitleChange} />
+        <s.TitleInput onChange={handleTitleChange} $mainColor={mainColor} />
         <s.CategoryInfo> 생성할 그림의 스타일을 골라주세요!</s.CategoryInfo>
         <s.CategoryContainer>
           {categorySet.map(category => (
