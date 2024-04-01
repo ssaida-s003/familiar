@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { FamilyShareRecordResType, QnARecordResType, QnAResponse, ResponseCategory, TodayDateState, TodayShareResponse } from '@/types/calender'
+import { FamilyShareRecordResType, QnARecordResType, QnAResponse, ResponseCategory, TodayDateState, TodayShareResponse } from '@/types/calendar'
 
 export const useTodayDateStore = create<TodayDateState>(set => ({
   date: '',

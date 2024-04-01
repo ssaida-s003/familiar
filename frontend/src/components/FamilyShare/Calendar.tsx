@@ -1,7 +1,7 @@
 import * as c from '@components/FamilyShare/style/CalenderStyle'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
-import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@stores/calender'
+import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@/stores/calendar'
 import { fetchFamilyShareRecord, fetchQnARecord } from '@apis/calender'
 import { useFamilyStore } from '@stores/family'
 import { useQueries } from 'react-query'

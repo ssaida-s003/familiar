@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import DisplayContainer from '@common/DisplayContainer'
 import ShareOrQuestion from '@components/FamilyShare/ShareOrQuestion'
-import Calender from '@components/FamilyShare/Calender'
+import Calender from '@/components/FamilyShare/Calendar'
 import AIImgAnswer from '@components/FamilyShare/AIImgAnswer'
 import RecordTodayShare from '@components/FamilyShare/RecordTodayShare'
 import RecordQnA from '@components/FamilyShare/RecordQnA'
