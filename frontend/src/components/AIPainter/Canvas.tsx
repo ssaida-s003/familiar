@@ -200,7 +200,9 @@ const Canvas: React.FC<CanvasProps> = () => {
 
   return (
     <c.Container>
-      <c.AlbumBtn src="/icon/icon_albumBtn.png" onClick={goAlbum} $mainColor={mainColor} />
+      <c.AlbumBtnContainer $mainColor={mainColor}>
+        <c.AlbumBtn src="/icon/icon_albumBtn.png" onClick={goAlbum} />
+      </c.AlbumBtnContainer>
       <canvas onMouseDown={startDrawing} onMouseUp={endDrawing} onMouseMove={draw} onMouseLeave={() => isDrawing && endDrawing()} ref={canvasRef} />
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
       {backgroundStore.convertPaint !== '' && <c.InfoText>그림을 추가로 꾸밀 수 있어요!</c.InfoText>}
