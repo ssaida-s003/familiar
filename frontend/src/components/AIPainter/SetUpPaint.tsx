@@ -65,6 +65,8 @@ const SetUpPaint = () => {
         artStyle: selectedCategory,
       }
 
+      console.log(aiPainterConvertReq)
+
       mutation.mutate(aiPainterConvertReq)
     }
   }
