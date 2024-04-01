@@ -2,7 +2,11 @@ import Calendar from 'react-calendar'
 import styled from 'styled-components'
 import 'react-calendar/dist/Calendar.css'
 
-export const CalendarWrapper = styled.div`
+interface themeProps {
+  $mainColor: string
+}
+
+export const CalendarWrapper = styled.div<themeProps>`
     width: 90%;
     margin: 0 auto;
     display: flex;
@@ -69,7 +73,7 @@ export const CalendarWrapper = styled.div`
         background: none;
 
     {
-        color: ${props => props.theme.primary_2};
+        color: ${props => `#${props.$mainColor}`};
     }
     }
 
@@ -116,7 +120,7 @@ export const CalendarWrapper = styled.div`
     .react-calendar__tile:enabled:hover,
     .react-calendar__tile:enabled:focus,
     .react-calendar__tile--active {
-        background-color: ${props => props.theme.yellow_2};
+        background-color: ${props => `#${props.$mainColor}`};
         border-radius: 5px;
     }
 `
