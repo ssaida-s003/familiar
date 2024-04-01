@@ -31,15 +31,41 @@ const ToolBarButtons = styled.div`
   align-items: center;
 `
 
+const ColorContainer = styled.div`
+  padding-left: 10px;
+  display: flex;
+`
+
+const ColorButton = styled.button`
+  background-color: ${props => props.color};
+  width: 24px;
+  height: 24px;
+  margin: 2px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow:
+      0 0 0 2px white,
+      0 0 0 4px ${props => props.color}; // 테두리 추가로 강조
+  }
+
+  transition: box-shadow 0.3s ease; // 부드러운 효과
+`
+
 const ToolBar: React.FC<ToolBarProps> = ({ setLineWidth, setIsErasing, clearCanvas, undo, redo, setBrushColor }) => {
-  const colors = ['#FF0000', '#FFA500', '#FFFF00', '#008000', '#0000FF', '#000080', '#800080', '#FFFFFF', '#000000']
+  const colors = ['#FF0000', '#FFA500', '#FFFF00', '#008000', '#0000FF', '#000080', '#800080', '#000000']
 
   return (
     <Container>
-      {colors.map(color => (
-        <button key={color} style={{ backgroundColor: color, width: '24px', height: '24px', margin: '2px' }} onClick={() => setBrushColor(color)} />
-      ))}
-
+      <ColorContainer>
+        {colors.map(color => (
+          <ColorButton key={color} color={color} onClick={() => setBrushColor(color)} />
+        ))}
+      </ColorContainer>
       <ToolBarButtons>
         <Icon src={'/icon/icon_undo.png'} onClick={undo} />
         <Icon src={'/icon/icon_redo.png'} onClick={redo} />
