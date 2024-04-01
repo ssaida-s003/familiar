@@ -183,7 +183,6 @@ const Canvas: React.FC<CanvasProps> = () => {
           convertedImage: dataUrl.replace('data:image/jpeg;base64,', ''),
           name: title,
         }
-
         saveMutation.mutate(aiPainterSaveReq)
       } else {
         navigate('/display/AI-painter/setup', { state: { image: dataUrl } })
@@ -192,7 +191,9 @@ const Canvas: React.FC<CanvasProps> = () => {
   }
 
   if (saveMutation.isSuccess) {
-    navigate('/display/AI-painter/album')
+    setTimeout(() => {
+      navigate('/display/AI-painter/album')
+    }, 1000)
   }
   const goAlbum = () => {
     navigate('/display/AI-painter/album')
