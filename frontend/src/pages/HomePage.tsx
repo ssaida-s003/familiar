@@ -28,7 +28,6 @@ const HomePage = () => {
   const mutation = useMutation(({ familyId, data }: { familyId: number; data: DataReqType }) => putDoorColors(familyId, data), {
     onSuccess: data => {
       console.log('업데이트 성공:', data)
-      setMainColor(data)
     },
   })
 
@@ -39,6 +38,8 @@ const HomePage = () => {
       bottomLeft: selectedColorCode[2],
       bottomRight: selectedColorCode[3],
     }
+
+    setMainColor(selectedColorCode[1])
 
     try {
       mutation.mutate({ familyId: 1, data })
