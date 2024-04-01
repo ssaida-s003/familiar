@@ -2,7 +2,7 @@ import * as c from '@components/FamilyShare/style/CalenderStyle'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@/stores/calendar'
-import { fetchFamilyShareRecord, fetchQnARecord } from '@apis/calender'
+import { fetchFamilyShareRecord, fetchQnARecord } from '@/apis/calendar'
 import { useFamilyStore } from '@stores/family'
 import { useQueries } from 'react-query'
 
@@ -39,14 +39,19 @@ const Calender = () => {
     const shareRecord = queryResults[0].data
     const qnaRecord = queryResults[1].data
 
+    console.log(queryResults[0])
+    console.log(queryResults[1])
+
     if (shareRecord) {
       setCategoryId(0)
       setTodayShareResponse(shareRecord)
-      console.log('shareRecord : ' + shareRecord)
+      console.log('shareRecord')
+      console.log(shareRecord)
     } else if (qnaRecord) {
       setCategoryId(1)
       setQnAResponse(qnaRecord)
-      console.log('qnaRecord : ' + qnaRecord)
+      console.log('qnaRecord')
+      console.log(qnaRecord)
     } else {
       setCategoryId(-1)
     }
