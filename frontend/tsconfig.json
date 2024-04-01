@@ -1,48 +1,22 @@
 {
   "compilerOptions": {
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "node"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "@apis/*": [
-        "src/apis/*"
-      ],
-      "@common/*": [
-        "src/common/*"
-      ],
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@stores/*": [
-        "src/stores/*"
-      ],
-      "@style/*": [
-        "src/style/*"
-      ],
-      "@types/*": [
-        "src/types/*"
-      ],
-      "@hooks/*": [
-        "src/hooks/*"
-      ]
+      "@/*": ["src/*"],
+      "@apis/*": ["src/apis/*"],
+      "@common/*": ["src/common/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@stores/*": ["src/stores/*"],
+      "@style/*": ["src/style/*"],
+      "@types/*": ["src/types/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
@@ -58,10 +32,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    ".eslintrc.cjs",
-    "src"
-  ],
+  "include": [".eslintrc.cjs", "src"],
   "references": [
     {
       "path": "./tsconfig.node.json"
