@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import NoAnswerAlarm from '@components/FamilyShare/NoAnswerAlarm'
-import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@stores/calender'
+import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@/stores/calendar'
 import CustomCarousel from '@components/FamilyShare/CustomCarousel'
 import QuestionResponse from '@components/QuestionResponse'
 
@@ -37,18 +37,33 @@ const AiImgAnswer = () => {
   useEffect(() => {
     let newSlides: Slide[] = []
     console.log(todayShareResponse)
-    if (categoryId === 0 && todayShareResponse) {
+
+    if (categoryId === 0) {
       newSlides = todayShareResponse.map((item, index) => ({
         key: index,
         content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '100%', height: 'auto' }} />,
       }))
-    } else if (categoryId === 1 && qnAResponse) {
+    } else if (categoryId === 1) {
       newSlides = qnAResponse.answers.map((item, index) => ({
         key: index,
         content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '100%', height: 'auto' }} />,
       }))
     }
+
     setSlides(newSlides)
+
+    // if (categoryId === 0 && todayShareResponse) {
+    //   newSlides = todayShareResponse.map((item, index) => ({
+    //     key: index,
+    //     content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '100%', height: 'auto' }} />,
+    //   }))
+    // } else if (categoryId === 1 && qnAResponse) {
+    //   newSlides = qnAResponse.answers.map((item, index) => ({
+    //     key: index,
+    //     content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '100%', height: 'auto' }} />,
+    //   }))
+    // }
+    // setSlides(newSlides)
   }, [categoryId, todayShareResponse, qnAResponse])
 
   return (
