@@ -1,5 +1,5 @@
 import * as q from '@components/FamilyShare/style/QustionResponseStyle'
-import { useQnAResponse } from '@stores/calender.ts'
+import { useQnAResponse } from '@/stores/calendar'
 
 const QuestionResponse = () => {
   const { qnAResponse } = useQnAResponse()
