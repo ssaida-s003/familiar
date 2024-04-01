@@ -34,7 +34,7 @@ export const Paint = styled.img`
 
 export const SetUpContainer = styled.div`
   width: 90%;
-  height: 35%;
+  height: 36.5%;
   background: linear-gradient(113deg, rgba(255, 255, 255, 0.56) 1.61%, rgba(255, 255, 255, 0.32) 100%);
   padding: 2% 5%;
 `
