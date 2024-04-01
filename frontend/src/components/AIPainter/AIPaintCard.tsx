@@ -4,6 +4,7 @@ import * as a from '@components/AIPainter/style/AIPaintCardStyle'
 import { selectWallPaper } from '@apis/aiPainter'
 import { useMutation } from 'react-query'
 import { useThemeStore } from '@stores/theme'
+import { useBackgroundStore } from '@stores/background'
 
 interface AiPaintCardProps {
   paint: getPaintResType
@@ -12,22 +13,19 @@ interface AiPaintCardProps {
 
 const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
   const [showButtons, setShowButtons] = useState(false)
-  const [isSelected, setIsSelected] = useState(paint.isWallpaper)
   const { mainColor } = useThemeStore()
+  const { appendPaintBackground } = useBackgroundStore()
 
   const handleSnowManIconClick = () => {
     setShowButtons(!showButtons)
   }
 
-  const selectMutation = useMutation(() => selectWallPaper(paint.familyId, paint.drawingId, !paint.isWallpaper), {
-    onSuccess: () => {
-      setIsSelected(!isSelected)
-    },
-  })
+  const selectMutation = useMutation(() => selectWallPaper(paint.familyId, paint.drawingId, !paint.isWallpaper), {})
 
   const handleSelect = () => {
     selectMutation.mutate()
     paint.isWallpaper = !paint.isWallpaper
+    appendPaintBackground(paint.generatedImage)
   }
 
   const handleDelete = () => {
