@@ -8,6 +8,7 @@ type Slide = {
 }
 
 interface CustomCarouselProps {
+  key: number
   cards: Slide[]
   width: string
   height: string
@@ -16,11 +17,13 @@ interface CustomCarouselProps {
   showArrows: boolean
 }
 
-const CustomCarousel: React.FC<CustomCarouselProps> = ({ cards, width, height, margin, offset, showArrows }) => {
+const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, height, margin, offset, showArrows }) => {
   const table = cards.map((element, index) => ({
     ...element,
     onClick: () => setGoToSlide(index),
   }))
+
+  console.log(key)
 
   const [offsetRadius, setOffsetRadius] = useState<number>(offset)
   const [showArrowsState, setShowArrows] = useState<boolean>(showArrows)
@@ -34,13 +37,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ cards, width, height, m
 
   return (
     <div style={{ width, height, margin }}>
-      <Carousel
-        slides={cardsState}
-        goToSlide={goToSlide}
-        offsetRadius={offsetRadius}
-        showNavigation={showArrowsState}
-        animationConfig={config.gentle}
-      />
+      <Carousel slides={cardsState} goToSlide={goToSlide} offsetRadius={offsetRadius} showNavigation={showArrowsState} animationConfig={config.gentle} />
     </div>
   )
 }

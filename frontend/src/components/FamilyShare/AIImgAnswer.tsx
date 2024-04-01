@@ -33,6 +33,7 @@ const AiImgAnswer = () => {
   const { todayShareResponse } = useTodayShareResponse()
   const { qnAResponse } = useQnAResponse()
   const { date } = useTodayDateStore()
+  const [carouselKey, setCarouselKey] = useState<number>(0)
 
   useEffect(() => {
     let newSlides: Slide[] = []
@@ -51,6 +52,7 @@ const AiImgAnswer = () => {
     }
 
     setSlides(newSlides)
+    setCarouselKey(prevKey => prevKey + 1)
 
     // if (categoryId === 0 && todayShareResponse) {
     //   newSlides = todayShareResponse.map((item, index) => ({
@@ -70,7 +72,7 @@ const AiImgAnswer = () => {
     <Container>
       <Date>{date.split('-').join('.')}</Date>
       {categoryId === 1 && <QuestionResponse />}
-      {slides.length > 0 ? <CustomCarousel cards={slides} height="300px" width="100%" margin="0 auto" offset={2} showArrows={false} /> : <NoAnswerAlarm />}
+      {slides.length > 0 ? <CustomCarousel key={carouselKey} cards={slides} height="300px" width="100%" margin="0 auto" offset={2} showArrows={false} /> : <NoAnswerAlarm />}
     </Container>
   )
 }
