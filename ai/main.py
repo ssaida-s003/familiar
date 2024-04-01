@@ -51,15 +51,25 @@ models = {}
 # ## 스케치 그림 생성 모델
 # models['drawing'] = None
 
+# 모델 미리 올릴지 말지 결정하는 변수
+app.model_offload = False
+
 app.loaded_model = None
 app.clip = None
+
+# 모델을 전부 올리도록 한다.
+if not app.model_offload:
+    app.loaded_model = {}
+    app.loaded_model['diary'] = None
+    app.loaded_model['clip'] = None
+    app.loaded_model['transfer'] = None
+
 def delete_model():
     del app.loaded_model
     del app.clip
     gc.collect()
     app.loaded_model=None
     app.clip=None
-
 
 @app.get("/")
 async def read_root():
@@ -74,19 +84,35 @@ async def make_diary_image(requestDto : DiaryRequestDto):
     except:
         return {"error_code": "400", "message": "요청이 잘못되거나 없는 데이터입니다."}
 
-    #추론 수행 모델 불러오기 및 추론 수행
-    if app.loaded_model == None or app.loaded_model.config.model_path != config.model_path : # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
-        delete_model()
+    # model 분리 모드면 모델을 원래 모델에 따라 내리거나 조금 수정하도록 로직수행
+    if app.model_offload:
+        #추론 수행 모델 불러오기 및 추론 수행
+        if app.loaded_model == None or app.loaded_model.config.model_path != config.model_path : # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
+            delete_model()
 
-        # 같은 xl 모델이면 로라를 바꾸기만 한다.
-        if app.loaded_model != None and app.loaded_model.config.model_version == "sdxl" and config.model_version == 'sdxl':
-            app.loaded_model.change_lora(model_info,config,'person')
-        else:
-            myModel = model_selector[config.base_model]
-            app.loaded_model = myModel(model_info, config) #모델 정보 불러오기
+            # 같은 xl 모델이면 로라를 바꾸기만 한다.
+            if app.loaded_model != None and app.loaded_model.config.model_version == "sdxl" and config.model_version == 'sdxl':
+                app.loaded_model.change_lora(model_info,config,'person')
+            else:
+                myModel = model_selector[config.base_model]
+                app.loaded_model = myModel(model_info, config) #모델 정보 불러오기
 
-    input : InferenceParameter = InferenceParameter({'prompt': requestDto.prompt})
-    result : Image = app.loaded_model.inference(input) # 모델 추론 결과
+        input: InferenceParameter = InferenceParameter({'prompt': requestDto.prompt})
+        result: Image = app.loaded_model.inference(input)  # 모델 추론 결과
+
+    else:
+        # 추론 수행 모델 불러오기 및 추론 수행
+        if app.loaded_model['diary'] == None or app.loaded_model['diary'].config.model_path != config.model_path:  # 만약 현재 수행 중인 모델이 없거나 현재 모델이 아니라면
+            # 같은 xl 모델이면 로라를 바꾸기만 한다.
+            if app.loaded_model['diary'] != None and app.loaded_model['diary'].config.model_version == "sdxl" and config.model_version == 'sdxl':
+                app.loaded_model['diary'].change_lora(model_info, config, 'person') # 로라 변경
+            else:
+                myModel = model_selector[config.base_model] # 모델 생성
+                app.loaded_model['diary'] = myModel(model_info, config)  # 모델 정보 불러오기
+
+
+        input : InferenceParameter = InferenceParameter({'prompt': requestDto.prompt})
+        result : Image = app.loaded_model['diary'] .inference(input) # 모델 추론 결과
 
     # PIL 이미지를 바이트로 변환
     img_byte_array = io.BytesIO()
@@ -125,41 +151,58 @@ async def drawing_by_ai(requestDto : DrawingRequestDto):
     config.model_path = model_path
     config.model_version = 'sd1.5'
     config.use_seed = False
+    # config.offload = True
     config.offload = False
-    # config.offload = False
     config.xformer = False
     config.fast_inference = False
     config.scheduler = 'Euler'
 
-    # CLIP으로 prompt 추출
-    app.clip = CLIP(config)  # CLIP 생성
-    input.prompt = app.clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
+    if app.model_offload:
+        # CLIP으로 prompt 추출
+        app.clip = CLIP(config)  # CLIP 생성
+        input.prompt = app.clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
 
-    del app.clip
-    gc.collect()
-    app.clip = None
+        del app.clip
+        gc.collect()
+        app.clip = None
 
-    # 한번도 로딩이 안되어 있었거나 같은 모델이 아니라면
-    if app.loaded_model == None or app.loaded_model.config.model_path != model_path:
-        delete_model()
+        # 한번도 로딩이 안되어 있었거나 같은 모델이 아니라면
+        if app.loaded_model == None or app.loaded_model.config.model_path != model_path:
+            delete_model()
 
-        app.loaded_model = ControlNet(config) # 불러오기
-    try:
-        # 스타일에 따른 로라 적용
-        app.loaded_model.set_style_lora(requestDto.artStyle)
+            app.loaded_model = ControlNet(config) # 불러오기
+        try:
+            # 스타일에 따른 로라 적용
+            app.loaded_model.set_style_lora(requestDto.artStyle)
 
-    # 잘못된 요청이면 예외 처리한다.
-    except TypeError | binascii.Error as e:
-        return {"error_code": "400", "message": "요청이 잘못되거나 없는 데이터입니다."}
+        # 잘못된 요청이면 예외 처리한다.
+        except TypeError | binascii.Error as e:
+            return {"error_code": "400", "message": "요청이 잘못되거나 없는 데이터입니다."}
 
-    # #프롬프트 추출하기 - Interroagtor 이용
-    # input.prompt = app.loaded_model.get_prompt(input.input_image)
-    # input.prompt = app.clip.get_prompt(input.input_image, artStyle=requestDto.artStyle)
-    # 여기까지 20초 소요
+            # 추론하기
+        result: Image = app.loaded_model.inference(input)  # 모델 추론 결과
+    else:
+        # clip 모델 없으면 로딩하기
+        if app.loaded_model['clip'] == None:
+            app.loaded_model['clip'] = CLIP(config)
 
-    # 추론하기
-    result: Image = app.loaded_model.inference(input)  # 모델 추론 결과
-    # 추론만 50초 소요
+        #프롬프트 추출
+        input.prompt = app.loaded_model['clip'] .get_prompt(input.input_image, artStyle=requestDto.artStyle)
+
+        # 모델 로딩 안됬거나 원래 모델이 아니라면 로딩한다.
+        if app.loaded_model['transfer'] == None or app.loaded_model['transfer'].config.model_path != model_path:
+            app.loaded_model['transfer'] = ControlNet(config)
+
+        try:
+            # 스타일에 따른 로라 적용
+            app.loaded_model['transfer'].set_style_lora(requestDto.artStyle)
+
+        # 잘못된 요청이면 예외 처리한다.
+        except TypeError | binascii.Error as e:
+            return {"error_code": "400", "message": "요청이 잘못되거나 없는 데이터입니다."}
+
+        # 추론하기
+        result: Image = app.loaded_model['transfer'].inference(input)  # 모델 추론 결과
 
     # PIL 이미지를 바이트로 변환
     img_byte_array = io.BytesIO()
