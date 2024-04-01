@@ -44,16 +44,15 @@ const Calender = () => {
     console.log(queryResults[0])
     console.log(queryResults[1])
 
-    if (shareRecord) {
+    if (qnaRecord && qnaRecord.questionId !== null) {
+      setCategoryId(1)
+      setQnAResponse(qnaRecord)
+      console.log(qnaRecord)
+    } else if (shareRecord) {
       setCategoryId(0)
       setTodayShareResponse(shareRecord)
       console.log('shareRecord')
       console.log(shareRecord)
-    } else if (qnaRecord) {
-      setCategoryId(1)
-      setQnAResponse(qnaRecord)
-      console.log('qnaRecord')
-      console.log(qnaRecord)
     } else {
       setCategoryId(-1)
     }
