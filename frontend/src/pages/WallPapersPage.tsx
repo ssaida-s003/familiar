@@ -3,9 +3,9 @@ import DisplayContainer from '@common/DisplayContainer'
 import styled from 'styled-components'
 import { useBackgroundStore } from '@stores/background'
 import { useThemeStore } from '@stores/theme'
+import { useTodayDateStore } from '@stores/calendar'
 import { useQueries } from 'react-query'
 import { fetchFamilyShareRecord, fetchQnARecord } from '@apis/calendar'
-import { useTodayDateStore } from '@stores/calendar'
 
 interface themeProps {
   $mainColor: string
