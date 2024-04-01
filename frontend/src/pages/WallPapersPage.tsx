@@ -33,8 +33,8 @@ const ChangeBtn = styled.img`
 const WallPapersPage = () => {
   const { paintBackground } = useBackgroundStore()
   const { mainColor } = useThemeStore()
-  const [currentIndex, setCurrentIndex] = useState(1)
-  const [backgroundType, setBackgroundType] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [backgroundType, setBackgroundType] = useState(1)
   const [currentIndex2, setCurrentIndex2] = useState(0)
   const { date } = useTodayDateStore()
 
