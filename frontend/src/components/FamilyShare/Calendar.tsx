@@ -5,6 +5,7 @@ import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareRe
 import { fetchFamilyShareRecord, fetchQnARecord } from '@/apis/calendar'
 import { useFamilyStore } from '@stores/family'
 import { useQueries } from 'react-query'
+import { useThemeStore } from '@stores/theme.ts'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
@@ -16,7 +17,8 @@ const Calender = () => {
   const { setCategoryId } = useResponseCategory()
   const { setTodayShareResponse } = useTodayShareResponse()
   const { setQnAResponse } = useQnAResponse()
-
+  const { mainColor } = useThemeStore()
+  
   useEffect(() => {
     const initialDate = dayjs().format('YYYY-MM-DD')
     setDate(initialDate)
@@ -77,7 +79,7 @@ const Calender = () => {
   }
 
   return (
-    <c.CalendarWrapper>
+    <c.CalendarWrapper $mainColor={mainColor}>
       <c.StyledCalendar
         value={today}
         onChange={handleDateChange}
