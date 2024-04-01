@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 interface CategoryProps {
   $isSelected: boolean
+  $mainColor: string
 }
 
 interface themeProps {
@@ -77,7 +78,7 @@ export const Category = styled.div<CategoryProps>`
   border-radius: 100%;
   background: #fff;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  border: 3px solid ${({ $isSelected }) => ($isSelected ? '#80add9' : 'transparent')};
+  border: 3px solid ${({ $isSelected, $mainColor }) => ($isSelected ? $mainColor : 'transparent')};
 `
 
 export const ButtonContainer = styled.div`

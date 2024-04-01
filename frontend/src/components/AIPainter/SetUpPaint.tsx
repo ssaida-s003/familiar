@@ -108,7 +108,12 @@ const SetUpPaint = () => {
         <s.CategoryContainer>
           {categorySet.map(category => (
             // eslint-disable-next-line react/jsx-key
-            <s.Category key={category.categoryNameByEnglish} onClick={() => selectCategory(category.categoryNameByEnglish)} $isSelected={selectedCategory === category.categoryNameByEnglish}>
+            <s.Category
+              key={category.categoryNameByEnglish}
+              onClick={() => selectCategory(category.categoryNameByEnglish)}
+              $isSelected={selectedCategory === category.categoryNameByEnglish}
+              $mainColor={mainColor}
+            >
               {category.categoryName}
             </s.Category>
           ))}
