@@ -14,3 +14,13 @@ export const usePaintStore = create<PaintState>(set => ({
   setTitle: title => set(() => ({ title })),
   setOriginalImage: originalImage => set(() => ({ originalImage })),
 }))
+
+interface BackgroundState {
+  convertPaint: string
+  setConvertPaint: (convertPaint: string) => void
+}
+
+export const useBackgroundStore = create<BackgroundState>(set => ({
+  convertPaint: '',
+  setConvertPaint: convertPaint => set(() => ({ convertPaint })),
+}))

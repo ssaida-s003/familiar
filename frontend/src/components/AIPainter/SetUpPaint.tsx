@@ -6,7 +6,7 @@ import { useFamilyStore } from '@stores/family'
 import { useMutation } from 'react-query'
 import Lottie from 'react-lottie'
 import loading from '@/assets/lotties/loading.json'
-import { usePaintStore } from '@stores/aiPaint'
+import { useBackgroundStore, usePaintStore } from '@stores/aiPaint'
 import { AiPainterConvertReqType } from '@/types/aiPainter'
 import AxiosError from '@common/AxiosError'
 import { useThemeStore } from '@stores/theme'
@@ -37,7 +37,7 @@ const SetUpPaint = () => {
   const familyId = useFamilyStore(state => state.familyId)
   const paintStore = usePaintStore()
   const { mainColor } = useThemeStore()
-
+  const backgroundStore = useBackgroundStore()
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
@@ -93,9 +93,9 @@ const SetUpPaint = () => {
   }
 
   if (mutation.isSuccess) {
-    const formatData = 'data:image/png;base64,' + mutation.data.image
-    console.log(formatData)
-    navigate('/display/AI-painter', { state: { backgroundImage: formatData } })
+    const formatData = 'data:image/jpeg;base64,' + mutation.data.image
+    backgroundStore.setConvertPaint(formatData)
+    navigate('/display/AI-painter')
   }
 
   return (
@@ -103,12 +103,17 @@ const SetUpPaint = () => {
       <s.PaintContainer>{image && <s.Paint src={image} alt="Canvas Painting" />}</s.PaintContainer>
       <s.SetUpContainer>
         <s.TitleInfo>그림의 제목을 지어주세요!</s.TitleInfo>
-        <s.TitleInput onChange={handleTitleChange} />
+        <s.TitleInput onChange={handleTitleChange} $mainColor={mainColor} />
         <s.CategoryInfo> 생성할 그림의 스타일을 골라주세요!</s.CategoryInfo>
         <s.CategoryContainer>
           {categorySet.map(category => (
             // eslint-disable-next-line react/jsx-key
-            <s.Category key={category.categoryNameByEnglish} onClick={() => selectCategory(category.categoryNameByEnglish)} $isSelected={selectedCategory === category.categoryNameByEnglish}>
+            <s.Category
+              key={category.categoryNameByEnglish}
+              onClick={() => selectCategory(category.categoryNameByEnglish)}
+              $isSelected={selectedCategory === category.categoryNameByEnglish}
+              $mainColor={mainColor}
+            >
               {category.categoryName}
             </s.Category>
           ))}

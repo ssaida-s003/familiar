@@ -34,7 +34,15 @@ const AIPaintList = () => {
   if (isLoading) return <div>Loading...</div>
   if (error) return <AxiosError />
 
-  return <Container>{data && data.map(paint => <AiPaintCard paint={paint} key={paint.drawingId} onDeleted={() => deleteMutation.mutate(paint.drawingId)} />)}</Container>
+  return (
+    <Container>
+      {data &&
+        data
+          .slice()
+          .reverse()
+          .map(paint => <AiPaintCard paint={paint} key={paint.drawingId} onDeleted={() => deleteMutation.mutate(paint.drawingId)} />)}
+    </Container>
+  )
 }
 
 export default AIPaintList
