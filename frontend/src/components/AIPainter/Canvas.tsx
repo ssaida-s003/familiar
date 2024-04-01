@@ -46,8 +46,10 @@ const Canvas: React.FC<CanvasProps> = () => {
           const canvas = canvasRef.current
           const context = contextRef.current
           if (canvas && context) {
-            context.drawImage(img as HTMLImageElement | SVGImageElement | HTMLVideoElement | HTMLCanvasElement | ImageBitmap | OffscreenCanvas | VideoFrame, 0, 0, canvas.width, canvas.height)
-            console.log(backgroundStore.convertPaint)
+            const x = (canvas.width / window.devicePixelRatio - 512) / 2
+            const y = (canvas.height / window.devicePixelRatio - 512) / 2
+
+            context.drawImage(img as CanvasImageSource, x, y, 512, 512)
           }
         })
         .catch(error => {
