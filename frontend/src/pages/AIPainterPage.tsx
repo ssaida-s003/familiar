@@ -7,7 +7,7 @@ const AiPainterPage = () => {
   const backgroundImage = location.state?.image
 
   return (
-    <DisplayContainer title={'AI 그림 그리기'}>
+    <DisplayContainer title={'Dream Painter'}>
       <Canvas backgroundImage={backgroundImage} />
     </DisplayContainer>
   )

@@ -28,7 +28,7 @@ const FamilyShare = () => {
   }, [])
 
   return (
-    <DisplayContainer title={'가족 공유'}>
+    <DisplayContainer title={'하루 공유'}>
       {shareStep === 0 && <ShareOrQuestion setIsTodayShareRecord={setIsTodayShareRecord} setIsQnARecord={setIsQnARecord} />}
       {shareStep !== 0 && isTodayShareRecord ? <RecordTodayShare /> : isQnARecord && <RecordQnA />}
       <AIImgAnswer />
