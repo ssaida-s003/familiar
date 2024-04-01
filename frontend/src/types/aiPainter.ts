@@ -15,7 +15,7 @@ export interface getPaintResType {
   familyId: number
   name: string
   originalImage: string
-  convertedImage: string
+  generatedImage: string
   createdAt: string
   isWallpaper: boolean
 }

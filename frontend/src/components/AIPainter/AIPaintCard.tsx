@@ -48,7 +48,7 @@ const AiPaintCard: React.FC<AiPaintCardProps> = ({ paint, onDeleted }) => {
       <a.PaintContainer>
         <a.Img src={`${paint.originalImage}`}></a.Img>
         <a.ArrowIcon src="/icon/icon_arrow.png"></a.ArrowIcon>
-        <a.Img src={`${paint.convertedImage}`}></a.Img>
+        <a.Img src={`${paint.generatedImage}`}></a.Img>
       </a.PaintContainer>
     </a.Container>
   )
