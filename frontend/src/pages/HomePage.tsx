@@ -34,8 +34,8 @@ const HomePage = () => {
 
   const goToNextStep = () => {
     const data = {
-      topLeft: selectedColorCode[0],
-      topRight: selectedColorCode[1],
+      topLeft: selectedColorCode[1],
+      topRight: selectedColorCode[0],
       bottomLeft: selectedColorCode[2],
       bottomRight: selectedColorCode[3],
     }
