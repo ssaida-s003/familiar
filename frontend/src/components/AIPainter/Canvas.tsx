@@ -58,6 +58,8 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
         context.strokeStyle = 'black'
         context.lineWidth = lineWidth
         contextRef.current = context
+        context.fillStyle = 'white'
+        context.fillRect(0, 0, canvas.width, canvas.height)
       }
 
       if (canvas) {
@@ -159,13 +161,12 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
   const goNextStep = () => {
     const canvas = canvasRef.current
     if (canvas) {
-      const dataUrl = canvas.toDataURL()
-
+      const dataUrl = canvas.toDataURL('image/jpeg')
       if (backgroundImg) {
         const { title, originalImage } = paintStore
         const aiPainterSaveReq = {
-          originalImage: originalImage.replace('data:image/png;base64,', ''),
-          convertedImage: dataUrl.replace('data:image/png;base64,', ''),
+          originalImage: originalImage.replace('data:image/jpeg;base64,', ''),
+          convertedImage: dataUrl.replace('data:image/jpeg;base64,', ''),
           name: title,
         }
 
