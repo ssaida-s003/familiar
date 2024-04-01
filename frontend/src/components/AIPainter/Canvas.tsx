@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useMutation } from 'react-query'
 import ToolBar from '@components/AIPainter/ToolBar'
 import * as c from '@components/AIPainter/style/CanvasStyle'
-import { usePaintStore } from '@stores/aiPaint'
+import { useBackgroundStore, usePaintStore } from '@stores/aiPaint'
 import { useFamilyStore } from '@stores/family'
 import { AiPainterSaveReqType } from '@/types/aiPainter'
 import { aiPaintSave } from '@apis/aiPainter'
+import { useThemeStore } from '@stores/theme'
 
 interface CanvasProps {
   backgroundImage?: string // 배경 이미지 URL 또는 Base64 데이터
 }
 
-const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
+const Canvas: React.FC<CanvasProps> = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const contextRef = useRef<CanvasRenderingContext2D | null>(null)
   const [isDrawing, setIsDrawing] = useState(false)
@@ -24,23 +25,36 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
   const paintStore = usePaintStore()
   const { familyId } = useFamilyStore()
   const navigate = useNavigate()
-  const location = useLocation()
-  const backgroundImg = location.state?.backgroundImage
+  const { mainColor } = useThemeStore()
+  const backgroundStore = useBackgroundStore()
 
   useEffect(() => {
-    if (backgroundImage && canvasRef.current && contextRef.current) {
-      const context = contextRef.current
-      const img = new Image()
-      console.log(backgroundImg)
-      img.onload = () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        context.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height)
-      }
-      img.src = backgroundImage
-      img.crossOrigin = 'Anonymous'
+    const loadImage = (src: string) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => resolve(img)
+        img.onerror = reject
+        img.crossOrigin = 'Anonymous'
+        img.src = src
+      })
     }
-  }, [backgroundImage])
+
+    if (backgroundStore.convertPaint) {
+      setHistory([])
+      loadImage(backgroundStore.convertPaint)
+        .then(img => {
+          const canvas = canvasRef.current
+          const context = contextRef.current
+          if (canvas && context) {
+            context.drawImage(img as HTMLImageElement | SVGImageElement | HTMLVideoElement | HTMLCanvasElement | ImageBitmap | OffscreenCanvas | VideoFrame, 0, 0, canvas.width, canvas.height)
+            console.log(backgroundStore.convertPaint)
+          }
+        })
+        .catch(error => {
+          console.error('Failed to load the background image', error)
+        })
+    }
+  }, [backgroundStore.convertPaint])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -162,7 +176,7 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
     const canvas = canvasRef.current
     if (canvas) {
       const dataUrl = canvas.toDataURL('image/jpeg')
-      if (backgroundImg) {
+      if (backgroundStore.convertPaint !== '') {
         const { title, originalImage } = paintStore
         const aiPainterSaveReq = {
           originalImage: originalImage.replace('data:image/jpeg;base64,', ''),
@@ -186,11 +200,13 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
 
   return (
     <c.Container>
-      <c.AlbumBtn src="/icon/icon_albumBtn.png" onClick={goAlbum} />
+      <c.AlbumBtnContainer $mainColor={mainColor}>
+        <c.AlbumBtn src="/icon/icon_albumBtn.png" onClick={goAlbum} />
+      </c.AlbumBtnContainer>
       <canvas onMouseDown={startDrawing} onMouseUp={endDrawing} onMouseMove={draw} onMouseLeave={() => isDrawing && endDrawing()} ref={canvasRef} />
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
-      {backgroundImg && <c.InfoText>그림을 추가로 꾸밀 수 있어요!</c.InfoText>}
-      <c.NextStepBtn src={backgroundImg ? '/icon/icon_AIStoreBtn.png' : '/icon/icon_AIChangeBtn.png'} onClick={goNextStep} />
+      {backgroundStore.convertPaint !== '' && <c.InfoText>그림을 추가로 꾸밀 수 있어요!</c.InfoText>}
+      <c.NextStepBtn src={backgroundStore.convertPaint !== '' ? '/icon/icon_AIStoreBtn.png' : '/icon/icon_AIChangeBtn.png'} onClick={goNextStep} />
     </c.Container>
   )
 }

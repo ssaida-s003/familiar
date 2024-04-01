@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 interface CategoryProps {
   $isSelected: boolean
+  $mainColor: string
 }
 
 interface themeProps {
@@ -44,7 +45,7 @@ export const TitleInfo = styled.div`
   font-size: 18px;
 `
 
-export const TitleInput = styled.input`
+export const TitleInput = styled.input<themeProps>`
   width: 96%;
   border-radius: 2px;
   border: 2px solid #fff;
@@ -52,6 +53,10 @@ export const TitleInput = styled.input`
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: transparent;
   margin: 2% 0;
+
+  &:focus {
+    outline: 2px solid ${({ $mainColor }) => `#${$mainColor}`};
+  }
 `
 
 export const CategoryContainer = styled.div`
@@ -77,7 +82,7 @@ export const Category = styled.div<CategoryProps>`
   border-radius: 100%;
   background: #fff;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  border: 3px solid ${({ $isSelected }) => ($isSelected ? '#80add9' : 'transparent')};
+  border: 3px solid ${({ $isSelected, $mainColor }) => ($isSelected ? `#${$mainColor}` : 'transparent')};
 `
 
 export const ButtonContainer = styled.div`
