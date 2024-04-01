@@ -6,7 +6,7 @@ import { useFamilyStore } from '@stores/family'
 import { useMutation } from 'react-query'
 import Lottie from 'react-lottie'
 import loading from '@/assets/lotties/loading.json'
-import { usePaintStore } from '@stores/aiPaint'
+import { useBackgroundStore, usePaintStore } from '@stores/aiPaint'
 import { AiPainterConvertReqType } from '@/types/aiPainter'
 import AxiosError from '@common/AxiosError'
 import { useThemeStore } from '@stores/theme'
@@ -37,7 +37,7 @@ const SetUpPaint = () => {
   const familyId = useFamilyStore(state => state.familyId)
   const paintStore = usePaintStore()
   const { mainColor } = useThemeStore()
-
+  const backgroundStore = useBackgroundStore()
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
@@ -94,8 +94,8 @@ const SetUpPaint = () => {
 
   if (mutation.isSuccess) {
     const formatData = 'data:image/jpeg;base64,' + mutation.data.image
-    console.log(formatData)
-    navigate('/display/AI-painter', { state: { backgroundImage: formatData } })
+    backgroundStore.setConvertPaint(formatData)
+    navigate('/display/AI-painter')
   }
 
   return (
