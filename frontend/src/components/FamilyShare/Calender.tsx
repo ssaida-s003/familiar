@@ -39,16 +39,28 @@ const Calender = () => {
     const shareRecord = queryResults[0].data
     const qnaRecord = queryResults[1].data
 
-    if (shareRecord && shareRecord.length > 0) {
+    if (shareRecord) {
       setCategoryId(0)
       setTodayShareResponse(shareRecord)
       console.log(shareRecord)
-    } else if (qnaRecord && qnaRecord.questionId !== null) {
+    } else if (qnaRecord) {
       setCategoryId(1)
       setQnAResponse(qnaRecord)
+      console.log(shareRecord)
     } else {
       setCategoryId(-1)
     }
+
+    // if (shareRecord && shareRecord.length > 0) {
+    //   setCategoryId(0)
+    //   setTodayShareResponse(shareRecord)
+    //   console.log(shareRecord)
+    // } else if (qnaRecord && qnaRecord.questionId !== null) {
+    //   setCategoryId(1)
+    //   setQnAResponse(qnaRecord)
+    // } else {
+    //   setCategoryId(-1)
+    // }
   }, [queryResults[0].data, queryResults[1].data])
 
   const handleDateChange = (value: Value) => {
