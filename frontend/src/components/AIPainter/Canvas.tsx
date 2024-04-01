@@ -63,7 +63,7 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
       }
 
       if (canvas) {
-        const initialCanvasState = canvas.toDataURL()
+        const initialCanvasState = canvas.toDataURL('image/jpeg')
         setHistory([initialCanvasState])
       }
     }
@@ -105,7 +105,7 @@ const Canvas: React.FC<CanvasProps> = ({ backgroundImage }) => {
     if (canvas) {
       setStep(step + 1)
       const newHistory = history.slice(0, step + 1)
-      newHistory.push(canvas.toDataURL())
+      newHistory.push(canvas.toDataURL('image/jpeg'))
       setHistory(newHistory)
       console.log(newHistory)
     }
