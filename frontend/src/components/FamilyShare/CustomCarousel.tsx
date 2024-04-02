@@ -15,32 +15,26 @@ interface CustomCarouselProps {
   margin: string
   offset: number
   showArrows: boolean
-  initialSlide?: number
 }
 
-const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, height, margin, offset, showArrows, initialSlide }) => {
+const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, height, margin, offset, showArrows }) => {
   const table = cards.map((element, index) => ({
     ...element,
-    onClick: () => {
-      setGoToSlide(index)
-      console.log(index)
-    },
+    onClick: () => setGoToSlide(index),
   }))
 
   key
 
   const [offsetRadius, setOffsetRadius] = useState<number>(offset)
   const [showArrowsState, setShowArrows] = useState<boolean>(showArrows)
-  const [goToSlide, setGoToSlide] = useState<number | undefined>(initialSlide)
+  const [goToSlide, setGoToSlide] = useState<number | undefined>(undefined)
   const [cardsState] = useState<Slide[]>(table)
+
+  setShowArrows(false)
 
   useEffect(() => {
     setOffsetRadius(offset)
-    setShowArrows(showArrows)
-    if (initialSlide !== undefined) {
-      setGoToSlide(initialSlide)
-    }
-  }, [offset, showArrows, initialSlide])
+  }, [offset])
 
   return (
     <div style={{ width, height, margin }}>
