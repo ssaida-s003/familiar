@@ -2,10 +2,8 @@ import * as c from '@components/FamilyShare/style/CalenderStyle'
 import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@/stores/calendar'
-import { fetchFamilyShareRecord, fetchQnARecord } from '@/apis/calendar'
-import { useFamilyStore } from '@stores/family'
-import { useQueries } from 'react-query'
 import { useThemeStore } from '@stores/theme.ts'
+import { useCalendarQueries } from '@/hooks/useCalendarQueries'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
@@ -13,29 +11,18 @@ type Value = ValuePiece | [ValuePiece, ValuePiece]
 const Calender = () => {
   const [today, setToday] = useState<Date>(new Date())
   const { date, setDate } = useTodayDateStore()
-  const { familyId } = useFamilyStore()
   const { setCategoryId } = useResponseCategory()
   const { setTodayShareResponse } = useTodayShareResponse()
   const { setQnAResponse } = useQnAResponse()
   const { mainColor } = useThemeStore()
 
+  const queryResults = useCalendarQueries()
+
   useEffect(() => {
     const initialDate = dayjs().format('YYYY-MM-DD')
+    console.log(date)
     setDate(initialDate)
   }, [])
-
-  const queryResults = useQueries([
-    {
-      queryKey: ['familyShareRecord', familyId, date],
-      queryFn: () => fetchFamilyShareRecord(familyId, { date }),
-      enabled: !!date,
-    },
-    {
-      queryKey: ['qnaRecord', familyId, date],
-      queryFn: () => fetchQnARecord(familyId, { date }),
-      enabled: !!date,
-    },
-  ])
 
   useEffect(() => {
     const shareRecord = queryResults[0].data
@@ -46,7 +33,7 @@ const Calender = () => {
 
     if (qnaRecord && qnaRecord.questionId !== null) {
       setCategoryId(1)
-      qnaRecord.answers.reverse()
+      qnaRecord.answers = qnaRecord.answers.reverse()
       setQnAResponse(qnaRecord)
       console.log(qnaRecord)
     } else if (shareRecord) {
@@ -57,17 +44,6 @@ const Calender = () => {
     } else {
       setCategoryId(-1)
     }
-
-    // if (shareRecord && shareRecord.length > 0) {
-    //   setCategoryId(0)
-    //   setTodayShareResponse(shareRecord)
-    //   console.log(shareRecord)
-    // } else if (qnaRecord && qnaRecord.questionId !== null) {
-    //   setCategoryId(1)
-    //   setQnAResponse(qnaRecord)
-    // } else {
-    //   setCategoryId(-1)
-    // }
   }, [queryResults[0].data, queryResults[1].data])
 
   const handleDateChange = (value: Value) => {
