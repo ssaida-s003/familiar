@@ -31,6 +31,9 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, heig
   const [cardsState] = useState<Slide[]>(table)
 
   useEffect(() => {
+    console.log(cards)
+    console.log(offset)
+
     setOffsetRadius(offset)
     setShowArrows(showArrows)
   }, [offset, showArrows])
