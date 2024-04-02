@@ -33,9 +33,6 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, heig
   setShowArrows(false)
 
   useEffect(() => {
-    console.log(cards)
-    console.log(offset)
-
     setOffsetRadius(offset)
   }, [offset])
 
