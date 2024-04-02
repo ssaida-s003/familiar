@@ -25,7 +25,7 @@ const AfterRecord = () => {
     onSuccess: data => {
       setImage(data.image)
       setIsLoading(false)
-      queryResults[0].refetch()
+      // queryResults[0].refetch()
     },
   })
 
