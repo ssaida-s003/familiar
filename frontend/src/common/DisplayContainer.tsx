@@ -48,6 +48,7 @@ const Footer = styled.footer`
   position: fixed;
   bottom: 0;
   display: flex;
+  z-index: 100;
 `
 
 const Icon = styled.img`
