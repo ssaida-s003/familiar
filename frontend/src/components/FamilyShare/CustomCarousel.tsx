@@ -25,6 +25,11 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, heig
 
   key
 
+  useEffect(() => {
+    console.log(cards)
+    console.log(offset)
+  }, [])
+
   const [offsetRadius, setOffsetRadius] = useState<number>(offset)
   const [showArrowsState, setShowArrows] = useState<boolean>(showArrows)
   const [goToSlide, setGoToSlide] = useState<number | undefined>(undefined)
