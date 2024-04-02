@@ -44,7 +44,7 @@ const Calender = () => {
     } else {
       setCategoryId(-1)
     }
-  }, [queryResults[0].data, queryResults[1].data])
+  }, [queryResults])
 
   const handleDateChange = (value: Value) => {
     if (value instanceof Date) {
