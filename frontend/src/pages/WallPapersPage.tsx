@@ -28,6 +28,7 @@ const ChangeBtn = styled.img`
   width: 40px;
   height: 40px;
   cursor: pointer;
+  border: none;
 `
 
 const WallPapersPage = () => {
