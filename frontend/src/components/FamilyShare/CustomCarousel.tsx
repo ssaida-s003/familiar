@@ -20,7 +20,10 @@ interface CustomCarouselProps {
 const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, height, margin, offset, showArrows }) => {
   const table = cards.map((element, index) => ({
     ...element,
-    onClick: () => setGoToSlide(index),
+    onClick: () => {
+      setGoToSlide(index)
+      console.log(index)
+    },
   }))
 
   key
