@@ -33,14 +33,14 @@ const Calender = () => {
 
     if (qnaRecord && qnaRecord.questionId !== null) {
       setCategoryId(1)
-      // qnaRecord.answers = qnaRecord.answers.reverse()
+      qnaRecord.answers = qnaRecord.answers.reverse()
       setQnAResponse(qnaRecord)
       console.log(qnaRecord)
     } else if (shareRecord) {
       setCategoryId(0)
-      // setTodayShareResponse(shareRecord.reverse())
-      setTodayShareResponse(shareRecord)
-      console.log('shareRecord')
+      setTodayShareResponse(shareRecord.reverse())
+      // setTodayShareResponse(shareRecord)
+      // console.log('shareRecord')
       console.log(shareRecord)
     } else {
       setCategoryId(-1)
