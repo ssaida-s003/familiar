@@ -72,7 +72,11 @@ const AiImgAnswer = () => {
     <Container>
       <Date>{date.split('-').join('.')}</Date>
       {categoryId === 1 && <QuestionResponse />}
-      {slides.length > 0 ? <CustomCarousel key={carouselKey} cards={slides} height="300px" width="100%" margin="0 auto" offset={2} showArrows={false} /> : <NoAnswerAlarm />}
+      {slides.length > 0 ? (
+        <CustomCarousel key={carouselKey} cards={slides} height="300px" width="100%" margin="0 auto" offset={2} showArrows={false} initialSlide={slides.length / 2} />
+      ) : (
+        <NoAnswerAlarm />
+      )}
     </Container>
   )
 }
