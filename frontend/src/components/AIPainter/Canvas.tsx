@@ -210,7 +210,7 @@ const Canvas: React.FC<CanvasProps> = () => {
       <ToolBar setLineWidth={setLineWidth} setIsErasing={setIsErasing} clearCanvas={clearCanvas} undo={undo} redo={redo} setBrushColor={setBrushColor} />
       {backgroundStore.convertPaint !== '' && <c.InfoText>그림을 추가로 꾸밀 수 있어요!</c.InfoText>}
       <c.NextStepBtn $mainColor={mainColor} onClick={goNextStep}>
-        {backgroundStore.convertPaint !== '' ? '그림 저장' : '그림 변환'}
+        {backgroundStore.convertPaint !== '' ? '그림 변환' : '그림 저장'}
       </c.NextStepBtn>
     </c.Container>
   )
