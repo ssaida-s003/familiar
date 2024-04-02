@@ -42,12 +42,12 @@ const AiImgAnswer = () => {
     if (categoryId === 0) {
       newSlides = todayShareResponse.map((item, index) => ({
         key: index,
-        content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '100%', height: 'auto' }} />,
+        content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '400px', height: 'auto' }} />,
       }))
     } else if (categoryId === 1) {
       newSlides = qnAResponse.answers.map((item, index) => ({
         key: index,
-        content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '100%', height: 'auto' }} />,
+        content: <img src={item.url} alt={`Slide ${index}`} style={{ width: '400px', height: 'auto' }} />,
       }))
     }
 
