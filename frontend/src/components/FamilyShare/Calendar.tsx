@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { useQnAResponse, useResponseCategory, useTodayDateStore, useTodayShareResponse } from '@/stores/calendar'
 import { useThemeStore } from '@stores/theme.ts'
-import { useCalendarQueries } from '@/hooks/useCalendarQueries'
+import { useQueries } from 'react-query'
+import { fetchFamilyShareRecord, fetchQnARecord } from '@/apis/calendar'
+import { useFamilyStore } from '@stores/family'
+// import { useCalendarQueries } from '@/hooks/useCalendarQueries'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
@@ -16,7 +19,21 @@ const Calender = () => {
   const { setQnAResponse } = useQnAResponse()
   const { mainColor } = useThemeStore()
 
-  const queryResults = useCalendarQueries()
+  // const queryResults = useCalendarQueries()
+  const { familyId } = useFamilyStore()
+
+  const queryResults = useQueries([
+    {
+      queryKey: ['familyShareRecord', familyId, date],
+      queryFn: () => fetchFamilyShareRecord(familyId, { date }),
+      enabled: !!familyId && !!date,
+    },
+    {
+      queryKey: ['qnaRecord', familyId, date],
+      queryFn: () => fetchQnARecord(familyId, { date }),
+      enabled: !!familyId && !!date,
+    },
+  ])
 
   useEffect(() => {
     const initialDate = dayjs().format('YYYY-MM-DD')
