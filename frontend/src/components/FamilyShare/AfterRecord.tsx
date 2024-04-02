@@ -8,7 +8,7 @@ import dayjs from 'dayjs'
 import { useRef, useState } from 'react'
 import ConvertRecord from '@components/FamilyShare/ConvertRecord'
 import * as r from '@components/FamilyShare/style/RecordingStyle'
-// import { useCalendarQueries } from '@/hooks/useCalendarQueries'
+import { useCalendarQueries } from '@/hooks/useCalendarQueries'
 
 const AfterRecord = () => {
   const { image, content, setImage } = useConvertTodayStore()
@@ -18,7 +18,7 @@ const AfterRecord = () => {
   const [isLoading, setIsLoading] = useState(false)
   const { memberId } = useConvertTodayStore()
 
-  // const queryResults = useCalendarQueries()
+  const queryResults = useCalendarQueries()
 
   const reConvertMutation = useMutation(familyTodayConvert, {
     onMutate: () => setIsLoading(true),
@@ -33,6 +33,7 @@ const AfterRecord = () => {
     onSuccess: () => {
       setShareStep(0)
       setDate(dayjs().format('YYYY-MM-DD'))
+      queryResults[0].refetch()
     },
   })
 
