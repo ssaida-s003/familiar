@@ -17,35 +17,24 @@ interface CustomCarouselProps {
   showArrows: boolean
 }
 
-const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, height, margin, offset, showArrows }) => {
-  const table = cards.map((element, index) => ({
-    ...element,
-    onClick: () => setGoToSlide(index),
-  }))
-
-  key
-
-  useEffect(() => {
-    console.log(cards)
-    console.log(offset)
-
-    setGoToSlide(Math.floor(table.length / 2))
-    console.log(Math.floor(table.length / 2))
-  }, [])
+const CustomCarousel: React.FC<CustomCarouselProps> = ({ cards, width, height, margin, offset, showArrows }) => {
+  const table = cards.map((element, index) => {
+    return { ...element, onClick: () => setGoToSlide(index) }
+  })
 
   const [offsetRadius, setOffsetRadius] = useState<number>(offset)
-  const [showArrowsState, setShowArrows] = useState<boolean>(showArrows)
+  const [showArrowsConfig, setShowArrowsConfig] = useState<boolean>(showArrows)
   const [goToSlide, setGoToSlide] = useState<number | undefined>(undefined)
-  const [cardsState] = useState<Slide[]>(table)
+  const [elements] = useState<Slide[]>(table)
 
   useEffect(() => {
     setOffsetRadius(offset)
-    setShowArrows(showArrows)
-  }, [offset, showArrows])
+    setShowArrowsConfig(showArrows)
+  }, [offset, showArrowsConfig])
 
   return (
     <div style={{ width, height, margin }}>
-      <Carousel slides={cardsState} goToSlide={goToSlide} offsetRadius={offsetRadius} showNavigation={showArrowsState} animationConfig={config.gentle} />
+      <Carousel slides={elements} goToSlide={goToSlide} offsetRadius={offsetRadius} showNavigation={showArrows} animationConfig={config.gentle} />
     </div>
   )
 }
