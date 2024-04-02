@@ -30,13 +30,14 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, heig
   const [goToSlide, setGoToSlide] = useState<number | undefined>(undefined)
   const [cardsState] = useState<Slide[]>(table)
 
+  setShowArrows(false)
+
   useEffect(() => {
     console.log(cards)
     console.log(offset)
 
     setOffsetRadius(offset)
-    setShowArrows(showArrows)
-  }, [offset, showArrows])
+  }, [offset])
 
   return (
     <div style={{ width, height, margin }}>
