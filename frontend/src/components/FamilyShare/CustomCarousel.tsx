@@ -37,7 +37,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ key, cards, width, heig
 
   return (
     <div style={{ width, height, margin }}>
-      <Carousel slides={cardsState.reverse()} goToSlide={goToSlide} offsetRadius={offsetRadius} showNavigation={showArrowsState} animationConfig={config.gentle} />
+      <Carousel slides={cardsState} goToSlide={goToSlide} offsetRadius={offsetRadius} showNavigation={showArrowsState} animationConfig={config.gentle} />
     </div>
   )
 }
