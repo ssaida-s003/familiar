@@ -18,7 +18,7 @@ const Calender = () => {
   const { setTodayShareResponse } = useTodayShareResponse()
   const { setQnAResponse } = useQnAResponse()
   const { mainColor } = useThemeStore()
-  
+
   useEffect(() => {
     const initialDate = dayjs().format('YYYY-MM-DD')
     setDate(initialDate)
@@ -46,11 +46,12 @@ const Calender = () => {
 
     if (qnaRecord && qnaRecord.questionId !== null) {
       setCategoryId(1)
+      qnaRecord.answers.reverse()
       setQnAResponse(qnaRecord)
       console.log(qnaRecord)
     } else if (shareRecord) {
       setCategoryId(0)
-      setTodayShareResponse(shareRecord)
+      setTodayShareResponse(shareRecord.reverse())
       console.log('shareRecord')
       console.log(shareRecord)
     } else {
