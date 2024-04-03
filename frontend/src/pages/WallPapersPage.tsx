@@ -27,8 +27,9 @@ const ChangeBtn = styled.img`
   left: 15px;
   width: 40px;
   height: 40px;
-  cursor: pointer;
-  border: none;
+  border: 0 !important;
+  outline: none !important;
+  transform: rotate(90deg);
 `
 
 const WallPapersPage = () => {
@@ -73,7 +74,7 @@ const WallPapersPage = () => {
 
   return (
     <DisplayContainer title={'배경화면'}>
-      <ChangeBtn onClick={handleChangeClick}></ChangeBtn>
+      <ChangeBtn src="/icon/icon_next.png" onClick={handleChangeClick}></ChangeBtn>
       {backgroundType === 1 && paintBackground.length > 0 && (
         <img key={currentIndex} src={paintBackground[currentIndex]} alt="배경화면" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       )}
