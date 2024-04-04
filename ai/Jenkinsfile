@@ -6,13 +6,13 @@ pipeline {
 
         DOCKERHUB_CREDENTIALS = credentials("dockerhub-token")
         dockerImage = ''
-        SSH_CONNECTION = "ubuntu@j10s003.p.ssafy.io"
+        SSH_CONNECTION = "fangdol888@ssaida-ai.duckdns.org"
     }
     agent any
     stages {
         stage('Git Clone') {
             steps {
-                git branch: 'deploy', credentialsId: "gitlab-token", url: 'https://lab.ssafy.com/s10-s-project/S10P21S003.git'
+                git branch: 'ai/deploy', credentialsId: "gitlab-token", url: 'https://lab.ssafy.com/s10-s-project/S10P21S003.git'
             }
         }
         stage('Login'){
@@ -23,7 +23,7 @@ pipeline {
   
         stage('AI - Docker Image Build') {
             steps {
-                dir("./") {
+                dir("./ai") {
                     script{
                         dockerImage = docker.build ai_repository
                     }
@@ -42,12 +42,13 @@ pipeline {
 
         stage('AI - Deploy') {
             steps {
-                sshagent (credentials: ['aws_key']) {
+                sshagent (credentials: ['gcp_key']) {
                     script{
                         sh "ssh -o StrictHostKeyChecking=no  ${SSH_CONNECTION} uptime"
                         //docker-compose
-                        sh "ssh -t ${SSH_CONNECTION} 'docker-compose pull ${docker_compose_ai_name}'"
-                        sh "ssh -t ${SSH_CONNECTION} 'docker-compose up -d ${docker_compose_ai_name}'"
+                        sh "ssh -t ${SSH_CONNECTION} 'sudo docker system prune -a -f'"
+                        sh "ssh -t ${SSH_CONNECTION} 'sudo docker compose pull ${docker_compose_ai_name}'"
+                        sh "ssh -t ${SSH_CONNECTION} 'sudo docker compose up -d ${docker_compose_ai_name}'"
                     }
                 }
             }     
