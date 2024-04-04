@@ -11,6 +11,7 @@
 - [1️⃣ 프로젝트 소개](#1-프로젝트-소개)
   - [Features](#features)
   - [Technologies](#technologies)
+  - [Architecture](#Architecture)
 - [2️⃣ 포팅 메뉴얼](#2-포팅-메뉴얼)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
