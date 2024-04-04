@@ -1,11 +1,11 @@
 # SSAFY 10기 & DA사업부 전자 연계 프로젝트 - Familiar
-👑 **삼성 청년 SW 아카데미 10기 & 삼성전자 DA사업부 연계 프로젝트 1등 수상**👑
 
 <!--프로젝트 대문 이미지-->
 <a href="https://www.youtube.com/watch?v=DGH4enc_nlA"><img src="https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%EC%84%9C%EB%B9%84%EC%8A%A4%EC%86%8C%EA%B0%9C.png" width="70%" height="70%"/></a>
 
 <small>_해당 이미지를 클릭하면 티저영상으로 이동됩니다._</small>
 
+>👑 **삼성 청년 SW 아카데미 10기 & 삼성전자 DA사업부 연계 프로젝트 1등 수상**👑
 <!--목차-->
 # 🎈 Table of Contents
 - [1️⃣ 프로젝트 소개](#1-프로젝트-소개)
