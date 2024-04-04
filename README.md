@@ -43,8 +43,6 @@
 
 
 ## Technologies
-***언어, 프레임워크, 주요 라이브러리**를 **버전**과 함께 나열하세요.*
-
 ### Version Info
 **FRONTEND**
 - [React]
