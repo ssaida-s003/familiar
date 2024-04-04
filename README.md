@@ -1,8 +1,5 @@
-# SSAFY 10기 & DA사업부 전자 연계 프로젝트 SSAIDA팀
-
-# Familiar
-
-삼성 청년 SW 아카데미 10기 & 삼성전자 DA사업부 연계 프로젝트 1등 수상
+# SSAFY 10기 & DA사업부 전자 연계 프로젝트 - Familiar
+👑 **삼성 청년 SW 아카데미 10기 & 삼성전자 DA사업부 연계 프로젝트 1등 수상**👑
 
 <!--배지-->
 ![MIT License][license-shield] ![Repository Size][repository-size-shield] ![Issue Closed][issue-closed-shield]
