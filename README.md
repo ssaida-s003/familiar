@@ -1,6 +1,10 @@
 # SSAFY 10기 & DA사업부 전자 연계 프로젝트 3팀
 
-# Project Title
+# Familiar
+
+삼성 청년 SW 아카데미 SSAFY 10기
+
+삼성전자 DA사업부 연계 프로젝트 1등 수상
 
 <!--배지-->
 ![MIT License][license-shield] ![Repository Size][repository-size-shield] ![Issue Closed][issue-closed-shield]
@@ -27,25 +31,42 @@
 
 
 # [1] 프로젝트 소개
-*다음 내용을 고려하여 프로젝트에 대한 **전반적인 정보**를 적으세요.*
 
-- ❗️짧은❗️ 도입부/제작 동기
-- 무슨 프로젝트인지
-- 왜 이 프로젝트를 사용해야하는지
+이미지 생성형 AI을 활용한 삼성 비스포크 패밀리허브 가족 소통 서비스
+
+32인치 디스플레이를 활용하여 **소통의 매개체**로서 가족의 행복을 책임지는 비스포크 패밀리허브
+
 
 ## Features
-*강조하고 싶은 **주요 기능**이나 **차별성 있는 특징**을 적으세요.*
-- 최고 멋진 **README**를 쉽게 작성할 수 있도록 *이텔릭체*로 된 **가이드**를 제공
-- 뱃지로 **언어 옵션**을 제공
+
+- **가족들 간 하루 일상 공유 기능**
+  - 음성 인식을 통해 냉장고에서도 손쉬운 입력
+  - 인물 모델로 화자의 얼굴이 들어가도록 하여 사진을 찍지않아도 개인화된 이미지 생성
+  - **하루 공유, 질문과 답변** 두 가지 방법으로 소통 가능
+
+- **Dream Painter**
+  - 화이트보드에 그린 낙서를 AI를 통해 퀄리티 높은 작품으로 완성
+  - 부모가 주방에 있는 동안에도 아이와 부모를 연결
+  - 비스포크 패밀리허브에 탑재된 미러링 기능을 통해 태블릿, 스마트폰 등 어떤 기기를 통해 그려도 주방에서 확인 가능
+
 
 ## Technologies
 ***언어, 프레임워크, 주요 라이브러리**를 **버전**과 함께 나열하세요.*
 
-- [Maven](https://maven.apache.org/) 3.6.3
+### Version Info
+**FRONTEND**
+- [React]
+**BACKEND**
+- [Java](https://www.java.com/ko/) 17
+- [Gradle](https://gradle.org/) 8.6
 - [MySQL](https://www.mysql.com/) 8.0
-- [Spring](https://spring.io/) 2.4.3
+- [Spring](https://spring.io/) 3.2.3
 
-
+**AI**
+- [CUDA](https://developer.nvidia.com/cuda-toolkit) 11.8.0
+- [cuDNN](https://developer.nvidia.com/cudnn) 9.0.0
+- [Python](https://www.python.org/) 3.10.6
+- [PyTorch](https://pytorch.org/) 2.2.1
 
 # [2] 포팅 메뉴얼
 *만약 운영체제에 따라 프로그램을 다르게 동작시켜야한다면, 운영체제별로 동작 방법을 설명하세요*
