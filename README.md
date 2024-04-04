@@ -8,17 +8,18 @@
 
 <!--목차-->
 # 🎈 Table of Contents
-- [[1] 프로젝트 소개](#1-프로젝트-소개)
+- [1️⃣ 프로젝트 소개](#1-프로젝트-소개)
   - [Features](#features)
   - [Technologies](#technologies)
-- [[2] 포팅 메뉴얼](#2-포팅-메뉴얼)
+- [2️⃣ 포팅 메뉴얼](#2-포팅-메뉴얼)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
-- [[3] 상세 기능 소개](#3-상세-기능-소개)
-- [[4] 팀 소개](#4-팀-소개)
-- [[5] 레퍼런스](#5-레퍼런스)
+- [3️⃣ 상세 기능 소개](#3-상세-기능-소개)
+- [4️⃣ 팀 소개](#4-팀-소개)
+- [5️⃣ 레퍼런스](#5-레퍼런스)
 
+<br>
 
 # 1️⃣ 프로젝트 소개
 
@@ -62,6 +63,8 @@
 ## Architecture
 ![Architecture](docs/Architecture.png)
 
+<br>
+
 # 2️⃣ 포팅 메뉴얼
 *만약 운영체제에 따라 프로그램을 다르게 동작시켜야한다면, 운영체제별로 동작 방법을 설명하세요*
 
@@ -92,7 +95,7 @@ npm install
 const API_KEY = "<Your API key>";
 ```
 
-
+<br>
 
 # 3️⃣ 상세 기능 소개
 ### 비스포크 패밀리허브 색상에 따른 배경 변경
@@ -112,7 +115,7 @@ const API_KEY = "<Your API key>";
 <small>그림을 그리고 화풍을 선택하면 화풍에 따른 LoRA를 이용하여 그림을 더 좋은 퀄리티로 바꾸어줍니다.
 </small>
 
-
+<br>
 
 # 4️⃣ 팀 소개
 
@@ -185,6 +188,8 @@ const API_KEY = "<Your API key>";
     </tr>
 <table>
 </center>
+
+<br>
 
 # 5️⃣ 레퍼런스
 [Huggingface - diffusers](https://huggingface.co/docs/diffusers/index)  
