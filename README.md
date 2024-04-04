@@ -8,17 +8,17 @@
 >👑 **삼성 청년 SW 아카데미 10기 & 삼성전자 DA사업부 연계 프로젝트 1등 수상**👑
 <!--목차-->
 # 🎈 Table of Contents
-- [1️⃣ 프로젝트 소개](#1-프로젝트-소개)
+- [1️⃣ 프로젝트 소개](#1️⃣-프로젝트-소개)
   - [Features](#features)
   - [Technologies](#technologies)
   - [Architecture](#architecture)
-- [2️⃣ 포팅 메뉴얼](#2-포팅-메뉴얼)
+- [2️⃣ 포팅 메뉴얼](#2️⃣-포팅-메뉴얼)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Configuration](#configuration)
-- [3️⃣ 상세 기능 소개](#3-상세-기능-소개)
-- [4️⃣ 팀 소개](#4-팀-소개)
-- [5️⃣ 레퍼런스](#5-레퍼런스)
+- [3️⃣ 상세 기능 소개](#3️⃣-상세-기능-소개)
+- [4️⃣ 팀 소개](#4️⃣-팀-소개)
+- [5️⃣ 레퍼런스](#5️⃣-레퍼런스)
 
 <br>
 
