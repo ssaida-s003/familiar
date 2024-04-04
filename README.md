@@ -7,7 +7,7 @@
 <small>_해당 이미지를 클릭하면 티저영상으로 이동됩니다._</small>
 
 <!--목차-->
-# Table of Contents
+# 🎈 Table of Contents
 - [[1] 프로젝트 소개](#1-프로젝트-소개)
   - [Features](#features)
   - [Technologies](#technologies)
@@ -20,7 +20,7 @@
 - [[5] 레퍼런스](#5-레퍼런스)
 
 
-# [1] 프로젝트 소개
+# 1️⃣ 프로젝트 소개
 
 이미지 생성형 AI을 활용한 삼성 비스포크 패밀리허브 가족 소통 서비스
 
@@ -59,7 +59,7 @@
 - [Python](https://www.python.org/) 3.10.6
 - [PyTorch](https://pytorch.org/) 2.2.1
 
-# [2] 포팅 메뉴얼
+# 2️⃣ 포팅 메뉴얼
 *만약 운영체제에 따라 프로그램을 다르게 동작시켜야한다면, 운영체제별로 동작 방법을 설명하세요*
 
 ## Prerequisites
@@ -91,7 +91,7 @@ const API_KEY = "<Your API key>";
 
 
 
-# [3] 상세 기능 소개
+# 3️⃣ 상세 기능 소개
 ***스크린샷, 코드** 등을 통해 **사용 방법**과 **사용 예제**를 보여주세요. 사용 예제별로 h2 헤더로 나누어 설명할 수 있습니다.*
 
 ![usage](img/usage.png)
@@ -102,8 +102,10 @@ const API_KEY = "<Your API key>";
 
 
 
-# [4] 팀 소개
+# 4️⃣ 팀 소개
 
+**SSAFY + AI + DA = 🥤SSAIDA 팀**
+<center>
 <table>
     <tr height="160px">
         <td align="center" width="200px">
@@ -170,7 +172,7 @@ const API_KEY = "<Your API key>";
         </td>
     </tr>
 <table>
-
+</center>
 
 # [5] 레퍼런스
 [Huggingface - diffusers](https://huggingface.co/docs/diffusers/index)  
