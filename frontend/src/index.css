@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+@font-face {
+  font-family: 'SamsungOneKorean';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/SamsungOneKorean-700.woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'AppleSDGothicNeo';
+  font-style: normal;
+  src: url('./fonts/AppleSDGothicNeoB.ttf') format('truetype');
+}
+
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+html,
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#root {
+  font-family: 'Noto Sans KR', sans-serif;
+  max-width: 1440px;
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  background-image: url('/img/img_main_background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
