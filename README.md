@@ -59,6 +59,10 @@
 - [Python](https://www.python.org/) 3.10.6
 - [PyTorch](https://pytorch.org/) 2.2.1
 
+### 아키텍처 구조
+<img src="docs/아키텍처_구조도.png"/>
+
+
 # 2️⃣ 포팅 메뉴얼
 *만약 운영체제에 따라 프로그램을 다르게 동작시켜야한다면, 운영체제별로 동작 방법을 설명하세요*
 
