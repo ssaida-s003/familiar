@@ -12,13 +12,9 @@
   - [Features](#features)
   - [Technologies](#technologies)
   - [Architecture](#architecture)
-- [2️⃣ 포팅 메뉴얼](#2️⃣-포팅-메뉴얼)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
-- [3️⃣ 상세 기능 소개](#3️⃣-상세-기능-소개)
-- [4️⃣ 팀 소개](#4️⃣-팀-소개)
-- [5️⃣ 레퍼런스](#5️⃣-레퍼런스)
+- [2️⃣ 상세 기능 소개](#2️⃣-상세-기능-소개)
+- [3️⃣ 팀 소개](#3️⃣-팀-소개)
+- [4️⃣ 레퍼런스](#4️⃣-레퍼런스)
 
 <br>
 
@@ -64,39 +60,7 @@
 
 <br>
 
-# 2️⃣ 포팅 메뉴얼
-*만약 운영체제에 따라 프로그램을 다르게 동작시켜야한다면, 운영체제별로 동작 방법을 설명하세요*
-
-## Prerequisites
-*프로젝트를 동작시키기 위해 필요한 소프트웨어와 라이브러리를 나열하고 어떻게 다운받을 수 있는지 설명하세요.*
-
-- [OpenWeather API key](https://openweathermap.org/) (무료)
-- npm
-```bash
-npm install npm@latest -g
-```
-
-## Installation
-*어떻게 이 프로젝트의 소스코드를 다운받을 수 있는지 설명하세요.*
-1. Repository 클론
-```bash
-git clone https://github.com/your-username/project-repository
-```
-2. NPM packages 설치
-```bash
-npm install
-```
-
-## Configuration
-*코드의 어느 부분을 채우거나 수정해야하는지 설명하세요.*
-- `config.js`에 Openweather API key를 입력
-```bash
-const API_KEY = "<Your API key>";
-```
-
-<br>
-
-# 3️⃣ 상세 기능 소개
+# 2️⃣ 상세 기능 소개
 ### 비스포크 패밀리허브 색상에 따른 배경 변경
 
 ![색상 선택](https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%EB%B9%84%EC%8A%A4%ED%8F%AC%ED%81%AC-%EC%83%89%EC%83%81%EC%84%A0%ED%83%9D.gif?ref_type=heads)
@@ -116,7 +80,7 @@ const API_KEY = "<Your API key>";
 
 <br>
 
-# 4️⃣ 팀 소개
+# 3️⃣ 팀 소개
 
 **SSAFY + AI + DA = 🥤SSAIDA 팀**
 <center>
@@ -190,7 +154,7 @@ const API_KEY = "<Your API key>";
 
 <br>
 
-# 5️⃣ 레퍼런스
+# 4️⃣ 레퍼런스
 [Huggingface - diffusers](https://huggingface.co/docs/diffusers/index)  
 [DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation](https://dreambooth.github.io/)  
 [LoRA: Low-Rank Adaptation of Large Language Models](https://github.com/microsoft/LoRA)  
