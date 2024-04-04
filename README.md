@@ -59,6 +59,9 @@
 - [Python](https://www.python.org/) 3.10.6
 - [PyTorch](https://pytorch.org/) 2.2.1
 
+## Architecture
+![Architecture](docs/Architecture.png)
+
 # [2] 포팅 메뉴얼
 *만약 운영체제에 따라 프로그램을 다르게 동작시켜야한다면, 운영체제별로 동작 방법을 설명하세요*
 
