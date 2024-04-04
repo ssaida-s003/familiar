@@ -56,6 +56,7 @@
 ### Version Info
 **FRONTEND**
 - [React]
+
 **BACKEND**
 - [Java](https://www.java.com/ko/) 17
 - [Gradle](https://gradle.org/) 8.6
