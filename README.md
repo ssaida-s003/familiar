@@ -103,37 +103,81 @@ const API_KEY = "<Your API key>";
 
 
 # [4] 팀 소개
-기여해주신 모든 분들께 대단히 감사드립니다.[`contributing guide`][contribution-url]를 참고해주세요.
-이 프로젝트의 기여하신 분들을 소개합니다! 🙆‍♀️
-*이모티콘 쓰는 것을 좋아한다면, 버그 수정에 🐞, 아이디어 제공에 💡, 새로운 기능 구현에 ✨를 사용할 수 있습니다.*
-- 🐞 [dev-ujin](https://github.com/dev-ujin): 메인페이지 버그 수정
 
+<table>
+    <tr height="160px">
+        <td align="center" width="200px">
+            <a href="https://github.com/yeaaaaahhhhh"><img height="150" width="100" src="https://file.notion.so/f/f/160592ad-dc63-481b-8566-2afbd2df9f93/b7e00f7c-1971-4c21-98fd-28e18f28e230/Untitled.png?id=95b815a7-865a-4708-9d3d-63a90b9d52e5&table=block&spaceId=160592ad-dc63-481b-8566-2afbd2df9f93&expirationTimestamp=1712282400000&signature=lihyj5b4H9gVaoh7OCsbcorWxbMb9Dhlg0khLq9KOxk&downloadName=Untitled.png"/></a>
+            <br />
+            <a href="https://github.com/yeaaaaahhhhh">김예현</a>
+        </td>
+        <td align="center" width="200px">
+            <a href="https://github.com/KINHYEONJI"><img height="150" width="100px" src="https://file.notion.so/f/f/160592ad-dc63-481b-8566-2afbd2df9f93/d48b1d41-9428-480a-b9b1-4dcad278e54e/Untitled.png?id=f7eba59a-9657-4b50-b4c9-27d274677d36&table=block&spaceId=160592ad-dc63-481b-8566-2afbd2df9f93&expirationTimestamp=1712282400000&signature=tmYelULG-S_piP0IpnY3rNLbCvqLIY0qZ_Je0iAwMcA&downloadName=Untitled.png"/></a>
+            <br />
+            <a href="https://github.com/KINHYEONJI">김현지</a>
+        </td>
+        <td align="center" width="200px">
+            <a href="https://github.com/Jaeseon95"><img height="150px" width="100px" src="https://file.notion.so/f/f/160592ad-dc63-481b-8566-2afbd2df9f93/13879bd8-fcd4-4655-9142-9a2352b78c98/Untitled.png?id=27017017-96b3-4d69-86a2-d7f44d05006c&table=block&spaceId=160592ad-dc63-481b-8566-2afbd2df9f93&expirationTimestamp=1712282400000&signature=VusIK4gMdpRLIy5O7wFGO2GnqO0Hn2ZlB7neGMZXblU&downloadName=Untitled.png"/></a>
+            <br />
+            <a href="https://github.com/Jaeseon95">박재선</a>
+        </td>
+    </tr>
+    <tr height="30px">
+        <td align="center">
+            Back-End
+            <br />
+        </td>
+        <td align="center">
+            Front-End    
+        </td>
+        <td align="center">
+            AI Modeling
+        <br>
+        </td>
+    </tr>
+    <tr height="160px">
+        <td align="center" width="200px">
+            <a href="https://github.com/fangdol888"><img height="150" width="100" src="https://file.notion.so/f/f/160592ad-dc63-481b-8566-2afbd2df9f93/5c60b1b8-92c1-4bc9-9121-fc25b1c64923/Untitled.png?id=4f9e3fac-2c1e-41b4-920f-cf98ed3c29a6&table=block&spaceId=160592ad-dc63-481b-8566-2afbd2df9f93&expirationTimestamp=1712282400000&signature=zRijfhxtPaN8T83fBQxA-vf_Kenm0s3namhHu7TCiws&downloadName=Untitled.png"/></a>
+            <br />
+            <a href="https://github.com/fangdol888">백승윤</a>
+        </td>
+        <td align="center" width="200px">
+            <a href="https://github.com/dokuny"><img height="150" width="100px" src="https://file.notion.so/f/f/160592ad-dc63-481b-8566-2afbd2df9f93/bd3d1918-c534-4ced-8872-58436bd624c3/Untitled.png?id=19a688bc-e3c5-4ed7-8b0c-10832964402d&table=block&spaceId=160592ad-dc63-481b-8566-2afbd2df9f93&expirationTimestamp=1712282400000&signature=cEZV2y5J3UW9vnZHRlhMCL4zlAvCKGfq0-ICnKPHFF0&downloadName=Untitled.png"/></a>
+            <br />
+            <a href="https://github.com/dokuny">이도훈</a>
+        </td>
+        <td align="center" width="200px">
+            <a href="https://github.com/sejinnnnnn"><img height="150px" width="100px" src="https://file.notion.so/f/f/160592ad-dc63-481b-8566-2afbd2df9f93/9a1f854e-b922-4e06-891e-ca91e78ad3f1/Untitled.png?id=3fbf6dc8-cf0a-4bcc-bb78-0a4b1623e7b4&table=block&spaceId=160592ad-dc63-481b-8566-2afbd2df9f93&expirationTimestamp=1712282400000&signature=TVw8h3GwigRX74FIC0Ll1hCDK15R4lCxHB7oLWLCOiU&downloadName=Untitled.png"/></a>
+            <br />
+            <a href="https://github.com/sejinnnnnn">천세진</a>
+        </td>
+    </tr>
+    <tr height="30px">
+        <td align="center">
+            CI/CD
+            <br />
+            Model Serving
+        </td>
+        <td align="center">
+            Back-End
+            <br />
+            Prompt Engineering
+        </td>
+        <td align="center">
+            CI/CD
+           <br />
+            Prompt Engineering
+        </td>
+    </tr>
+<table>
 
 
 # [5] 레퍼런스
-***유사한 프로젝트의 레포지토리** 혹은 **블로그 포스트** 등 프로젝트 구현에 영감을 준 출처에 대해 링크를 나열하세요.*
+[Huggingface - diffusers](https://huggingface.co/docs/diffusers/index)  
+[DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation](https://dreambooth.github.io/)  
+[LoRA: Low-Rank Adaptation of Large Language Models](https://github.com/microsoft/LoRA)  
+[clip-interrogator](https://github.com/pharmapsychotic/clip-interrogator)
 
-- [Readme Template - Embedded Artistry](https://embeddedartistry.com/blog/2017/11/30/embedded-artistry-readme-template/)
-- [How to write a kickass Readme - James.Scott](https://dev.to/scottydocs/how-to-write-a-kickass-readme-5af9)
-- [Best-README-Template - othneildrew](https://github.com/othneildrew/Best-README-Template#prerequisites)
-- [Img Shields](https://shields.io/)
-- [Github Pages](https://pages.github.com/)
-
-
-
-<!--Url for Badges-->
-[license-shield]: https://img.shields.io/github/license/dev-ujin/readme-template?labelColor=D8D8D8&color=04B4AE
-[repository-size-shield]: https://img.shields.io/github/repo-size/dev-ujin/readme-template?labelColor=D8D8D8&color=BE81F7
-[issue-closed-shield]: https://img.shields.io/github/issues-closed/dev-ujin/readme-template?labelColor=D8D8D8&color=FE9A2E
-
-<!--Url for Buttons-->
-[readme-eng-shield]: https://img.shields.io/badge/-readme%20in%20english-2E2E2E?style=for-the-badge
-[view-demo-shield]: https://img.shields.io/badge/-%F0%9F%98%8E%20view%20demo-F3F781?style=for-the-badge
-[view-demo-url]: https://dev-ujin.github.io
-[report-bug-shield]: https://img.shields.io/badge/-%F0%9F%90%9E%20report%20bug-F5A9A9?style=for-the-badge
-[report-bug-url]: https://github.com/dev-ujin/readme-template/issues
-[request-feature-shield]: https://img.shields.io/badge/-%E2%9C%A8%20request%20feature-A9D0F5?style=for-the-badge
-[request-feature-url]: https://github.com/dev-ujin/readme-template/issues
 
 <!--URLS-->
 [license-url]: LICENSE.md
