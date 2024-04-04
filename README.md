@@ -5,8 +5,10 @@
 ![MIT License][license-shield] ![Repository Size][repository-size-shield] ![Issue Closed][issue-closed-shield]
 
 <!--프로젝트 대문 이미지-->
-[![Project Title](https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%EC%84%9C%EB%B9%84%EC%8A%A4%EC%86%8C%EA%B0%9C.png)](https://www.youtube.com/watch?v=DGH4enc_nlA)
+<a href="https://www.youtube.com/watch?v=DGH4enc_nlA"><img src="https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%EC%84%9C%EB%B9%84%EC%8A%A4%EC%86%8C%EA%B0%9C.png" width="70%" height="70%"/></a>
+
 <small>_해당 이미지를 클릭하면 티저영상으로 이동됩니다._</small>
+
 
 <!--프로젝트 버튼-->
  [![Readme in English][readme-eng-shield]][readme-eng-url] [![View Demo][view-demo-shield]][view-demo-url] [![Report bug][report-bug-shield]][report-bug-url] [![Request feature][request-feature-shield]][request-feature-url]
