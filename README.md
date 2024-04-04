@@ -104,12 +104,12 @@ const API_KEY = "<Your API key>";
 ### 가족 간 하루 일상 공유 & 질문 
 ![하루 공유](https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%ED%95%98%EB%A3%A8%EA%B3%B5%EC%9C%A0_%EC%A7%88%EB%AC%B8.gif?ref_type=heads)
 <small>
-음성을 통해 하루 일상이나 질문을 남기면 가족의 얼굴을 기반으로 생성된 이미지로 가족과 소통할 수 있습니다.
+음성을 통해 하루 일상이나 질문을 남기면, 가족의 얼굴을 학습한 Stable Diffusio 모델 기반으로 생성된 이미지가 생성되고 이를 통해 시간에 제약받지 않으며 가족과 소통할 수 있습니다.
 </small>
 
 ### Dream Painter
 ![드림 페인터](https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%EB%93%9C%EB%A6%BC%ED%8E%98%EC%9D%B8%ED%84%B0.gif?ref_type=heads)
-<small>그림을 그리고 화풍을 선택하면 그림을 더 좋은 퀄리티로 바꾸어줍니다.
+<small>그림을 그리고 화풍을 선택하면 화풍에 따른 LoRA를 이용하여 그림을 더 좋은 퀄리티로 바꾸어줍니다.
 </small>
 
 
@@ -186,7 +186,7 @@ const API_KEY = "<Your API key>";
 <table>
 </center>
 
-# [5] 레퍼런스
+# 5️⃣ 레퍼런스
 [Huggingface - diffusers](https://huggingface.co/docs/diffusers/index)  
 [DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation](https://dreambooth.github.io/)  
 [LoRA: Low-Rank Adaptation of Large Language Models](https://github.com/microsoft/LoRA)  
