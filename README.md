@@ -95,13 +95,22 @@ const API_KEY = "<Your API key>";
 
 
 # 3️⃣ 상세 기능 소개
-***스크린샷, 코드** 등을 통해 **사용 방법**과 **사용 예제**를 보여주세요. 사용 예제별로 h2 헤더로 나누어 설명할 수 있습니다.*
+### 비스포크 패밀리허브 색상에 따른 배경 변경
 
-![usage](img/usage.png)
+![색상 선택](https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%EB%B9%84%EC%8A%A4%ED%8F%AC%ED%81%AC-%EC%83%89%EC%83%81%EC%84%A0%ED%83%9D.gif?ref_type=heads)
+<small>색상을 선택할 수 있는 비스포크 패밀리허브의 특성에 맞춰 서비스의 배경색이 변경됩니다.</small>
 
-```java
-// 몇 개의 API 사용 예제를 코드와 함께 보여주세요.
-```
+
+### 가족 간 하루 일상 공유 & 질문 
+![하루 공유](https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%ED%95%98%EB%A3%A8%EA%B3%B5%EC%9C%A0_%EC%A7%88%EB%AC%B8.gif?ref_type=heads)
+<small>
+음성을 통해 하루 일상이나 질문을 남기면 가족의 얼굴을 기반으로 생성된 이미지로 가족과 소통할 수 있습니다.
+</small>
+
+### Dream Painter
+![드림 페인터](https://lab.ssafy.com/s10-s-project/S10P21S003/-/raw/master/docs/%EB%93%9C%EB%A6%BC%ED%8E%98%EC%9D%B8%ED%84%B0.gif?ref_type=heads)
+<small>그림을 그리고 화풍을 선택하면 그림을 더 좋은 퀄리티로 바꾸어줍니다.
+</small>
 
 
 
