@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: backend
+  config:
+    import:
+      - classpath:/config/keys.yml
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    # mysql 기본 설정
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${db.host:localhost:3306}/s10p21s003?serverTimezone=Asia/Seoul&useUniCode=yes&characterEncoding=UTF-8
+    username: ${db.username:root}
+    password: ${db.password:root}
+
+server:
+  port: 8081
+  servlet:
+    context-path: /api
+
+#쿼리문 로그
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
