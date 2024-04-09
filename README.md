@@ -2,7 +2,7 @@
 
 <!--프로젝트 대문 이미지-->
 [![서비스 소개](./docs/서비스소개.png)](https://www.youtube.com/watch?v=DGH4enc_nlA)
-<a href="https://www.youtube.com/watch?v=DGH4enc_nlA"><img src="https://github.com/ssaida-s003/familiar/tree/master/docs/%EC%84%9C%EB%B9%84%EC%8A%A4%EC%86%8C%EA%B0%9C.png" width="70%" height="70%"/></a>
+<!-- <a href="https://www.youtube.com/watch?v=DGH4enc_nlA"><img src="https://github.com/ssaida-s003/familiar/tree/master/docs/%EC%84%9C%EB%B9%84%EC%8A%A4%EC%86%8C%EA%B0%9C.png" width="70%" height="70%"/></a> -->
 
 <small>_해당 이미지를 클릭하면 티저영상으로 이동됩니다._</small>
 
@@ -64,18 +64,18 @@
 # 2️⃣ 상세 기능 소개
 ### 비스포크 패밀리허브 색상에 따른 배경 변경
 
-![색상 선택](./docs/%EB%B9%84%EC%8A%A4%ED%8F%AC%ED%81%AC-%EC%83%89%EC%83%81%EC%84%A0%ED%83%9D.gif)
+![색상 선택](./docs/비스포크-색상선택.gif)
 <small>색상을 선택할 수 있는 비스포크 패밀리허브의 특성에 맞춰 서비스의 배경색이 변경됩니다.</small>
 
 
 ### 가족 간 하루 일상 공유 & 질문 
-![하루 공유](./docs/%ED%95%98%EB%A3%A8%EA%B3%B5%EC%9C%A0_%EC%A7%88%EB%AC%B8.gif)
+![하루 공유](./docs/하루공유_질문.gif)
 <small>
 음성을 통해 하루 일상이나 질문을 남기면, 가족의 얼굴을 학습한 Stable Diffusio 모델 기반으로 생성된 이미지가 생성되고 이를 통해 시간에 제약받지 않으며 가족과 소통할 수 있습니다.
 </small>
 
 ### Dream Painter
-![드림 페인터](./docs/%EB%93%9C%EB%A6%BC%ED%8E%98%EC%9D%B8%ED%84%B0.gif)
+![드림 페인터](./docs/드림페인터.gif)
 <small>그림을 그리고 화풍을 선택하면 화풍에 따른 LoRA를 이용하여 그림을 더 좋은 퀄리티로 바꾸어줍니다.
 </small>
 
@@ -151,6 +151,18 @@
         </td>
     </tr>
 <table>
+</center>
+
+<center>
+| ![김예현](./docs/예현.png) | ![김현지](./docs/현지.png) | ![박재선](./docs/재선.png) |
+|:---:|:---:|:---:|
+| [김예현](https://github.com/yeaaaaahhhhh) | [김현지](https://github.com/KINHYEONJI) | [박재선](https://github.com/Jaeseon95) |
+| Back-End | Front-End | AI Modeling |
+
+| ![백승윤](./docs/승윤.png) | ![이도훈](./docs/도훈.png) | ![천세진](./docs/세진.png) |
+|:---:|:---:|:---:|
+| [백승윤](https://github.com/fangdol888) | [이도훈](https://github.com/dokuny) | [천세진](https://github.com/sejinnnnnn) |
+| CI/CD, Model Serving | Back-End, Prompt Engineering | CI/CD, Prompt Engineering |
 </center>
 
 <br>
