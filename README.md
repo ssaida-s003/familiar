@@ -1,6 +1,7 @@
 # SSAFY 10기 & DA사업부 전자 연계 프로젝트 - Familiar
 
 <!--프로젝트 대문 이미지-->
+[![서비스 소개](./docs/서비스소개.png)](https://www.youtube.com/watch?v=DGH4enc_nlA)
 <a href="https://www.youtube.com/watch?v=DGH4enc_nlA"><img src="https://github.com/ssaida-s003/familiar/tree/master/docs/%EC%84%9C%EB%B9%84%EC%8A%A4%EC%86%8C%EA%B0%9C.png" width="70%" height="70%"/></a>
 
 <small>_해당 이미지를 클릭하면 티저영상으로 이동됩니다._</small>
@@ -63,18 +64,18 @@
 # 2️⃣ 상세 기능 소개
 ### 비스포크 패밀리허브 색상에 따른 배경 변경
 
-![색상 선택](https://github.com/ssaida-s003/familiar/tree/master/docs/%EB%B9%84%EC%8A%A4%ED%8F%AC%ED%81%AC-%EC%83%89%EC%83%81%EC%84%A0%ED%83%9D.gif?ref_type=heads)
+![색상 선택](./docs/%EB%B9%84%EC%8A%A4%ED%8F%AC%ED%81%AC-%EC%83%89%EC%83%81%EC%84%A0%ED%83%9D.gif)
 <small>색상을 선택할 수 있는 비스포크 패밀리허브의 특성에 맞춰 서비스의 배경색이 변경됩니다.</small>
 
 
 ### 가족 간 하루 일상 공유 & 질문 
-![하루 공유](https://github.com/ssaida-s003/familiar/tree/master/docs/%ED%95%98%EB%A3%A8%EA%B3%B5%EC%9C%A0_%EC%A7%88%EB%AC%B8.gif?ref_type=heads)
+![하루 공유](./docs/%ED%95%98%EB%A3%A8%EA%B3%B5%EC%9C%A0_%EC%A7%88%EB%AC%B8.gif)
 <small>
 음성을 통해 하루 일상이나 질문을 남기면, 가족의 얼굴을 학습한 Stable Diffusio 모델 기반으로 생성된 이미지가 생성되고 이를 통해 시간에 제약받지 않으며 가족과 소통할 수 있습니다.
 </small>
 
 ### Dream Painter
-![드림 페인터](https://github.com/ssaida-s003/familiar/tree/master/docs/%EB%93%9C%EB%A6%BC%ED%8E%98%EC%9D%B8%ED%84%B0.gif?ref_type=heads)
+![드림 페인터](./docs/%EB%93%9C%EB%A6%BC%ED%8E%98%EC%9D%B8%ED%84%B0.gif)
 <small>그림을 그리고 화풍을 선택하면 화풍에 따른 LoRA를 이용하여 그림을 더 좋은 퀄리티로 바꾸어줍니다.
 </small>
 
