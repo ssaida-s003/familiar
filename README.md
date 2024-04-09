@@ -84,7 +84,7 @@
 # 3️⃣ 팀 소개
 
 **SSAFY + AI + DA = 🥤SSAIDA 팀**
-<center>
+<!-- <center>
 <table>
     <tr height="160px">
         <td align="center" width="200px">
@@ -151,19 +151,18 @@
         </td>
     </tr>
 <table>
-</center>
+</center> -->
 
-<center>
-| ![김예현](./docs/예현.png) | ![김현지](./docs/현지.png) | ![박재선](./docs/재선.png) |
+| ![김예현](./docs/예현.png) | ![김현지](./docs/현지.png) | ![박재선](./docs/재선.png) |
 |:---:|:---:|:---:|
 | [김예현](https://github.com/yeaaaaahhhhh) | [김현지](https://github.com/KINHYEONJI) | [박재선](https://github.com/Jaeseon95) |
 | Back-End | Front-End | AI Modeling |
 
-| ![백승윤](./docs/승윤.png) | ![이도훈](./docs/도훈.png) | ![천세진](./docs/세진.png) |
+
+| ![백승윤](./docs/승윤.png) | ![이도훈](./docs/도훈.png) | ![천세진](./docs/세진.png) |
 |:---:|:---:|:---:|
 | [백승윤](https://github.com/fangdol888) | [이도훈](https://github.com/dokuny) | [천세진](https://github.com/sejinnnnnn) |
-| CI/CD, Model Serving | Back-End, Prompt Engineering | CI/CD, Prompt Engineering |
-</center>
+| CI/CD<br/>Model Serving | Back-End<br/>Prompt Engineering | CI/CD<br/>Prompt Engineering |
 
 <br>
 
